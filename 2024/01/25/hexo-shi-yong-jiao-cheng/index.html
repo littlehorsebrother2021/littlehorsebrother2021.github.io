@@ -10,9 +10,9 @@
 
 运行服务器1$ hexo server /hexo s
 
-生成可执行文件1$ hexo generate
+生成可执行文件1$ hexo generate /hexo g
 
-上传博客代码1$ hexo deploy">
+上传博客代码(Gitee">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -398,7 +398,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    45
+                    239
                 </div>
                 
 
@@ -430,9 +430,15 @@
 
 <h3 id="运行服务器"><a href="#运行服务器" class="headerlink" title="运行服务器"></a>运行服务器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server /hexo s</span><br></pre></td></tr></table></figure>
 
-<h3 id="生成可执行文件"><a href="#生成可执行文件" class="headerlink" title="生成可执行文件"></a>生成可执行文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<h3 id="生成可执行文件"><a href="#生成可执行文件" class="headerlink" title="生成可执行文件"></a>生成可执行文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate /hexo g</span><br></pre></td></tr></table></figure>
 
-<h3 id="上传博客代码"><a href="#上传博客代码" class="headerlink" title="上传博客代码"></a>上传博客代码</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<h3 id="上传博客代码-Gitee"><a href="#上传博客代码-Gitee" class="headerlink" title="上传博客代码(Gitee)"></a>上传博客代码(Gitee)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<h3 id="上传博客代码-GitHub"><a href="#上传博客代码-GitHub" class="headerlink" title="上传博客代码(GitHub)"></a>上传博客代码(GitHub)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo de</span><br></pre></td></tr></table></figure>
+<p>  代码逐行解读为：<br>   hexo clean:清理缓存<br>  hexo g:生成可执行文件<br>  hexo de:上传博客代码</p>
+<h3 id="注意-在上传过程中可能会遇到报错："><a href="#注意-在上传过程中可能会遇到报错：" class="headerlink" title="注意!在上传过程中可能会遇到报错："></a>注意!在上传过程中可能会遇到报错：</h3><p>  “unable to get local issuer certificate”<br>          (“无法获取本地颁发者证书”)<br>  这是由于当你通过HTTPS访问Git远程仓库的时候，如果服务器上的SSL证书未经过第三方机构认证，git就会报错。原因是因为未知的没有签署过的证书意味着可能存在很大的风险。解决办法就是通过下面的命令将git中的sslverify关掉：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global http.sslverify <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<p>解决方法原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36342182/article/details/108668395">https://blog.csdn.net/qq_36342182/article/details/108668395</a></p>
 
                 
             </div>
@@ -813,7 +819,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">185</span>
+                        class="white-color">379</span>
             
             
             
@@ -909,7 +915,7 @@
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2403618853" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2403618853" data-position="top" data-delay="50">
         <i class="fab fa-qq"></i>
     </a>
 
