@@ -4,8 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="归档: 2023, 小马哥个人博客">
-    <meta name="description" content="我的个人博客，喜欢的请支持一下">
+    <meta name="keywords" content="STM32LCD屏幕移植纸质教程, 小马哥个人博客">
+    <meta name="description" content="声明本教程诣在简化移植的流程，参考视频进行步骤和流程的精简化。如有侵权，请告知我，我将删除。
+步骤1 新建cubemx文件设置时钟以及你所需要的库。注：LCD屏幕应该是你最后迁移的内容，返工重新部署可能会导致项目出错。
+要点需要在Proje">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +19,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>归档: 2023 | 小马哥个人博客</title>
+    <title>STM32LCD屏幕移植纸质教程 | 小马哥个人博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -328,263 +330,416 @@
 
 </header>
 
-    <div class="bg-cover pd-header about-cover">
-    <div class="container">
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">STM32LCD屏幕移植纸质教程</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
     <div class="row">
-    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
-        <div class="brand">
-            <div class="title center-align">
-                
-                我的个人博客
-                
-            </div>
-
-            <div class="description center-align">
-                
-                <span id="subtitle"></span>
-                <script src="/libs/typed/typed.js"></script>
-                <script>
-                    var typed = new Typed("#subtitle", {
-                        strings: [ 
-                            
-                                "从来没有真正的绝境, 只有心灵的迷途",
-                            
-                                "Never really desperate, only the lost of the soul",
-                            
-                        ],
-                        startDelay: 300,
-                        typeSpeed: 100,
-                        loop: true,
-                        backSpeed: 50,
-                        showCursor: true
-                    });
-                </script>
-                
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<script>
-    // 每天切换 banner 图.  Switch banner image every day.
-    var bannerUrl = "/medias/banner/" + new Date().getDay() + '.jpg';
-    $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
-</script>
-<script>
-    
-      var bannerUrl = "/medias/featureimages/" + Math.floor(Math.random() * 24) + '.jpg';
-    
-    $('.bg-cover.about-cover').css('background-image', 'url(' + bannerUrl + ')');
-
-</script>
-
-
-    </div>
-</div>
-
-<main class="content">
-
-    
-    <div class="container archive-calendar">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
     <div class="card">
-        <div id="post-calendar" class="card-content"></div>
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/STM32/">
+                                <span class="chip bg-color">STM32</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2024-02-19
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2024-02-19
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    683
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    2 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h2><p>本教程诣在简化移植的流程，参考<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1fN41147mA/?spm_id_from=333.788.recommend_more_video.-1">视频</a>进行步骤和流程的精简化。如有侵权，请告知我，我将删除。</p>
+<h2 id="步骤1-新建cubemx文件"><a href="#步骤1-新建cubemx文件" class="headerlink" title="步骤1 新建cubemx文件"></a>步骤1 新建cubemx文件</h2><p>设置时钟以及你所需要的库。<br>注：LCD屏幕应该是你最后迁移的内容，返工重新部署可能会导致项目出错。</p>
+<h3 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h3><p>需要在Project manager-&gt;code generate中将原先勾选仅保留需要的库文件改为勾选保留全部的库文件。</p>
+<h2 id="步骤2-迁移文件"><a href="#步骤2-迁移文件" class="headerlink" title="步骤2 迁移文件"></a>步骤2 迁移文件</h2><p>1.将正点原子例程文件-&gt;LCD样例文件(hal库版本)打开，打开其中的BSP文件夹，复制LCD文件夹。<br>2.在创建好的cubemx工程文件中新建一个BSP文件夹，将刚刚复制的LCD文件夹粘贴到其中</p>
+<h2 id="步骤3-设置新的文件夹和文件寻址"><a href="#步骤3-设置新的文件夹和文件寻址" class="headerlink" title="步骤3 设置新的文件夹和文件寻址"></a>步骤3 设置新的文件夹和文件寻址</h2><p>1.打开keil5工程，点击方块堆，在Groups中添加”&#x2F;Drivers&#x2F;BSP”，保存后退出。<br>2.点击魔法棒，选中(C&#x2F;C++)窗口，看到下方的”includes paths”,点击后面的三个点，点击空白文本框新建新的文件路径，再次点击后面三个点，将文件目录选择到BSP文件夹后点（选择文件夹）保存后退出。<br>3.点击左侧工程栏目中的BSP文件夹，右键添加文件，将lcd.c和lcd.ex.c添加进该文件夹。  </p>
+<h2 id="步骤4-修改代码"><a href="#步骤4-修改代码" class="headerlink" title="步骤4 修改代码"></a>步骤4 修改代码</h2><p>1.打开lcd.c,将所有文件寻址从”.&#x2F;BSP&#x2F;LCD&#x2F;…”改为”.&#x2F;LCD&#x2F;…”;接下来删去”stdlib.h””usart.h”两个库。<br>2.打开lcd.ex.c,将所有文件寻址从”.&#x2F;BSP&#x2F;LCD&#x2F;…”改为”.&#x2F;LCD&#x2F;…”;接下来删去”delay.h”库。<br>3.打开lcd.h,删去”sys.h”库,添加”main.h”。<br>4.在main.c中添加如下代码：  </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * @brief  延时函数</span></span><br><span class="line"><span class="comment">  * @param  ms 延时多少秒</span></span><br><span class="line"><span class="comment">  * @retval 无</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">delay_ms</span><span class="params">(<span class="type">uint32_t</span> ms)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">uint32_t</span> ms_uwTick=uwTick;</span><br><span class="line">	<span class="keyword">while</span> (uwTick-ms_uwTick&lt;ms);</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后在main.h中加入函数声明以便lcd.ex.c使用。<br>5.编译lcd.ex.c,将所有的<code>delay_us()</code>函数替换为上述函数。再次编译查看问题。无误后将该文件从文件夹中去除。<br>6.打开main.h-&gt;stm32f103xx_hal.h-&gt;stm32f103_hal_conf.h,将被注释掉的SRAM取消注释。再次编译运行。<br>7.选中stm32f1xx_hal_driver文件夹，添加sram和fsmc的C文件，再次编译运行，此时应该只剩下一个错误(uart)<br>8.定位到错误的UART位置，将该行进行注释，再次编译可得0错误0警告。</p>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>如果你的文件在上述步骤之后成功运行，但是你在之后再次使用cubemx重新部署工程，请直接跳转到步骤4-&gt;第六步</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">littlehorsebrother</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://littlehorsebrother2021.github.io/2024/02/19/stm32lcd-ping-mu-yi-zhi-zhi-zhi-jiao-cheng/">https://littlehorsebrother2021.github.io/2024/02/19/stm32lcd-ping-mu-yi-zhi-zhi-zhi-jiao-cheng/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">littlehorsebrother</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/STM32/">
+                                    <span class="chip bg-color">STM32</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2024/02/19/stm32lcd-ping-mu-yi-zhi-zhi-zhi-jiao-cheng/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="STM32LCD屏幕移植纸质教程">
+                        
+                        <span class="card-title">STM32LCD屏幕移植纸质教程</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-02-19
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            littlehorsebrother
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/STM32/">
+                        <span class="chip bg-color">STM32</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2024/02/18/stm32-bei-wang-lu-yi-nan-jie-da/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="STM32 备忘录&amp;疑难解答">
+                        
+                        <span class="card-title">STM32 备忘录&amp;疑难解答</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-02-18
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            littlehorsebrother
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/STM32/">
+                        <span class="chip bg-color">STM32</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
     </div>
 </div>
 
-<script type="text/javascript" src="/libs/echarts/echarts.min.js"></script>
-<script type="text/javascript">
-    let myChart = echarts.init(document.getElementById('post-calendar'));
+<!-- TOC 悬浮按钮. -->
 
-    
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
 
-    let option = {
-        title: {
-            top: 0,
-            text: '文章日历',
-            left: 'center',
-            textStyle: {
-                color: '#3C4858'
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
             }
-        },
-        tooltip: {
-            padding: 10,
-            backgroundColor: '#555',
-            borderColor: '#777',
-            borderWidth: 1,
-            formatter: function (obj) {
-                var value = obj.value;
-                return '<div style="font-size: 14px;">' + value[0] + '：' + value[1] + '</div>';
-            }
-        },
-        visualMap: {
-            show: true,
-            showLabel: true,
-            categories: [0, 1, 2, 3, 4],
-            calculable: true,
-            inRange: {
-                symbol: 'rect',
-                color: ['#ebedf0', '#c6e48b', '#7bc96f', '#239a3b', '#196127']
-            },
-            itemWidth: 12,
-            itemHeight: 12,
-            orient: 'horizontal',
-            left: 'center',
-            bottom: 0
-        },
-        calendar: [{
-            left: 'center',
-            range: ["2023-02-19", "2024-02-19"],
-            cellSize: [13, 13],
-            splitLine: {
-                show: false
-            },
-            itemStyle: {
-                color: '#196127',
-                borderColor: '#fff',
-                borderWidth: 2
-            },
-            yearLabel: {
-                show: false
-            },
-            monthLabel: {
-                nameMap: 'cn',
-                fontSize: 11
-            },
-            dayLabel: {
-                formatter: '{start}  1st',
-                nameMap: 'cn',
-                fontSize: 11
-            }
-        }],
-        series: [{
-            type: 'heatmap',
-            coordinateSystem: 'calendar',
-            calendarIndex: 0,
-            data: [["2023-02-19", 0], ["2023-02-20", 0], ["2023-02-21", 0], ["2023-02-22", 0], ["2023-02-23", 0], ["2023-02-24", 0], ["2023-02-25", 0], ["2023-02-26", 0], ["2023-02-27", 0], ["2023-02-28", 0], ["2023-03-01", 0], ["2023-03-02", 0], ["2023-03-03", 0], ["2023-03-04", 0], ["2023-03-05", 0], ["2023-03-06", 0], ["2023-03-07", 0], ["2023-03-08", 0], ["2023-03-09", 0], ["2023-03-10", 0], ["2023-03-11", 0], ["2023-03-12", 0], ["2023-03-13", 0], ["2023-03-14", 0], ["2023-03-15", 0], ["2023-03-16", 0], ["2023-03-17", 0], ["2023-03-18", 0], ["2023-03-19", 0], ["2023-03-20", 0], ["2023-03-21", 0], ["2023-03-22", 0], ["2023-03-23", 0], ["2023-03-24", 0], ["2023-03-25", 0], ["2023-03-26", 0], ["2023-03-27", 0], ["2023-03-28", 0], ["2023-03-29", 0], ["2023-03-30", 0], ["2023-03-31", 0], ["2023-04-01", 0], ["2023-04-02", 0], ["2023-04-03", 0], ["2023-04-04", 0], ["2023-04-05", 0], ["2023-04-06", 0], ["2023-04-07", 0], ["2023-04-08", 0], ["2023-04-09", 0], ["2023-04-10", 0], ["2023-04-11", 0], ["2023-04-12", 0], ["2023-04-13", 0], ["2023-04-14", 0], ["2023-04-15", 0], ["2023-04-16", 0], ["2023-04-17", 0], ["2023-04-18", 0], ["2023-04-19", 0], ["2023-04-20", 0], ["2023-04-21", 0], ["2023-04-22", 0], ["2023-04-23", 0], ["2023-04-24", 0], ["2023-04-25", 0], ["2023-04-26", 0], ["2023-04-27", 0], ["2023-04-28", 0], ["2023-04-29", 0], ["2023-04-30", 0], ["2023-05-01", 0], ["2023-05-02", 0], ["2023-05-03", 0], ["2023-05-04", 0], ["2023-05-05", 0], ["2023-05-06", 0], ["2023-05-07", 0], ["2023-05-08", 0], ["2023-05-09", 0], ["2023-05-10", 0], ["2023-05-11", 0], ["2023-05-12", 0], ["2023-05-13", 0], ["2023-05-14", 0], ["2023-05-15", 0], ["2023-05-16", 0], ["2023-05-17", 0], ["2023-05-18", 0], ["2023-05-19", 0], ["2023-05-20", 0], ["2023-05-21", 0], ["2023-05-22", 0], ["2023-05-23", 0], ["2023-05-24", 0], ["2023-05-25", 0], ["2023-05-26", 0], ["2023-05-27", 0], ["2023-05-28", 0], ["2023-05-29", 0], ["2023-05-30", 0], ["2023-05-31", 0], ["2023-06-01", 0], ["2023-06-02", 0], ["2023-06-03", 0], ["2023-06-04", 0], ["2023-06-05", 0], ["2023-06-06", 0], ["2023-06-07", 0], ["2023-06-08", 0], ["2023-06-09", 0], ["2023-06-10", 0], ["2023-06-11", 0], ["2023-06-12", 0], ["2023-06-13", 0], ["2023-06-14", 0], ["2023-06-15", 0], ["2023-06-16", 0], ["2023-06-17", 0], ["2023-06-18", 0], ["2023-06-19", 0], ["2023-06-20", 0], ["2023-06-21", 0], ["2023-06-22", 0], ["2023-06-23", 0], ["2023-06-24", 0], ["2023-06-25", 0], ["2023-06-26", 0], ["2023-06-27", 0], ["2023-06-28", 0], ["2023-06-29", 0], ["2023-06-30", 0], ["2023-07-01", 0], ["2023-07-02", 0], ["2023-07-03", 0], ["2023-07-04", 0], ["2023-07-05", 0], ["2023-07-06", 0], ["2023-07-07", 0], ["2023-07-08", 0], ["2023-07-09", 0], ["2023-07-10", 0], ["2023-07-11", 0], ["2023-07-12", 0], ["2023-07-13", 0], ["2023-07-14", 0], ["2023-07-15", 0], ["2023-07-16", 0], ["2023-07-17", 0], ["2023-07-18", 0], ["2023-07-19", 0], ["2023-07-20", 0], ["2023-07-21", 0], ["2023-07-22", 0], ["2023-07-23", 0], ["2023-07-24", 0], ["2023-07-25", 0], ["2023-07-26", 0], ["2023-07-27", 0], ["2023-07-28", 0], ["2023-07-29", 0], ["2023-07-30", 0], ["2023-07-31", 0], ["2023-08-01", 0], ["2023-08-02", 0], ["2023-08-03", 0], ["2023-08-04", 0], ["2023-08-05", 0], ["2023-08-06", 0], ["2023-08-07", 0], ["2023-08-08", 0], ["2023-08-09", 0], ["2023-08-10", 0], ["2023-08-11", 0], ["2023-08-12", 0], ["2023-08-13", 0], ["2023-08-14", 0], ["2023-08-15", 0], ["2023-08-16", 0], ["2023-08-17", 0], ["2023-08-18", 0], ["2023-08-19", 0], ["2023-08-20", 0], ["2023-08-21", 0], ["2023-08-22", 0], ["2023-08-23", 0], ["2023-08-24", 0], ["2023-08-25", 0], ["2023-08-26", 0], ["2023-08-27", 0], ["2023-08-28", 0], ["2023-08-29", 0], ["2023-08-30", 0], ["2023-08-31", 0], ["2023-09-01", 0], ["2023-09-02", 0], ["2023-09-03", 0], ["2023-09-04", 0], ["2023-09-05", 0], ["2023-09-06", 0], ["2023-09-07", 0], ["2023-09-08", 0], ["2023-09-09", 0], ["2023-09-10", 0], ["2023-09-11", 0], ["2023-09-12", 0], ["2023-09-13", 0], ["2023-09-14", 0], ["2023-09-15", 0], ["2023-09-16", 0], ["2023-09-17", 0], ["2023-09-18", 0], ["2023-09-19", 0], ["2023-09-20", 0], ["2023-09-21", 0], ["2023-09-22", 0], ["2023-09-23", 0], ["2023-09-24", 0], ["2023-09-25", 0], ["2023-09-26", 0], ["2023-09-27", 0], ["2023-09-28", 0], ["2023-09-29", 0], ["2023-09-30", 0], ["2023-10-01", 0], ["2023-10-02", 0], ["2023-10-03", 0], ["2023-10-04", 0], ["2023-10-05", 0], ["2023-10-06", 0], ["2023-10-07", 0], ["2023-10-08", 0], ["2023-10-09", 0], ["2023-10-10", 0], ["2023-10-11", 0], ["2023-10-12", 0], ["2023-10-13", 0], ["2023-10-14", 0], ["2023-10-15", 0], ["2023-10-16", 0], ["2023-10-17", 0], ["2023-10-18", 0], ["2023-10-19", 0], ["2023-10-20", 2], ["2023-10-21", 0], ["2023-10-22", 0], ["2023-10-23", 0], ["2023-10-24", 0], ["2023-10-25", 0], ["2023-10-26", 0], ["2023-10-27", 0], ["2023-10-28", 0], ["2023-10-29", 0], ["2023-10-30", 0], ["2023-10-31", 0], ["2023-11-01", 0], ["2023-11-02", 0], ["2023-11-03", 0], ["2023-11-04", 0], ["2023-11-05", 0], ["2023-11-06", 0], ["2023-11-07", 0], ["2023-11-08", 0], ["2023-11-09", 0], ["2023-11-10", 0], ["2023-11-11", 0], ["2023-11-12", 0], ["2023-11-13", 0], ["2023-11-14", 0], ["2023-11-15", 0], ["2023-11-16", 0], ["2023-11-17", 0], ["2023-11-18", 0], ["2023-11-19", 0], ["2023-11-20", 0], ["2023-11-21", 0], ["2023-11-22", 0], ["2023-11-23", 0], ["2023-11-24", 0], ["2023-11-25", 0], ["2023-11-26", 0], ["2023-11-27", 0], ["2023-11-28", 0], ["2023-11-29", 0], ["2023-11-30", 0], ["2023-12-01", 0], ["2023-12-02", 0], ["2023-12-03", 0], ["2023-12-04", 0], ["2023-12-05", 0], ["2023-12-06", 0], ["2023-12-07", 0], ["2023-12-08", 0], ["2023-12-09", 0], ["2023-12-10", 0], ["2023-12-11", 0], ["2023-12-12", 0], ["2023-12-13", 0], ["2023-12-14", 0], ["2023-12-15", 0], ["2023-12-16", 0], ["2023-12-17", 0], ["2023-12-18", 0], ["2023-12-19", 0], ["2023-12-20", 0], ["2023-12-21", 0], ["2023-12-22", 0], ["2023-12-23", 0], ["2023-12-24", 0], ["2023-12-25", 0], ["2023-12-26", 0], ["2023-12-27", 0], ["2023-12-28", 0], ["2023-12-29", 0], ["2023-12-30", 0], ["2023-12-31", 0], ["2024-01-01", 0], ["2024-01-02", 0], ["2024-01-03", 0], ["2024-01-04", 0], ["2024-01-05", 0], ["2024-01-06", 0], ["2024-01-07", 0], ["2024-01-08", 0], ["2024-01-09", 0], ["2024-01-10", 0], ["2024-01-11", 0], ["2024-01-12", 0], ["2024-01-13", 0], ["2024-01-14", 0], ["2024-01-15", 0], ["2024-01-16", 0], ["2024-01-17", 0], ["2024-01-18", 0], ["2024-01-19", 0], ["2024-01-20", 0], ["2024-01-21", 0], ["2024-01-22", 0], ["2024-01-23", 0], ["2024-01-24", 0], ["2024-01-25", 1], ["2024-01-26", 0], ["2024-01-27", 0], ["2024-01-28", 0], ["2024-01-29", 0], ["2024-01-30", 0], ["2024-01-31", 0], ["2024-02-01", 0], ["2024-02-02", 0], ["2024-02-03", 0], ["2024-02-04", 0], ["2024-02-05", 0], ["2024-02-06", 0], ["2024-02-07", 0], ["2024-02-08", 0], ["2024-02-09", 0], ["2024-02-10", 0], ["2024-02-11", 0], ["2024-02-12", 0], ["2024-02-13", 0], ["2024-02-14", 0], ["2024-02-15", 0], ["2024-02-16", 1], ["2024-02-17", 0], ["2024-02-18", 1], ["2024-02-19", 1]]
-        }]
+        });
 
-    };
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
 
-    myChart.setOption(option);
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
 </script>
 
     
-
-    
-
-    <div id="cd-timeline" class="container">
-        
-        <div class="cd-timeline-block">
-
-            
-            
-            
-            <div class="cd-timeline-img year" data-aos="zoom-in-up">
-                <a href="/archives/2023">2023</a>
-            </div>
-            
-
-            
-            
-            
-            <div class="cd-timeline-img month" data-aos="zoom-in-up">
-                <a href="/archives/2023/10">10</a>
-            </div>
-            
-
-            
-            <div class="cd-timeline-img day" data-aos="zoom-in-up">
-                <span>20</span>
-            </div>
-            <article class="cd-timeline-content" data-aos="fade-up">
-                <div class="article col s12 m6">
-                    <div class="card">
-                        <a href="/2023/10/20/wo-de-di-yi-pian-wen-zhang/">
-                            <div class="card-image">
-                                
-                                
-                                <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="我的第一篇文章">
-                                
-                                <span class="card-title">我的第一篇文章</span>
-                            </div>
-                        </a>
-                        <div class="card-content article-content">
-                            <div class="summary block-with-text">
-                                
-                                    这是我的第一篇文章，诞生于2023.10.20 23：03 我在过去曾经建立过网站但是因为时间和精力以及服务器来路不正而中止了。我希望这个静态网站能够走的久些
-
-                                
-                            </div>
-                            <div class="publish-info">
-                                <span class="publish-date">
-                                    <i class="far fa-clock fa-fw icon-date"></i>2023-10-20
-                                </span>
-                                <span class="publish-author">
-                                    
-                                    <i class="fas fa-user fa-fw"></i>
-                                    littlehorsebrother
-                                    
-                                </span>
-                            </div>
-                        </div>
-
-                        
-                    </div>
-                </div>
-            </article>
-        </div>
-        
-        <div class="cd-timeline-block">
-
-            
-            
-
-            
-            
-
-            
-            <div class="cd-timeline-img day" data-aos="zoom-in-up">
-                <span>20</span>
-            </div>
-            <article class="cd-timeline-content" data-aos="fade-up">
-                <div class="article col s12 m6">
-                    <div class="card">
-                        <a href="/2023/10/20/hello-world/">
-                            <div class="card-image">
-                                
-                                
-                                <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
-                                
-                                <span class="card-title">Hello World</span>
-                            </div>
-                        </a>
-                        <div class="card-content article-content">
-                            <div class="summary block-with-text">
-                                
-                                    Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex
-                                
-                            </div>
-                            <div class="publish-info">
-                                <span class="publish-date">
-                                    <i class="far fa-clock fa-fw icon-date"></i>2023-10-20
-                                </span>
-                                <span class="publish-author">
-                                    
-                                    <i class="fas fa-user fa-fw"></i>
-                                    littlehorsebrother
-                                    
-                                </span>
-                            </div>
-                        </div>
-
-                        
-                    </div>
-                </div>
-            </article>
-        </div>
-        
-    </div>
 
 </main>
 
