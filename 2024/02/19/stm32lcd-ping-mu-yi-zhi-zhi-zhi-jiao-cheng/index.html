@@ -393,7 +393,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    683
+                    685
                 </div>
                 
 
@@ -415,6 +415,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
 
         
         <!-- 代码块折行 -->
@@ -431,7 +434,17 @@
 <h2 id="步骤2-迁移文件"><a href="#步骤2-迁移文件" class="headerlink" title="步骤2 迁移文件"></a>步骤2 迁移文件</h2><p>1.将正点原子例程文件-&gt;LCD样例文件(hal库版本)打开，打开其中的BSP文件夹，复制LCD文件夹。<br>2.在创建好的cubemx工程文件中新建一个BSP文件夹，将刚刚复制的LCD文件夹粘贴到其中</p>
 <h2 id="步骤3-设置新的文件夹和文件寻址"><a href="#步骤3-设置新的文件夹和文件寻址" class="headerlink" title="步骤3 设置新的文件夹和文件寻址"></a>步骤3 设置新的文件夹和文件寻址</h2><p>1.打开keil5工程，点击方块堆，在Groups中添加”&#x2F;Drivers&#x2F;BSP”，保存后退出。<br>2.点击魔法棒，选中(C&#x2F;C++)窗口，看到下方的”includes paths”,点击后面的三个点，点击空白文本框新建新的文件路径，再次点击后面三个点，将文件目录选择到BSP文件夹后点（选择文件夹）保存后退出。<br>3.点击左侧工程栏目中的BSP文件夹，右键添加文件，将lcd.c和lcd.ex.c添加进该文件夹。  </p>
 <h2 id="步骤4-修改代码"><a href="#步骤4-修改代码" class="headerlink" title="步骤4 修改代码"></a>步骤4 修改代码</h2><p>1.打开lcd.c,将所有文件寻址从”.&#x2F;BSP&#x2F;LCD&#x2F;…”改为”.&#x2F;LCD&#x2F;…”;接下来删去”stdlib.h””usart.h”两个库。<br>2.打开lcd.ex.c,将所有文件寻址从”.&#x2F;BSP&#x2F;LCD&#x2F;…”改为”.&#x2F;LCD&#x2F;…”;接下来删去”delay.h”库。<br>3.打开lcd.h,删去”sys.h”库,添加”main.h”。<br>4.在main.c中添加如下代码：  </p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * @brief  延时函数</span></span><br><span class="line"><span class="comment">  * @param  ms 延时多少秒</span></span><br><span class="line"><span class="comment">  * @retval 无</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">delay_ms</span><span class="params">(<span class="type">uint32_t</span> ms)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">uint32_t</span> ms_uwTick=uwTick;</span><br><span class="line">	<span class="keyword">while</span> (uwTick-ms_uwTick&lt;ms);</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">&#x2F;**
+  * @brief  延时函数
+  * @param  ms 延时多少秒
+  * @retval 无
+  *&#x2F;
+void delay_ms(uint32_t ms)
+&#123;
+	uint32_t ms_uwTick&#x3D;uwTick;
+	while (uwTick-ms_uwTick&lt;ms);
+	
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>然后在main.h中加入函数声明以便lcd.ex.c使用。<br>5.编译lcd.ex.c,将所有的<code>delay_us()</code>函数替换为上述函数。再次编译查看问题。无误后将该文件从文件夹中去除。<br>6.打开main.h-&gt;stm32f103xx_hal.h-&gt;stm32f103_hal_conf.h,将被注释掉的SRAM取消注释。再次编译运行。<br>7.选中stm32f1xx_hal_driver文件夹，添加sram和fsmc的C文件，再次编译运行，此时应该只剩下一个错误(uart)<br>8.定位到错误的UART位置，将该行进行注释，再次编译可得0错误0警告。</p>
 <h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>如果你的文件在上述步骤之后成功运行，但是你在之后再次使用cubemx重新部署工程，请直接跳转到步骤4-&gt;第六步</p>
 
@@ -545,18 +558,17 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2024/02/19/stm32lcd-ping-mu-yi-zhi-zhi-zhi-jiao-cheng/">
+                <a href="/2024/02/28/ji-lu-jia-zhao-ban-nian/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="STM32LCD屏幕移植纸质教程">
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="记录_驾照_半年">
                         
-                        <span class="card-title">STM32LCD屏幕移植纸质教程</span>
+                        <span class="card-title">记录_驾照_半年</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -566,9 +578,9 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-02-19
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2024-02-28
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -577,12 +589,11 @@
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/STM32/">
-                        <span class="chip bg-color">STM32</span>
+                    <a href="/tags/%E7%94%9F%E6%B4%BB%E7%BB%8F%E5%8E%86/">
+                        <span class="chip bg-color">生活经历</span>
                     </a>
                     
                 </div>
@@ -645,6 +656,9 @@
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
 
 
 <!-- 代码语言 -->
@@ -766,7 +780,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">2.2k</span>
+                        class="white-color">5.6k</span>
             
             
             
