@@ -385,21 +385,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-05-22
+                    2024-05-29
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    723
+                    1.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    4 分
                 </div>
                 
 
@@ -431,7 +431,7 @@
 <h4 id="第一部分-一些概念"><a href="#第一部分-一些概念" class="headerlink" title="第一部分_一些概念"></a>第一部分_一些概念</h4><p>a.  在具体了解这些参数之前，需要先了解三个具体的概念：增益，带宽，频谱。<br>首先是<strong>增益</strong>。<br>增益（dB）简介</p>
 <ol>
 <li>放大器输出与输入的比值称为<strong>放大倍数</strong>，单位“倍”，如10倍放大器，100倍放大器。当改用<strong>分贝</strong>做单位时，放大倍数就称之为增益，这是一个概念的两种称呼。这是个定性的认识，接下来看看定量的认识：<br>注意一点：电压（电流）与功率放大倍数的定义是不同的，看公式大家就明白了。<br>dB的两个定义方式：   </li>
-<li>电压（电流）放大倍数分贝数定义：K&#x3D;20lg(Vo&#x2F;Vi)，其中K为放大倍数的分贝数，Vo为放大信号输出，Vi为信号输入；      </li>
+<li>电压（电流）放大倍数分贝数定义：***K&#x3D;20lg(Vo&#x2F;Vi)***，其中K为放大倍数的分贝数，Vo为放大信号输出，Vi为信号输入；      </li>
 <li>功率放大倍数分贝数定义：K&#x3D;10lg(Po&#x2F;Pi)，其中K为放大倍数的分贝数，Po为放大信号输出，Pi为信号输入；  </li>
 <li>K&gt;0说明信号被放大，K&#x3D;0信号直通，K&lt;0说明信号被衰减；</li>
 <li>这里给出3个重要的增益值：0dB,-3dB.0dB根据所给公式就能知道Vo&#x3D;Vi，此时是直接输出，没有放大或衰减。其次是-3dB,根据公式最后能计算出Vo&#x3D;0.707Vi ，Po&#x3D;0.5Pi,这个增益最大的特点就在于，此时的功率是最大功率值的一半，因此这个点又叫做半功率点。<br>参考连接:<a href="%22https://blog.csdn.net/qq_29362303/article/details/89351354%22">增益dB 的定义与倍数换算</a>;</li>
@@ -440,6 +440,10 @@
 <p>其次是<strong>带宽</strong>.<br>带宽可类比为高速公路宽度，单位为Hz，通常是指信息传输通道允许传递的信号的频率范围，比如从10GHz-100GHz，这是一个值域，而不是一个值。在之后的滤波过程中，很大程度上是在带宽这个“值域”上动手脚.<br>参考链接:<a href="%22https://zhuanlan.zhihu.com/p/650468394%22">比特率，波特率，带宽</a>  </p>
 <hr>
 <p>最后是<strong>频谱</strong><br>频谱是一组正弦波，经适当组合后，形成被考察的时域信号。图 1-1 显示了一个复合信号的波形。假定我们希望看到的是正弦波，但显然图示信号并不是纯粹的正弦形，而仅靠观察又很难确定其中的原因。因此需要频率-幅值图区评判波形的构成（参考笔记1中任意正弦波叠加&#x3D;所有波形）。</p>
+<h3 id="05-29-更新"><a href="#05-29-更新" class="headerlink" title="05.29 更新"></a>05.29 更新</h3><p>沟槽的保存，后面写的近千字解释全没了，导致上周末验收没成功。TT  </p>
+<ol>
+<li><em><strong>增益带宽积</strong></em>（GBP）<br>字面意思是放大器的带宽和带宽对应增益的乘积<br>GBP&#x3D;Gain×fo<br>使用上式有一个前提条件：即在一定频率范围内，增益带宽积才是一个常数。上式中的fo如果不在满足增益带宽积为定值的范围内，则公式并不成立。<br>另有：<em><strong>单位增益带宽</strong></em><br>单位增益带宽就是单位增益时对应的频率<br>结合运算放大器的开环增益曲线，增益为1，也就是0dB，此时的对应的频率即为单位增益带宽。<br>推荐资料：<a href="%22https://blog.csdn.net/qq_21794157/article/details/122920050%22">如何理解运算放大器的增益带宽积-运放增益</a>;<br>2.<em><strong>压摆率</strong></em><br>一、压摆率<br>指放大电路在闭环状态下，输入为大信号时（例如阶跃信号），放大电路输出电压对时间的最大变化速率。<br>压摆率的意思就是运算放大器输出电压的转换速率，单位有通常有V&#x2F;s，V&#x2F;ms和V&#x2F;μs三种，它反映的是一个运算放大器在速度方面的指标，表示运放对信号变化速度的适应能力，是衡量运放在大幅度信号作用时工作速度的参数。当输入信号变化斜率的绝对值小于SR时，输出电压才按线性规律变化。<br>压摆率(SR)可以理解为这个运放的最大电压变换率，我们需要使得信号的变化率始终小于压摆率，才能保证输出信号不失真。如果这样理解，就不难推出关于如何选择压摆率的公式：<br>设输入信号 Ui&#x3D;Uom * cos(wt)<br>dUi&#x2F;dt&#x3D;-Uom * w * sin(wt)<br>要使Ui变化率最大，即|dUi&#x2F;dt|max&#x3D;Uom * w&#x3D;2 * pi * f * Uom<br>故选择 压摆率&gt;&#x3D;2 * pi * f * Uom 的运放<br>直观解释链接<a href="%22https://blog.csdn.net/weixin_41967706/article/details/122870933%22">运算放大器基本参数—压摆率（直观解释）</a><br>3.<em><strong>供电电压</strong></em><br>运放供电电压要和输入电压区分，他是给运放芯片供电的，不是需要处理的电压。<br>4.<em><strong>输出范围</strong></em><br>在输出范围上，这点跟供电电压有关系，以及跟电源轨和轨道轨有关系</li>
+</ol>
 
                 
             </div>
@@ -551,18 +555,17 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2024/05/22/ying-jian-xue-xi-bi-ji-2/">
+                <a href="/2024/07/04/2024-7-4-da-yi-xia-zong-jie/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="硬件学习笔记2">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="2024_7_4大一下总结">
                         
-                        <span class="card-title">硬件学习笔记2</span>
+                        <span class="card-title">2024_7_4大一下总结</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -572,9 +575,9 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-05-22
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2024-07-04
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -583,12 +586,11 @@
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E7%A1%AC%E4%BB%B6%E7%AC%94%E8%AE%B0/">
-                        <span class="chip bg-color">硬件笔记</span>
+                    <a href="/tags/%E7%94%9F%E6%B4%BB%E7%BB%8F%E5%8E%86/">
+                        <span class="chip bg-color">生活经历</span>
                     </a>
                     
                 </div>
@@ -775,7 +777,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">15.1k</span>
+                        class="white-color">18.1k</span>
             
             
             
