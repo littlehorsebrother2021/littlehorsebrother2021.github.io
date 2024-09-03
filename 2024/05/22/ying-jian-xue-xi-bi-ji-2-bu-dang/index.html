@@ -4,8 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="4.10专业分流宣讲会, 小马哥个人博客">
-    <meta name="description" content="">
+    <meta name="keywords" content="硬件学习笔记3-笔记2补档, 小马哥个人博客">
+    <meta name="description" content="引言这里是五月中下旬，距离我写第一期硬件学习笔记已经过去了一个月，这一个月可真够忙的，各种大作业，期中考，比赛竞赛，但是好在现在这些都已经过去了，总算有时间去学wxd的硬件部分了，因此我在这里写下硬件笔记第二期，以此记录我的学习历程。、
+第">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +18,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>4.10专业分流宣讲会 | 小马哥个人博客</title>
+    <title>硬件学习笔记3-笔记2补档 | 小马哥个人博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -332,12 +333,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">4.10专业分流宣讲会</h1>
+                    <h1 class="description center-align post-title">硬件学习笔记3-笔记2补档</h1>
                 </div>
             </div>
         </div>
@@ -359,12 +360,25 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E7%A1%AC%E4%BB%B6%E7%AC%94%E8%AE%B0/">
+                                <span class="chip bg-color">硬件笔记</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                学习
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -373,28 +387,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2024-04-10
+                    2024-05-22
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-04-10
+                    2024-09-03
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    2.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    7 分
                 </div>
                 
 
@@ -422,7 +436,40 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>这里是五月中下旬，距离我写第一期硬件学习笔记已经过去了一个月，这一个月可真够忙的，各种大作业，期中考，比赛竞赛，但是好在现在这些都已经过去了，总算有时间去学wxd的硬件部分了，因此我在这里写下硬件笔记第二期，以此记录我的学习历程。、</p>
+<h4 id="第一部分-一些概念"><a href="#第一部分-一些概念" class="headerlink" title="第一部分_一些概念"></a>第一部分_一些概念</h4><p>a.  在具体了解这些参数之前，需要先了解三个具体的概念：增益，带宽，频谱。<br>首先是<strong>增益</strong>。<br>增益Gain（dB）简介（另称：开环增益（无反馈））</p>
+<ol>
+<li>放大器输出与输入的比值称为<strong>放大倍数</strong>，单位“倍”，如10倍放大器，100倍放大器。当改用<strong>分贝</strong>做单位时，放大倍数就称之为增益，这是一个概念的两种称呼。这是个定性的认识，接下来看看定量的认识：<br>注意一点：电压（电流）与功率放大倍数的定义是不同的，看公式大家就明白了。<br>dB的两个定义方式：   </li>
+<li>电压（电流）放大倍数分贝数定义：K&#x3D;20lg(Vo&#x2F;Vi)，其中K为放大倍数的分贝数，Vo为放大信号输出，Vi为信号输入；      </li>
+<li>功率放大倍数分贝数定义：K&#x3D;10lg(Po&#x2F;Pi)，其中K为放大倍数的分贝数，Po为放大信号输出，Pi为信号输入；  </li>
+<li>K&gt;0说明信号被放大，K&#x3D;0信号直通，K&lt;0说明信号被衰减；</li>
+<li>这里给出3个重要的增益值：0dB,-3dB.0dB根据所给公式就能知道Vo&#x3D;Vi，此时是直接输出，没有放大或衰减。其次是-3dB,根据公式最后能计算出Vo&#x3D;0.707Vi ，Po&#x3D;0.5Pi,这个增益最大的特点就在于，此时的功率是最大功率值的一半，因此这个点又叫做半功率点。<br>参考连接:<a href="%22https://blog.csdn.net/qq_29362303/article/details/89351354%22">增益dB 的定义与倍数换算</a>;</li>
+</ol>
+<hr>
+<p>其次是<strong>带宽</strong>.<br>带宽可类比为高速公路宽度，单位为Hz，通常是指信息传输通道允许传递的信号的频率范围，比如从10GHz-100GHz，这是一个值域，而不是一个值。在之后的滤波过程中，很大程度上是在带宽这个“值域”上动手脚.<br>参考链接:<a href="%22https://zhuanlan.zhihu.com/p/650468394%22">比特率，波特率，带宽</a>  </p>
+<hr>
+<p>最后是<strong>频谱</strong><br>频谱是一组正弦波，经适当组合后，形成被考察的时域信号。假设一个复合信号的波形。假定我们希望看到的是正弦波，但显然复合信号并不是纯粹的正弦形，而仅靠观察又很难确定其中的原因。因此需要频率-幅值图区评判波形的构成（参考笔记1中任意正弦波叠加&#x3D;所有波形）。  </p>
+<hr>
+<h4 id="运算放大器的概念介绍"><a href="#运算放大器的概念介绍" class="headerlink" title="运算放大器的概念介绍"></a>运算放大器的概念介绍</h4><h5 id="增益带宽积-GBW"><a href="#增益带宽积-GBW" class="headerlink" title="增益带宽积(GBW)"></a>增益带宽积(GBW)</h5><p>所谓的增益带宽积，顾名思义指的是运放的增益和带宽的乘积，而这个乘积往往是个常数，且等于运放的开环增益穿越0dB的时候的频率。<br>具体参考资料：<a href="%22https://blog.csdn.net/qq_21794157/article/details/122920050%22">如何理解运算放大器的增益带宽积-运放增益</a>;  </p>
+<hr>
+<h5 id="压摆率Slew-Rate（SR）"><a href="#压摆率Slew-Rate（SR）" class="headerlink" title="压摆率Slew Rate（SR）"></a>压摆率Slew Rate（SR）</h5><p>定义：闭环放大器输出电压变化的最快速率。用 V&#x2F;μs表示。<br>§理解：此值显示运放正常工作时，输出端所能提供的最大变化速率，当输出信号欲实现比这个速率还快的变化时，运放就不能提供了，导致输出波形变形——原本是正弦波就变成了三角波。<br>相关概念：满功率带宽FPBW：通常定义为信号频率在这个频率下，当运放提供其最大输出电压时，输出信号的幅度开始出现失真。换句话说，当信号频率高于满功率带宽时，即使运放的增益设置为最大，输出信号也会因为不能快速响应而出现失真。<br>FPBW&#x3D;2×GainSlew Rate&#x2F;Gain​<br><strong>简单理解</strong>：时域图斜率限制者,潜在的波形失真凶手。</p>
+<hr>
+<h5 id="运算放大器的供电电压"><a href="#运算放大器的供电电压" class="headerlink" title="运算放大器的供电电压"></a>运算放大器的供电电压</h5><p>运算放大器（Op-Amp）的供电电压特性是其电路设计和应用中的一个关键方面。以下是一些关于运算放大器供电电压的基本特性：<br>运算放大器供电电压特性<br>I. 双电源&#x2F;单电源供电均可。<br>注意：通常情况下使用双电源供电，正电压+负电压的组合输出，以方便输入存在负压的波形输入。<br>II. 轨到轨输入 (Rail-to-Rail Input)<br>轨到轨运算放大器允许输入电位在从负电源到正电源的整个区间变化。<br>III.  <strong>输出电压限制</strong><br><strong>运算放大器的输出电压通常受到供电电压的限制。这点实践出真知。</strong></p>
+<hr>
+<h5 id="输出范围"><a href="#输出范围" class="headerlink" title="输出范围"></a>输出范围</h5><p>I. <strong>双电源供电</strong>：双电源供电的运算放大器，其输出可以在零电压两侧变化，差动输入电压为零时，输出也可以置零。<br>II. <strong>单电源供电</strong>：单电源供电的运算放大器，输出范围在电源与地之间的某一范围内变化。<br>III. <strong>轨到轨输入和输出</strong>：轨到轨运算放大器允许输入电位在从负电源到正电源的整个区间变化，输出电压可以非常接近电源电压，通常在电源轨的10mV到100mV范围内。<br>IV. <strong>输出电压范围</strong>：运算放大器的输出电压范围通常受到供电电源的限制，输出电压的最大值一般仅几十伏。<br>V. <strong>高压大功率型</strong>：高压大电流集成运算放大器不需附加任何电路，即可输出高电压和大电流，例如电源电压可达±150V，输出电流可达1A。<br>VI. <strong>输出电压摆幅</strong>：输出电压摆幅指运算放大器输出信号可以达到的最大电压范围，通常受限于供电电压和负载。<br>VII. <strong>输出电压限制</strong>：运算放大器的输出电压还受到内部电路设计的限制，某些运算放大器可能无法提供真正0V的输出，总会有一点偏移量。</p>
+<hr>
+<h5 id="是否单位增益稳定"><a href="#是否单位增益稳定" class="headerlink" title="是否单位增益稳定"></a>是否单位增益稳定</h5><p>单位增益稳定（Unity Gain Stable，UGS）的概念指的是运算放大器（Op-Amp）在单位增益配置（即闭环增益为1）时能够保持稳定工作，不产生振荡的状态。</p>
+<p>概念：<br>单位增益稳定是衡量运算放大器稳定性的一个重要参数。在单位增益配置下，运算放大器的输出直接反馈到其输入端，形成一个闭环系统。如果在此配置下，运算放大器能够稳定工作，不产生振荡，那么称该运算放大器为单位增益稳定的。</p>
+<p>判断方法：</p>
+<ol>
+<li><strong>开环增益与相位裕度</strong>：判断一个运算放大器是否单位增益稳定，需要查看其开环增益（Open-Loop Gain）和相位裕度（Phase Margin）。当开环增益下降到1（0dB）时，如果相位裕度大于0度，则认为运算放大器是单位增益稳定的。</li>
+<li><strong>频率响应</strong>：通过分析运算放大器的频率响应曲线，特别是开环增益与相位响应，可以判断其稳定性。在单位增益频率（即开环增益为1的频率）处，如果相位滞后小于180度，则运算放大器被认为是单位增益稳定的。</li>
+<li><strong>数据手册信息</strong>：通常，运算放大器的数据手册会提供有关其稳定性的信息。手册中会标明运算放大器是否为单位增益稳定，以及相关的稳定性参数，如开环增益、相位裕度和增益裕度。</li>
+<li><strong>实际测试</strong>：在某些情况下，为了验证运算放大器的稳定性，可以通过实际电路测试来进行判断。这包括搭建一个单位增益的放大电路，并观察其是否有振荡现象发生。<br>单位增益稳定性是运算放大器设计和应用中的一个关键因素，它影响着电路的性能和可靠性。工程师在设计电路时，需要仔细选择和评估运算放大器的稳定性，以满足特定应用的需求。</li>
+</ol>
+<hr>
+<h5 id="电源轨"><a href="#电源轨" class="headerlink" title="电源轨"></a>电源轨</h5><p>   参考链接：<a href="%22https://jishuzhan.net/article/1762045476313501698#1%E3%80%81%E7%94%B5%E6%BA%90%E8%BD%A8%E5%AE%9A%E4%B9%89%22">电源轨概念讲解</a>;  </p>
+
                 
             </div>
             <hr/>
@@ -448,7 +495,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://littlehorsebrother2021.github.io/2024/04/10/4-10-zhuan-ye-fen-liu-xuan-jiang-hui/">https://littlehorsebrother2021.github.io/2024/04/10/4-10-zhuan-ye-fen-liu-xuan-jiang-hui/</a>
+                    <a href="https://blog.556106.xyz/2024/05/22/ying-jian-xue-xi-bi-ji-2-bu-dang/">https://blog.556106.xyz/2024/05/22/ying-jian-xue-xi-bi-ji-2-bu-dang/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -485,7 +532,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/%E7%A1%AC%E4%BB%B6%E7%AC%94%E8%AE%B0/">
+                                    <span class="chip bg-color">硬件笔记</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -533,13 +584,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2024/04/10/ying-jian-xue-xi-bi-ji-1/">
+                <a href="/2024/05/22/ying-jian-xue-xi-bi-ji-2/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="硬件学习笔记1">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="硬件学习笔记2">
                         
-                        <span class="card-title">硬件学习笔记1</span>
+                        <span class="card-title">硬件学习笔记2</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -550,12 +601,16 @@
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2024-04-10
+                            <i class="far fa-clock fa-fw icon-date"></i>2024-05-22
                         </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            littlehorsebrother
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    学习
+                                </a>
+                            
                             
                         </span>
                     </div>
@@ -578,13 +633,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2024/04/09/51-dan-pian-ji-zhuan-ti-1/">
+                <a href="/2024/05/15/4.22-5.15-san-zhou-ban-zong-jie/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="51单片机专题1">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="4.22-5.15三周半总结">
                         
-                        <span class="card-title">51单片机专题1</span>
+                        <span class="card-title">4.22-5.15三周半总结</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -595,12 +650,16 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-04-09
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-05-15
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            littlehorsebrother
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%88%91%E7%9A%84%E7%94%9F%E6%B4%BB/" class="post-category">
+                                    我的生活
+                                </a>
+                            
                             
                         </span>
                     </div>
@@ -608,8 +667,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/51%E5%8D%95%E7%89%87%E6%9C%BA/">
-                        <span class="chip bg-color">51单片机</span>
+                    <a href="/tags/%E7%94%9F%E6%B4%BB%E7%BB%8F%E5%8E%86/">
+                        <span class="chip bg-color">生活经历</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%91%A8%E6%80%BB%E7%BB%93/">
+                        <span class="chip bg-color">周总结</span>
                     </a>
                     
                 </div>
@@ -751,7 +814,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">18.1k</span>
+                        class="white-color">23.4k</span>
             
             
             
@@ -1014,7 +1077,7 @@ $(function () {
         <script type="text/javascript">
           var defaultEncoding = 2; //网站编写字体是否繁体，1-繁体，2-简体
           var translateDelay = 0; //延迟时间,若不在前, 要设定延迟翻译时间, 如100表示100ms,默认为0
-          var cookieDomain = "https://littlehorsebrother2021.github.io"; //Cookie地址, 一定要设定, 通常为你的网址
+          var cookieDomain = "https://blog.556106.xyz"; //Cookie地址, 一定要设定, 通常为你的网址
           var msgToTraditionalChinese = "繁"; //此处可以更改为你想要显示的文字
           var msgToSimplifiedChinese = "简"; //同上，但两处均不建议更改
           var translateButtonId = "translateLink"; //默认互换id
