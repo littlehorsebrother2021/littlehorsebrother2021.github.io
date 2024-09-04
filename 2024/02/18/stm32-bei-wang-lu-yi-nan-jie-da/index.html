@@ -51,7 +51,9 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 6.3.0"></head>
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 <body>
@@ -401,7 +403,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    461
+                    459
                 </div>
                 
 
@@ -437,12 +439,12 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="观前提示"><a href="#观前提示" class="headerlink" title="观前提示"></a>观前提示</h1><p>本系列基于正点原子STM32F103ZET6战舰开发板。</p>
-<h2 id="1-关于按键中断"><a href="#1-关于按键中断" class="headerlink" title="1.关于按键中断"></a>1.关于按键中断</h2><p>按键中断需要注意设置的触发条件：PA0是上升沿触发中断，PE2,PE3,PE4是下降沿触发，如果这个没设置好（默认）就会导致key0-key2按键触发不灵敏<br>按键中断设置三件事：触发条件，电路接通条件（上&#x2F;下拉），中断开启。<br>按键中断回调函数某些delay（调用hal库内容的）函数不能放进去。</p>
+<h2 id="1-关于按键中断"><a href="#1-关于按键中断" class="headerlink" title="1.关于按键中断"></a>1.关于按键中断</h2><p>按键中断需要注意设置的触发条件：PA0是上升沿触发中断，PE2,PE3,PE4是下降沿触发，如果这个没设置好（默认）就会导致key0-key2按键触发不灵敏<br>按键中断设置三件事：触发条件，电路接通条件（上/下拉），中断开启。<br>按键中断回调函数某些delay（调用hal库内容的）函数不能放进去。</p>
 <h2 id="2-关于串口通信"><a href="#2-关于串口通信" class="headerlink" title="2.关于串口通信"></a>2.关于串口通信</h2><p>串口通信的设置没有什么问题，最容易忘的是开启microlib。不开启的话无法使用魔改后的printf和scanf函数。</p>
 <h3 id="开启micro-lib"><a href="#开启micro-lib" class="headerlink" title="开启micro lib"></a>开启micro lib</h3><p>魔法棒-&gt;Target-&gt;勾选microlib。</p>
 <h2 id="3-关于pwm"><a href="#3-关于pwm" class="headerlink" title="3.关于pwm"></a>3.关于pwm</h2><p>请注意pwm使用的定时器是哪个，不要傻乎乎的照搬之前的历程然后放着一个没用的定时器。。。</p>
 <h2 id="4-关于dma"><a href="#4-关于dma" class="headerlink" title="4.关于dma"></a>4.关于dma</h2><p>没什么好说的数据搬运工，注意是单次传输还是循环传输。</p>
-<h2 id="5-关于adc"><a href="#5-关于adc" class="headerlink" title="5.关于adc"></a>5.关于adc</h2><p>adc并没有直接与定时器挂钩——可以设置软件启动，所以可以避免跟定时器抢引脚的情况（PA6！&#x3D;使用了定时器2）。</p>
+<h2 id="5-关于adc"><a href="#5-关于adc" class="headerlink" title="5.关于adc"></a>5.关于adc</h2><p>adc并没有直接与定时器挂钩——可以设置软件启动，所以可以避免跟定时器抢引脚的情况（PA6！=使用了定时器2）。</p>
 <h2 id="6-关于lcd"><a href="#6-关于lcd" class="headerlink" title="6.关于lcd"></a>6.关于lcd</h2><p>请观看大牛视频<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1fN41147mA/?spm_id_from=333.788.recommend_more_video.-1">使用CubeMX移植正点原子STM32LCD屏幕教程</a>;<br>(过几天尝试把纸质教程写出来)</p>
 <h2 id="7-关于项目"><a href="#7-关于项目" class="headerlink" title="7.关于项目"></a>7.关于项目</h2><p>请一个一个模块加，别一下子全部加进来。。。不然你将手足无措，出错将不知道是哪个模块的问题。<br>一个一个模块实验过来<br>加入-&gt;能不能用（历程测试）-&gt;能用-&gt;下一个模块<br>加入-&gt;能不能用（历程测试）-&gt;不能用-&gt;先查cubemx设置-&gt;接着查代码错误-&gt;还不行csdn，B站找解决教程。</p>
 
@@ -794,7 +796,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">23.4k</span>
+                        class="white-color">23.2k</span>
             
             
             
