@@ -4,9 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="4.22-5.15三周半总结, 小马哥个人博客">
-    <meta name="description" content="一个字——累原谅我这么久没更新，这三周实在是有一点混乱跟匆忙，有点回到高中首考前的那段时光。
-4.22-4.30 最后的准备1.这一段时间主要是5.1之前两周重叠的麻烦，中间那一天休息是仅有的，需要准备思政PPT,思政论文，预习各类课程，但">
+    <meta name="keywords" content="分类: ѧϰ, 小马哥个人博客">
+    <meta name="description" content="我的个人博客，喜欢的请支持一下">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>4.22-5.15三周半总结 | 小马哥个人博客</title>
+    <title>分类: ѧϰ | 小马哥个人博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -331,457 +330,170 @@
 
 </header>
 
-    
-<script src="/libs/cryptojs/crypto-js.min.js"></script>
-<script>
-    (function() {
-        let pwd = '';
-        if (pwd && pwd.length > 0) {
-            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
-                alert('密码错误，将返回主页！');
-                location.href = '/';
-            }
-        }
-    })();
-</script>
+    <div class="bg-cover pd-header about-cover">
+    <div class="container">
+    <div class="row">
+    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
+        <div class="brand">
+            <div class="title center-align">
+                
+                我的个人博客
+                
+            </div>
 
-
-
-
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
-    <div class="container" style="right: 0px;left: 0px;">
-        <div class="row">
-            <div class="col s12 m12 l12">
-                <div class="brand">
-                    <h1 class="description center-align post-title">4.22-5.15三周半总结</h1>
-                </div>
+            <div class="description center-align">
+                
+                <span id="subtitle"></span>
+                <script src="/libs/typed/typed.js"></script>
+                <script>
+                    var typed = new Typed("#subtitle", {
+                        strings: [ 
+                            
+                                "从来没有真正的绝境, 只有心灵的迷途",
+                            
+                                "Never really desperate, only the lost of the soul",
+                            
+                        ],
+                        startDelay: 300,
+                        typeSpeed: 100,
+                        loop: true,
+                        backSpeed: 50,
+                        showCursor: true
+                    });
+                </script>
+                
             </div>
         </div>
     </div>
 </div>
 
 
+<script>
+    // 每天切换 banner 图.  Switch banner image every day.
+    var bannerUrl = "/medias/banner/" + new Date().getDay() + '.jpg';
+    $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
+</script>
+<script>
+    
+      var bannerUrl = "/medias/featureimages/" + Math.floor(Math.random() * 24) + '.jpg';
+    
+    $('.bg-cover.about-cover').css('background-image', 'url(' + bannerUrl + ')');
+
+</script>
 
 
-<main class="post-container content">
+    </div>
+</div>
+
+<main class="content">
 
     
-    <div class="row">
-    <div id="main-content" class="col s12 m12 l9">
-        <!-- 文章内容详情 -->
-<div id="artDetail">
+
+<div id="category-cloud" class="container chip-container">
     <div class="card">
-        <div class="card-content article-info">
-            <div class="row tag-cate">
-                <div class="col s7">
-                    
-                    <div class="article-tag">
-                        
-                            <a href="/tags/%E7%94%9F%E6%B4%BB%E7%BB%8F%E5%8E%86/">
-                                <span class="chip bg-color">生活经历</span>
-                            </a>
-                        
-                            <a href="/tags/%E5%91%A8%E6%80%BB%E7%BB%93/">
-                                <span class="chip bg-color">周总结</span>
-                            </a>
-                        
-                    </div>
-                    
-                </div>
-                <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/%E6%88%91%E7%9A%84%E7%94%9F%E6%B4%BB/" class="post-category">
-                                我的生活
-                            </a>
-                        
-                    </div>
-                    
-                </div>
+        <div class="card-content">
+            <div class="tag-title center-align">
+                <i class="fas fa-bookmark"></i>&nbsp;&nbsp;文章分类
             </div>
-
-            <div class="post-info">
+            <div class="tag-chips">
                 
-                <div class="post-date info-break-policy">
-                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2024-05-15
-                </div>
                 
-
                 
-                <div class="post-date info-break-policy">
-                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-09-03
-                </div>
+                <a href="/categories/%E6%88%91%E7%9A%84%E7%94%9F%E6%B4%BB/" title="我的生活: 18">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #F9EBEA;">我的生活
+                        <span class="tag-length">18</span>
+                    </span>
+                </a>
                 
-
                 
-                <div class="info-break-policy">
-                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    867
-                </div>
+                <a href="/categories/%D1%A7%CF%B0/" title="ѧϰ: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-active "
+                            style="background-color: #F5EEF8;">ѧϰ
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
                 
-
                 
-                <div class="info-break-policy">
-                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
-                </div>
+                <a href="/categories/%E5%AD%A6%E4%B9%A0/" title="学习: 11">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #D5F5E3;">学习
+                        <span class="tag-length">11</span>
+                    </span>
+                </a>
                 
-
                 
-                    <div id="busuanzi_container_page_pv" class="info-break-policy">
-                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
-                        <span id="busuanzi_value_page_pv"></span>
-                    </div>
-				
+                <a href="/categories/%E4%B8%8A%E8%AF%BE/" title="上课: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #E8F8F5;">上课
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
             </div>
         </div>
-        <hr class="clearfix">
-
-        
-        <!-- 是否加载使用自带的 prismjs. -->
-        <link rel="stylesheet" href="/libs/prism/prism.min.css">
-        
-
-        
-        <!-- 代码块折行 -->
-        <style type="text/css">
-            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
-        </style>
-        
-
-        <div class="card-content article-card-content">
-            <div id="articleContent">
-                <h2 id="一个字——累"><a href="#一个字——累" class="headerlink" title="一个字——累"></a>一个字——累</h2><p>原谅我这么久没更新，这三周实在是有一点混乱跟匆忙，有点回到高中首考前的那段时光。</p>
-<h3 id="4-22-4-30-最后的准备"><a href="#4-22-4-30-最后的准备" class="headerlink" title="4.22-4.30 最后的准备"></a>4.22-4.30 最后的准备</h3><p>1.这一段时间主要是5.1之前两周重叠的麻烦，中间那一天休息是仅有的，需要准备思政PPT,思政论文，预习各类课程，但总的来说还是比较紧凑，不是很紧张，因为后面跟了一个五一，当然，也因为后面跟了一个五一。</p>
-<h3 id="5-1-5-5-五一假期"><a href="#5-1-5-5-五一假期" class="headerlink" title="5.1-5.5 五一假期"></a>5.1-5.5 五一假期</h3><p>时隔两个月，我回到了温州，一切都还是老样子，当然这次是相当放松的，因为回温≠学车了，这句话说出口的时候满是苦涩，但更多是庆幸，因为两个月前我已经通过了，pass了。<br>这次回来没出去玩，基本上纯粹的在家里呆了三天，但还是有一些新东西的。<br>第一个，就是我重新碰车了，当然是家里的自动档车，在小区里开了一圈，还不错，之前两个月的车感还在，当然还是有一点紧张的，由于没了离合，左脚空落落的，换挡也不用换挡了，只需要踩刹车跟油门就能开，实在是简单。<br>第二个，就是见了些人，见了些事。。。<br>第三个，就是假期的高铁，最后一天的高铁是真的拥挤超载，一堆上车补票的人，过道里都站不下了。</p>
-<h3 id="5-6-5-12-期中周"><a href="#5-6-5-12-期中周" class="headerlink" title="5.6-5.12 期中周"></a>5.6-5.12 期中周</h3><p>这一周是最忙的，没有休息日，5.12两门理学院的考试，5.6 presentation。除了5.5号在高铁上写了一些题目，剩下的题目基本上都是课上写完的，但这一次考试，高数这边举措有一些误判，就是hdu的题库实在是太简陋了，简陋到近几年的考题有些只改了一点点就搬上来考了，物理那边甚至出现了原题，而误判的重点就在于，我的高数没有去做历年的卷子，本来在5.11号网上我有犹豫过，但由于高中思维，以及去年并没有这种非常雷同碰到，导致我最终放弃了看历年卷子，然后我就错失证明题以及其他一些题目的分数，当然，昨天成绩就出来了，81，还好，但下次要留个心眼，同时这里确实也证明了，高数想考高分，必须要刷红宝书，吸收了高数的教训之后，在下午考大物之前，我把历年卷子过了一遍，结果下午做的感觉还行，那么下次就要注意了，历年卷子&gt;练习册错题&gt;不挂科&gt;书本。</p>
-<h3 id="5-12-5-15-前路回想"><a href="#5-12-5-15-前路回想" class="headerlink" title="5.12-5.15 前路回想"></a>5.12-5.15 前路回想</h3><p>现在是19：55：01，论文课，周末要打电赛了，上周遗留的一些作业还没写完，有点难受，然后总的无线电拖了三期，当然还是有点头绪的，五一假期看了一点，然后我发现了电分后面章节的秘密，等这边忙完，我估计要花大量时间在这三期上了。</p>
-<h3 id="5-15-5-18-未来"><a href="#5-15-5-18-未来" class="headerlink" title="5.15-5.18 未来"></a>5.15-5.18 未来</h3><p>六级还有30天<br>每周我爱记单词，听力练习<br>离期末周还有5周<br>离学期结束还有六周<br>离最后一次实践课还有一周</p>
-
-                
-            </div>
-            <hr/>
-
-            
-
-    <div class="reprint" id="reprint-statement">
-        
-            <div class="reprint__author">
-                <span class="reprint-meta" style="font-weight: bold;">
-                    <i class="fas fa-user">
-                        文章作者:
-                    </i>
-                </span>
-                <span class="reprint-info">
-                    <a href="/about" rel="external nofollow noreferrer">littlehorsebrother</a>
-                </span>
-            </div>
-            <div class="reprint__type">
-                <span class="reprint-meta" style="font-weight: bold;">
-                    <i class="fas fa-link">
-                        文章链接:
-                    </i>
-                </span>
-                <span class="reprint-info">
-                    <a href="https://blog.556106.xyz/2024/05/15/4.22-5.15-san-zhou-ban-zong-jie/">https://blog.556106.xyz/2024/05/15/4.22-5.15-san-zhou-ban-zong-jie/</a>
-                </span>
-            </div>
-            <div class="reprint__notice">
-                <span class="reprint-meta" style="font-weight: bold;">
-                    <i class="fas fa-copyright">
-                        版权声明:
-                    </i>
-                </span>
-                <span class="reprint-info">
-                    本博客所有文章除特別声明外，均采用
-                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
-                    许可协议。转载请注明来源
-                    <a href="/about" target="_blank">littlehorsebrother</a>
-                    !
-                </span>
-            </div>
-        
     </div>
-
-    <script async defer>
-      document.addEventListener("copy", function (e) {
-        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
-        M.toast({html: toastHTML})
-      });
-
-      function navToReprintStatement() {
-        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
-      }
-    </script>
+</div>
 
 
+    
 
-            <div class="tag_share" style="display: block;">
-                <div class="post-meta__tag-list" style="display: inline-block;">
-                    
-                        <div class="article-tag">
+    <article id="articles" class="container articles">
+        <div class="row tags-posts">
+            
+            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2025/04/18/2025-xiao-sai-fu-pan/">
+                        <div class="card-image tag-image">
                             
-                                <a href="/tags/%E7%94%9F%E6%B4%BB%E7%BB%8F%E5%8E%86/">
-                                    <span class="chip bg-color">生活经历</span>
-                                </a>
                             
-                                <a href="/tags/%E5%91%A8%E6%80%BB%E7%BB%93/">
-                                    <span class="chip bg-color">周总结</span>
-                                </a>
+                            <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="2025У������">
+                            
+                            <span class="card-title">2025У������</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                
                             
                         </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-18
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%D1%A7%CF%B0/" class="post-category">
+                                    ѧϰ
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
                     
-                </div>
-                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
-                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
-<div id="article-share">
-
-    
-    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-    <script src="/libs/share/js/social-share.min.js"></script>
-    
-
-    
-
-</div>
-
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/STM32/">
+                            <span class="chip bg-color">STM32</span>
+                        </a>
+                        
+                    </div>
+                    
                 </div>
             </div>
             
         </div>
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-<article id="prenext-posts" class="prev-next articles">
-    <div class="row article-row">
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
-            <div class="card">
-                <a href="/2024/05/22/ying-jian-xue-xi-bi-ji-2-bu-dang/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="硬件学习笔记3-笔记2补档">
-                        
-                        <span class="card-title">硬件学习笔记3-笔记2补档</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2024-05-22
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                    学习
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E7%A1%AC%E4%BB%B6%E7%AC%94%E8%AE%B0/">
-                        <span class="chip bg-color">硬件笔记</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2024/04/24/lun-wen-xie-zuo-yu-zhi-dao-1/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="论文写作实战_标题">
-                        
-                        <span class="card-title">论文写作实战_标题</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-04-24
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E4%B8%8A%E8%AF%BE/" class="post-category">
-                                    上课
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E8%AE%BA%E6%96%87%E5%86%99%E4%BD%9C%E4%B8%8E%E6%8C%87%E5%AF%BC/">
-                        <span class="chip bg-color">论文写作与指导</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-    </div>
-</article>
-
-</div>
-
-
-
-<!-- 代码块功能依赖 -->
-<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
-
-
-  <!-- 是否加载使用自带的 prismjs. -->
-  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
-
-
-<!-- 代码语言 -->
-
-
-<!-- 代码块复制 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
-
-
-<!-- 代码块收缩 -->
-
-
-
-    </div>
-    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
-        <div class="toc-widget card" style="background-color: white;">
-            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
-            <div id="toc-content"></div>
-        </div>
-    </div>
-</div>
-
-<!-- TOC 悬浮按钮. -->
-
-<div id="floating-toc-btn" class="hide-on-med-and-down">
-    <a class="btn-floating btn-large bg-color">
-        <i class="fas fa-list-ul"></i>
-    </a>
-</div>
-
-
-<script src="/libs/tocbot/tocbot.min.js"></script>
-<script>
-    $(function () {
-        tocbot.init({
-            tocSelector: '#toc-content',
-            contentSelector: '#articleContent',
-            headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number('0'),
-            headingSelector: 'h2, h3, h4'
-        });
-
-        // Set scroll toc fixed.
-        let tocHeight = parseInt($(window).height() * 0.4 - 64);
-        let $tocWidget = $('.toc-widget');
-        $(window).scroll(function () {
-            let scroll = $(window).scrollTop();
-            /* add post toc fixed. */
-            if (scroll > tocHeight) {
-                $tocWidget.addClass('toc-fixed');
-            } else {
-                $tocWidget.removeClass('toc-fixed');
-            }
-        });
-
-        
-        /* 修复文章卡片 div 的宽度. */
-        let fixPostCardWidth = function (srcId, targetId) {
-            let srcDiv = $('#' + srcId);
-            if (srcDiv.length === 0) {
-                return;
-            }
-
-            let w = srcDiv.width();
-            if (w >= 450) {
-                w = w + 21;
-            } else if (w >= 350 && w < 450) {
-                w = w + 18;
-            } else if (w >= 300 && w < 350) {
-                w = w + 16;
-            } else {
-                w = w + 14;
-            }
-            $('#' + targetId).width(w);
-        };
-
-        // 切换TOC目录展开收缩的相关操作.
-        const expandedClass = 'expanded';
-        let $tocAside = $('#toc-aside');
-        let $mainContent = $('#main-content');
-        $('#floating-toc-btn .btn-floating').click(function () {
-            if ($tocAside.hasClass(expandedClass)) {
-                $tocAside.removeClass(expandedClass).hide();
-                $mainContent.removeClass('l9');
-            } else {
-                $tocAside.addClass(expandedClass).show();
-                $mainContent.addClass('l9');
-            }
-            fixPostCardWidth('artDetail', 'prenext-posts');
-        });
-        
-    });
-</script>
-
-    
-
+    </article>
 </main>
 
 
