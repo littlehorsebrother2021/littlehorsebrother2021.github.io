@@ -461,64 +461,64 @@
 <h3 id="3-2-修改并移植文件"><a href="#3-2-修改并移植文件" class="headerlink" title="3.2. 修改并移植文件"></a>3.2. 修改并移植文件</h3><ol>
 <li><p>修改文件名称<br>找到lv_conf_template.h文件，修改文件名为lv_conf.h。<br>打开lv_conf.h文件，修改以下内容：把#if 0 改为#if 1。</p>
 </li>
-<li><p>裁剪初始文件<br>裁剪过后只剩下如下文件：(注意:裁剪过程中二级文件夹内的文件不参与删改，只在lvgl-8.3.10这一级文件夹内进行裁剪)<br><img src="/./image/STM32H743%20LVGL_GUIguider%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/cut.png" alt="剩余文件">  </p>
+<li><p>裁剪初始文件<br>裁剪过后只剩下如下文件：(注意:裁剪过程中二级文件夹内的文件不参与删改，只在lvgl-8.3.10这一级文件夹内进行裁剪)<br><img src="/2025/03/13/2025/xue-xi-lei/stm32h743-lvgl-guiguider-shi-yong-jiao-cheng/cut.png" alt="剩余文件">  </p>
 </li>
-<li><p>创建文件夹结构：(在顶层工程文件夹下创建如下文件夹结构)<br><img src="/./image/STM32H743%20LVGL_GUIguider%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/structure.png" alt="工程文件"><br>(这里有一点需要注意，如果你是使用cubemx生成工程的，在没有使用cubemx中的中间件模块时，顶层文件夹将缺失Middlewares文件夹，每次生成工程时都会自动将我们的Middlewares文件夹删除，所以需要手动添加，或者使用cubemx中的中间件模块，这样就不会出现这个问题了,笔者这里使用了DSP模块，因此有自动生成Middleware文件夹，文件夹内如下：)<br><img src="/./image/STM32H743%20LVGL_GUIguider%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/Middlewares.png" alt="Middleware"></p>
+<li><p>创建文件夹结构：(在顶层工程文件夹下创建如下文件夹结构)<br><img src="/2025/03/13/2025/xue-xi-lei/stm32h743-lvgl-guiguider-shi-yong-jiao-cheng/structure.png" alt="工程文件"><br>(这里有一点需要注意，如果你是使用cubemx生成工程的，在没有使用cubemx中的中间件模块时，顶层文件夹将缺失Middlewares文件夹，每次生成工程时都会自动将我们的Middlewares文件夹删除，所以需要手动添加，或者使用cubemx中的中间件模块，这样就不会出现这个问题了,笔者这里使用了DSP模块，因此有自动生成Middleware文件夹，文件夹内如下：)<br><img src="/2025/03/13/2025/xue-xi-lei/stm32h743-lvgl-guiguider-shi-yong-jiao-cheng/Middlewares.png" alt="Middleware"></p>
 </li>
 <li><p>将裁剪后的LVGL文件夹复制到Middlewares&#x2F;LVGL&#x2F;GUI&#x2F;lvgl 路径下。</p>
 </li>
-<li><p>打开工程，添加如下分组：<br><img src="/image/STM32H743%20LVGL_GUIguider%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/group.png" alt="分组"></p>
+<li><p>打开工程，添加如下分组：<br><img src="/2025/03/13/2025/xue-xi-lei/stm32h743-lvgl-guiguider-shi-yong-jiao-cheng/group.png" alt="分组"></p>
 </li>
-<li><p>添加如下文件：<br><img src="/./image/STM32H743%20LVGL_GUIguider%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/file.png" alt="文件"></p>
+<li><p>添加如下文件：<br><img src="/2025/03/13/2025/xue-xi-lei/stm32h743-lvgl-guiguider-shi-yong-jiao-cheng/file.png" alt="文件"></p>
 </li>
-<li><p>其他选项修改<br><img src="/image/STM32H743%20LVGL_GUIguider%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/option.png" alt="选项"><br>(2026.3.18更新：由于现在全面接入AC6编译器而上述设置针对AC5编译器，因此这里对于<strong>AC6编译器请无视屏蔽MDK警告</strong>这一条，否则可能引起报错)</p>
+<li><p>其他选项修改<br><img src="/2025/03/13/2025/xue-xi-lei/stm32h743-lvgl-guiguider-shi-yong-jiao-cheng/option.png" alt="选项"><br>(2026.3.18更新：由于现在全面接入AC6编译器而上述设置针对AC5编译器，因此这里对于<strong>AC6编译器请无视屏蔽MDK警告</strong>这一条，否则可能引起报错)</p>
 </li>
 </ol>
 <h2 id="4-LVGL移植显示和触摸-基于正点原子屏幕，请自备对应屏幕显示工程"><a href="#4-LVGL移植显示和触摸-基于正点原子屏幕，请自备对应屏幕显示工程" class="headerlink" title="4.  LVGL移植显示和触摸(基于正点原子屏幕，请自备对应屏幕显示工程)"></a>4.  LVGL移植显示和触摸(基于正点原子屏幕，请自备对应屏幕显示工程)</h2><h3 id="4-1-屏幕显示"><a href="#4-1-屏幕显示" class="headerlink" title="4.1. 屏幕显示"></a>4.1. 屏幕显示</h3><ol>
 <li><p>把lv_port_disp_template.c&#x2F;h 的条件编译指令#if 0改为#if 1。  </p>
 </li>
-<li><p>包含输出设备头文件<br><img src="/./image/STM32H743%20LVGL_GUIguider%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/include.png" alt="包含头文件">  </p>
+<li><p>包含输出设备头文件<br><img src="/2025/03/13/2025/xue-xi-lei/stm32h743-lvgl-guiguider-shi-yong-jiao-cheng/include.png" alt="包含头文件">  </p>
 </li>
-<li><p>在disp_init函数中添加屏幕初始化代码,设置为横屏<br><img src="/image/STM32H743%20LVGL_GUIguider%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/disp_init.png" alt="屏幕初始化"></p>
+<li><p>在disp_init函数中添加屏幕初始化代码,设置为横屏<br><img src="/2025/03/13/2025/xue-xi-lei/stm32h743-lvgl-guiguider-shi-yong-jiao-cheng/disp_init.png" alt="屏幕初始化"></p>
 </li>
-<li><p>配置图形数据缓冲模式<br>这里按照你的单片机性能来设置，性能较低的用1或2就行了，性能高的可以试试3模式<br>(设置1024的原因是横屏之后，我的RGB屏幕一行像素点数为1024个，这个值根据你的屏幕分辨率横屏后的行像素点来设置)<br><img src="/./image/STM32H743%20LVGL_GUIguider%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/buffer.png" alt="图形数据缓冲模式"></p>
+<li><p>配置图形数据缓冲模式<br>这里按照你的单片机性能来设置，性能较低的用1或2就行了，性能高的可以试试3模式<br>(设置1024的原因是横屏之后，我的RGB屏幕一行像素点数为1024个，这个值根据你的屏幕分辨率横屏后的行像素点来设置)<br><img src="/2025/03/13/2025/xue-xi-lei/stm32h743-lvgl-guiguider-shi-yong-jiao-cheng/buffer.png" alt="图形数据缓冲模式"></p>
 </li>
-<li><p>设置屏幕尺寸<br><img src="/./image/STM32H743%20LVGL_GUIguider%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/size.png" alt="屏幕尺寸"><br>&emsp;同样的道理，这里根据你的屏幕分辨率进行设置，横屏之后，我的屏幕分辨率为1024*600，所以这里设置为1024和600。  </p>
+<li><p>设置屏幕尺寸<br><img src="/2025/03/13/2025/xue-xi-lei/stm32h743-lvgl-guiguider-shi-yong-jiao-cheng/size.png" alt="屏幕尺寸"><br>&emsp;同样的道理，这里根据你的屏幕分辨率进行设置，横屏之后，我的屏幕分辨率为1024*600，所以这里设置为1024和600。  </p>
 </li>
-<li><p>在disp_flush函数中添加屏幕刷新代码(打点输出)<br><img src="/image/STM32H743%20LVGL_GUIguider%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/disp_flush.png" alt="屏幕刷新"><br>&emsp;<strong>lcd_color_fill</strong>函数是屏幕填充函数，这里使用的是正点原子的屏幕，所以使用的是正点原子的屏幕填充函数，这里需要根据你的屏幕进行修改。<br>至此屏幕显示部分移植完成。</p>
+<li><p>在disp_flush函数中添加屏幕刷新代码(打点输出)<br><img src="/2025/03/13/2025/xue-xi-lei/stm32h743-lvgl-guiguider-shi-yong-jiao-cheng/disp_flush.png" alt="屏幕刷新"><br>&emsp;<strong>lcd_color_fill</strong>函数是屏幕填充函数，这里使用的是正点原子的屏幕，所以使用的是正点原子的屏幕填充函数，这里需要根据你的屏幕进行修改。<br>至此屏幕显示部分移植完成。</p>
 </li>
 </ol>
 <h3 id="4-2-触摸移植"><a href="#4-2-触摸移植" class="headerlink" title="4.2. 触摸移植"></a>4.2. 触摸移植</h3><ol>
 <li><p>把lv_port_touch_template.c&#x2F;h 的条件编译指令#if 0改为#if 1。  </p>
 </li>
-<li><p>包含触摸头文件<br><img src="/image/STM32H743%20LVGL_GUIguider%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/touch_driver_include.png" alt="触摸头文件"></p>
+<li><p>包含触摸头文件<br><img src="/2025/03/13/2025/xue-xi-lei/stm32h743-lvgl-guiguider-shi-yong-jiao-cheng/touch_driver_include.png" alt="触摸头文件"></p>
 </li>
-<li><p>裁剪输入设备部分<br>&emsp;由于这里使用的是触摸屏，因此只保留touchpad 部分，其他输入设备部分全部注释&#x2F;删除，其他函数也注释&#x2F;删除，只保留touchpad部分。<br><img src="/image/STM32H743%20LVGL_GUIguider%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/touch_cut.png" alt="裁剪输入设备"></p>
+<li><p>裁剪输入设备部分<br>&emsp;由于这里使用的是触摸屏，因此只保留touchpad 部分，其他输入设备部分全部注释&#x2F;删除，其他函数也注释&#x2F;删除，只保留touchpad部分。<br><img src="/2025/03/13/2025/xue-xi-lei/stm32h743-lvgl-guiguider-shi-yong-jiao-cheng/touch_cut.png" alt="裁剪输入设备"></p>
 </li>
-<li><p>包含输入设备驱动头文件<br><img src="/image/STM32H743%20LVGL_GUIguider%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/touch_driver_include.png" alt="输入设备驱动头文件"></p>
+<li><p>包含输入设备驱动头文件<br><img src="/2025/03/13/2025/xue-xi-lei/stm32h743-lvgl-guiguider-shi-yong-jiao-cheng/touch_driver_include.png" alt="输入设备驱动头文件"></p>
 </li>
-<li><p>在touchpad_init函数中添加触摸初始化代码<br><img src="/image/STM32H743%20LVGL_GUIguider%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/touch_init.png" alt="触摸初始化"></p>
+<li><p>在touchpad_init函数中添加触摸初始化代码<br><img src="/2025/03/13/2025/xue-xi-lei/stm32h743-lvgl-guiguider-shi-yong-jiao-cheng/touch_init.png" alt="触摸初始化"></p>
 </li>
-<li><p>在touchpad_is_pressed函数中添加触摸检测代码<br><img src="/image/STM32H743%20LVGL_GUIguider%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/touchpad_is_pressed.png" alt="触摸读取"></p>
+<li><p>在touchpad_is_pressed函数中添加触摸检测代码<br><img src="/2025/03/13/2025/xue-xi-lei/stm32h743-lvgl-guiguider-shi-yong-jiao-cheng/touchpad_is_pressed.png" alt="触摸读取"></p>
 </li>
-<li><p>配置坐标获取函数<br><img src="/image/STM32H743%20LVGL_GUIguider%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/touchpad_get_xy.png" alt="坐标获取"></p>
+<li><p>配置坐标获取函数<br><img src="/2025/03/13/2025/xue-xi-lei/stm32h743-lvgl-guiguider-shi-yong-jiao-cheng/touchpad_get_xy.png" alt="坐标获取"></p>
 </li>
 </ol>
 <h3 id="4-3-提供时基"><a href="#4-3-提供时基" class="headerlink" title="4.3. 提供时基"></a>4.3. 提供时基</h3><ol>
-<li><p>首先配置一个定时器，这里使用的是TIM3，配置如下：(定时器溢出时间:1s,开启全局中断)<br><img src="/image/STM32H743%20LVGL_GUIguider%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/tim3_config.png" alt="时基"></p>
+<li><p>首先配置一个定时器，这里使用的是TIM3，配置如下：(定时器溢出时间:1s,开启全局中断)<br><img src="/2025/03/13/2025/xue-xi-lei/stm32h743-lvgl-guiguider-shi-yong-jiao-cheng/tim3_config.png" alt="时基"></p>
 </li>
-<li><p>在定时器中断回调函数中调用lv_tick_inc(x)函数，提供时基<br><img src="/image/STM32H743%20LVGL_GUIguider%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/tim3_callback.png" alt="时基"><br>&emsp;<strong>注意</strong>:初始化定时器时，需保证:进入中断的时间间隔&#x3D;x毫秒<br>至此触摸移植完成</p>
+<li><p>在定时器中断回调函数中调用lv_tick_inc(x)函数，提供时基<br><img src="/2025/03/13/2025/xue-xi-lei/stm32h743-lvgl-guiguider-shi-yong-jiao-cheng/tim3_callback.png" alt="时基"><br>&emsp;<strong>注意</strong>:初始化定时器时，需保证:进入中断的时间间隔&#x3D;x毫秒<br>至此触摸移植完成</p>
 </li>
 </ol>
 <h3 id="4-4-测试"><a href="#4-4-测试" class="headerlink" title="4.4 测试"></a>4.4 测试</h3><ol>
-<li>这边直接上图<br><img src="/image/STM32H743%20LVGL_GUIguider%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/test.png" alt="测试"><br>(cubemx生成的请记得开启定时器，并且以中断方式开启)<br>如果显示正常，屏幕中应该出现了一个按钮，点击按钮如果出现响应，则移植成功。<br>至此LVGL移植完成</li>
+<li>这边直接上图<br><img src="/2025/03/13/2025/xue-xi-lei/stm32h743-lvgl-guiguider-shi-yong-jiao-cheng/test.png" alt="测试"><br>(cubemx生成的请记得开启定时器，并且以中断方式开启)<br>如果显示正常，屏幕中应该出现了一个按钮，点击按钮如果出现响应，则移植成功。<br>至此LVGL移植完成</li>
 </ol>
 <h2 id="LVGL-GUIguider使用"><a href="#LVGL-GUIguider使用" class="headerlink" title="LVGL GUIguider使用"></a>LVGL GUIguider使用</h2><ol>
 <li><p>打开GUIguider软件，选择对应的LVGL版本</p>
 </li>
 <li><p>选择对应的屏幕分辨率，这里自定义为1024*600</p>
 </li>
-<li><p>之后经过一定设计之后，选择使用c语言生成，得到如下工程文件夹：<br><img src="/image/STM32H743%20LVGL_GUIguider%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/project.png" alt="工程文件夹"></p>
+<li><p>之后经过一定设计之后，选择使用c语言生成，得到如下工程文件夹：<br><img src="/2025/03/13/2025/xue-xi-lei/stm32h743-lvgl-guiguider-shi-yong-jiao-cheng/project.png" alt="工程文件夹"></p>
 </li>
 <li><p>在Middlewares\LVGL\GUI_APP 路径下生成一个名为myGUI的文件夹，将生成的工程文件夹中的<strong>custom</strong>,<strong>generated</strong>两个文件夹拷贝到这个文件夹目录下。</p>
 </li>
