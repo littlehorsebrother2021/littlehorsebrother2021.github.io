@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.556106.xyz/post/20260319163436.html</loc>
+    
+    <lastmod>2026-03-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.556106.xyz/post/20260317170323.html</loc>
     
     <lastmod>2026-03-18</lastmod>
@@ -397,6 +406,13 @@
   </url>
   
   <url>
+    <loc>https://blog.556106.xyz/tags/STM32N6/</loc>
+    <lastmod>2026-03-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.556106.xyz/tags/%E4%B8%AA%E4%BA%BA%E7%BB%8F%E5%8E%86/</loc>
     <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
@@ -442,6 +458,13 @@
   
   <url>
     <loc>https://blog.556106.xyz/categories/%E6%88%91%E7%9A%84%E7%94%9F%E6%B4%BB/</loc>
+    <lastmod>2026-03-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.556106.xyz/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</loc>
     <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
