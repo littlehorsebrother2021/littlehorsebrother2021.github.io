@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /
+Sitemap: https://blog.556106.xyz/sitemap.xml
