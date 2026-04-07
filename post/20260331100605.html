@@ -1,0 +1,1313 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="02_STM32N6开发实战1, 小马哥个人博客">
+    <meta name="description" content="前言&amp;emsp;经过几天的具体摸索，终于对STM32N6有了初步的认识，并且熟悉了一些是stm32cubeide 接下来就是具体的开发实战了。我们先从最简单的LED灯_按键_UART开始吧。&amp;emsp;参考资料：
+
+rm0486-stm32">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>02_STM32N6开发实战1 | 小马哥个人博客</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">小马哥个人博客</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">小马哥个人博客</div>
+        <div class="logo-desc">
+            
+            我的个人博客，喜欢的请支持一下
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">02_STM32N6开发实战1</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/STM32N6/">
+                                <span class="chip bg-color">STM32N6</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" class="post-category">
+                                学习记录
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2026-03-31
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2026-04-05
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    3.5k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    13 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>&emsp;经过几天的具体摸索，终于对STM32N6有了初步的认识，并且熟悉了一些是stm32cubeide 接下来就是具体的开发实战了。我们先从最简单的LED灯_按键_UART开始吧。<br>&emsp;参考资料：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://www.st.com/resource/en/reference_manual/rm0486-stm32n647657xx-armbased-32bit-mcus-stmicroelectronics.pdf">rm0486-stm32n647657xx-armbased-32bit-mcus-stmicroelectronics.pdf</a></li>
+<li><a target="_blank" rel="noopener" href="https://wiki.alientek.com/docs/Boards/STM32/DNN647/start-guide/start-development/step-by-step/#step-13-mcu-%E5%BC%95%E8%84%9A%E5%92%8C%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE">STM32N6开发实战指南</a></li>
+</ol>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="1-Cubemx配置"><a href="#1-Cubemx配置" class="headerlink" title="1.Cubemx配置"></a>1.Cubemx配置</h3><p>&emsp;新建工程部分直接跳过，唯一需要注意的是在新建工程之后会弹出如下内容：<br><img src="/post/20260331100605/TrustZone.png" alt="安全域TrustZone"><br>&emsp;由于安全域是针对工程源代码加密的，因此我们选择不启用安全区，点击“Secrue domain only”按钮随后生成即可，接下来进入外设配置部分。  </p>
+<!-- &emsp;**需要注意的是**,由于是基础工程阶段，因此当前工程中所有的外设都配置在“Application”部分 -->
+<h4 id="1-1-配置RCC-时钟"><a href="#1-1-配置RCC-时钟" class="headerlink" title="1.1 配置RCC 时钟"></a>1.1 配置RCC 时钟</h4><p>&emsp;在RCC选项卡中，我们选择外部高速晶振，这里和普通F1,F4,H7芯片配置不同的是，我们还要注意芯片的供电方式，N6的核心电压有两种不同方式供电，手册中的说明如下：<br><img src="/post/20260331100605/Systemsupply_SMPS.png" alt="供电方式1_SMPS"><br><img src="/post/20260331100605/Systemsupply_NonSMPS.png" alt="供电方式2_NonSMPS"><br>SMPS:SMPS step-down converter（开关电源降压转换器）,是STM32N6芯片<strong>自带</strong>的一个开关电源降压转换器，这个设施的启用与否取决于硬件设施设计时是否对外部供电存在处理，能否让核心在没有转换器的情况下正常工作。我所使用的开发板并没有，因此这里需要将其变成“PWR_SMPS_SUPPLY”，完整的配置图如下：<br><img src="/post/20260331100605/RCC.png" alt="RCC配置">  </p>
+<h4 id="1-2-配置SYS-Cortex-M55"><a href="#1-2-配置SYS-Cortex-M55" class="headerlink" title="1.2 配置SYS,Cortex_M55"></a>1.2 配置SYS,Cortex_M55</h4><p>&emsp;这部分不过多赘述，直接上图：<br><img src="/post/20260331100605/SYS.png" alt="SYS配置"><br><img src="/post/20260331100605/Cortex_M55.png" alt="Cortex_M55配置"></p>
+<h4 id="1-3-配置LED-Button-GPIO"><a href="#1-3-配置LED-Button-GPIO" class="headerlink" title="1.3 配置LED,Button(GPIO)"></a>1.3 配置LED,Button(GPIO)</h4><p>&emsp;在GPIO选项卡中，根据开发板原理图，我们选择PC10,PE10(LED)，配置为输出模式即可，然后PC6,PC13,PD1,PG11（Button）配置成EXTI模式，根据原理图配置上&#x2F;下拉电阻以及触发边沿，完整配置图如下：<br><img src="/post/20260331100605/GPIO.png" alt="GPIO配置"><br>&emsp;需要说明，如果配置了按键为EXTI模式，要在NVIC1_S_Application选项卡中配置相应的中断优先级，否则按键无法正常使用。<br><img src="/post/20260331100605/NVIC.png" alt="NVIC配置">  </p>
+<h4 id="1-4-配置UART"><a href="#1-4-配置UART" class="headerlink" title="1.4 配置UART"></a>1.4 配置UART</h4><p>&emsp;由于在上期中已经说明，基础部分开发不涉及FSBL(正点原子已经帮我们写好)，因此勾选USART1的”Application”即可，然后选择异步通信”Asynchronous”，配置(默认即可)波特率为115200，数据位为8，停止位为1，无校验位，<strong>需要注意，默认引脚与原理图上不符，需要更改</strong>，正确的引脚是PE5为UASRT1_TX,PE6为UASRT1_RX,完整配置图如下：<br><img src="/post/20260331100605/USART1_P.png" alt="USART配置"><br><img src="/post/20260331100605/USART1_GPIO.png" alt="USART引脚"></p>
+<h4 id="1-5-配置XSPIM-XSPI1"><a href="#1-5-配置XSPIM-XSPI1" class="headerlink" title="1.5 配置XSPIM,XSPI1"></a>1.5 配置XSPIM,XSPI1</h4><p>&emsp;由于开发板中使用了XSPI1链接外部flash，因此需要配置XSPI1，这部分配置内容取决于外部flash的链接方式和flash参数，配置图如下：<br><img src="/post/20260331100605/XSPIM.png" alt="XSPIM配置"><br><img src="/post/20260331100605/XSPI1_page1.png" alt="XSPI1配置"><br><img src="/post/20260331100605/XSPI1_page2.png" alt="XSPI1配置"></p>
+<h4 id="1-6-配置时钟树"><a href="#1-6-配置时钟树" class="headerlink" title="1.6 配置时钟树"></a>1.6 配置时钟树</h4><p>&emsp;这里是整个配置部分最头疼的地方，原本H7的时钟树对于我来说就已经比较复杂了，N6的时钟树更是复杂,LOL。下面我用visio画了一个简单的时钟树简图(只画最基础的部分)，方便大家理解：<br><img src="/post/20260331100605/Clock.png" alt="时钟树"><br>&emsp;由于本期只涉及UART和LED，因此我们只需要配置UART和系统时钟即可，配置图如下：<br><img src="/post/20260331100605/ClockTree_page1.png" alt="时钟树配置1"><br><img src="/post/20260331100605/ClockTree_page2.png" alt="时钟树配置2"><br><img src="/post/20260331100605/ClockTree_page3.png" alt="时钟树配置3"><br><img src="/post/20260331100605/ClockTree_page4.png" alt="时钟树配置4">    </p>
+<h4 id="1-7-配置工程生成选项"><a href="#1-7-配置工程生成选项" class="headerlink" title="1.7 配置工程生成选项"></a>1.7 配置工程生成选项</h4><p>&emsp;配置完成之后，我们点击“Project”选项卡，配置工程生成选项，这里我们IDE选择“STM32Cubeide”，取消勾选”Generate Under Root”,然后<strong>取消</strong>勾选FSBL工程结构，<br><img src="/post/20260331100605/Project.png" alt="工程生成选项"><br>对于代码生成设置，由于建立的工程需要与他人共享，因此这里不选最后的“Add necessary library files as reference in the toolchain project configuration file”，然后为了区分每个外设的配置，将外设相关的代码生成到独立.c&#x2F;.h文件下，最终结果如下：<br><img src="/post/20260331100605/CodeGenerator.png" alt="代码生成设置"><br>设置完毕后，生成代码。转到Cubeide中进行编写</p>
+<p>这里需要注意的是，由于N6的一个工程可能会包含FSBL和Application两部分，因此生成的工程目录中和正常的F1,F4,H7目录不一样，这里给出具体解释：    </p>
+<h4 id="STM32N6-工程真实目录结构说明-基于-STM32CubeIDE"><a href="#STM32N6-工程真实目录结构说明-基于-STM32CubeIDE" class="headerlink" title="STM32N6 工程真实目录结构说明 (基于 STM32CubeIDE)"></a>STM32N6 工程真实目录结构说明 (基于 STM32CubeIDE)</h4><p>本项目基于 STM32N6 系列微处理器开发。STM32CubeMX 在生成 STM32CubeIDE 工程时，采用了”<strong>源码与 IDE 工作区严格分离</strong>“的设计逻辑。</p>
+<p>以下是本工程真实生成的物理目录层级及其核心功能详解：</p>
+<h5 id="🗂️-整体物理目录树预览"><a href="#🗂️-整体物理目录树预览" class="headerlink" title="🗂️ 整体物理目录树预览"></a>🗂️ 整体物理目录树预览</h5><pre class="line-numbers language-text" data-language="text"><code class="language-text">📦 Project_Name (工程根目录)
+├── 📄 Project_Name.ioc               # CubeMX 图形化核心配置文件
+├── 📄 .mxproject                     # CubeMX 内部生成状态记录文件
+│
+├── 📁 Appli                          # 【纯源码区】应用核心代码 (不含任何 IDE 配置)
+│   └── 📁 Core                       # 包含 main.c, 头文件及外设初始化 C 代码
+│
+├── 📁 Drivers                        # 【纯源码区】官方底层驱动库
+│   ├── 📁 CMSIS                      # Cortex-M55 内核文件及启动汇编
+│   └── 📁 STM32N6xx_HAL_Driver       # STM32 HAL/LL 库源码
+│
+├── 📁 Secure_nsclib                  # 【安全特性】TrustZone 相关的安全/非安全域接口存根 
+│
+└── 📁 STM32CubeIDE
+    │   # 【IDE 工作区】所有的编译、链接和工程配置文件全在这里！
+    ├── 📄 .project                   # 整个 Eclipse 工作区的定义文件
+    └── 📁 Appli                      # 针对 Appli 应用的独立子工程文件夹
+        ├── 📄 .cproject &amp; .project   # CubeIDE/Eclipse 的核心工程配置文件
+        ├── 📄 Project_Appli Debug.launch # 点击“Debug/Run”时调用的启动/下载脚本
+        ├── 📁 Application  
+        │   # IDE 内部虚拟映射的源码文件夹 (指向外层的 Appli/Core)
+        ├── 📁 Drivers                # IDE 内部虚拟映射的驱动文件夹 (指向外层的 Drivers)
+        ├── 📁 Debug                  # 编译输出目录 (包含生成的 .elf, .bin, .map 等文件)
+        ├── 📁 Release                # 编译输出目录 (包含生成的 .elf, .bin, .map 等文件)
+        └── 📄 STM32N647X0HXQ_*.ld    # 【关键】所有的链接脚本文件都在这里！<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="2-IDE配置"><a href="#2-IDE配置" class="headerlink" title="2.IDE配置"></a>2.IDE配置</h3><p>&emsp;由于博主原先一直在Keil 5.36环境下开发，不适应cubeide，因此下方内容将大部分涉及cubeide的使用，如果只需要了解代码编写，可以跳过直接去看<strong>2.1</strong>部分。</p>
+<h4 id="2-1-导入工程到cubeide"><a href="#2-1-导入工程到cubeide" class="headerlink" title="2.1 导入工程到cubeide"></a>2.1 导入工程到cubeide</h4><p>&emsp;点击左上角file-&gt;import，选择General-&gt;Existing Project into workspace-&gt;next，选择刚刚生成的工程目录，会看到已经有相关的工程显示，勾选{Projectname}和{Projectname_Appli}，然后点击finish即可。具体如下图：<br><img src="/post/20260331100605/Import.png" alt="导入工程">  </p>
+<p>&emsp;导入工程后，可以看到其非常庞大的文件库，这里的文件库和上方解释的整体物理目录树基本一一对应，这里不再赘述。</p>
+<h4 id="2-2-更改和设置链接脚本"><a href="#2-2-更改和设置链接脚本" class="headerlink" title="2.2 更改和设置链接脚本"></a>2.2 更改和设置链接脚本</h4><p>&emsp;这部分内容由于正点原子已经有完整的教程，因此这里不再赘述，直接给跳转链接：<br><a target="_blank" rel="noopener" href="https://wiki.alientek.com/docs/Boards/STM32/DNN647/start-guide/start-development/step-by-step/#step-2-%E4%BD%BF%E7%94%A8-stm32cubeide-%E5%BC%80%E5%8F%91">正点原子教程</a><br><strong>2026-04-05 更新</strong><br>这部分的<code>STM32N647X0HXQ_LRUN_RAMxspi1.ld</code>修改完成之后，请去03_STM32N6开发实战2.md中补全剩余修改，正点原子的内容不全。</p>
+<h4 id="2-3-工程编译"><a href="#2-3-工程编译" class="headerlink" title="2.3 工程编译"></a>2.3 工程编译</h4><p>&emsp;选中需要配置的工程后，依次点击工具栏中的 “Project” -&gt; “Build Configurations” -&gt; “Set Active” 可以设置当前工程激活的是 ‘Debug’ 配置还是 ‘Release’ 配置,设置好后点击小锤子 🔨进行编译</p>
+<h4 id="2-4-工程运行与调试"><a href="#2-4-工程运行与调试" class="headerlink" title="2.4 工程运行与调试"></a>2.4 工程运行与调试</h4><p>&emsp;这部分内容由于正点原子已经有完整的教程，因此这里不再赘述，直接给跳转链接：<br><a target="_blank" rel="noopener" href="https://wiki.alientek.com/docs/Boards/STM32/DNN647/start-guide/start-development/step-by-step/#step-2-%E4%BD%BF%E7%94%A8-stm32cubeide-%E5%BC%80%E5%8F%91">正点原子教程</a><br>&emsp;值得注意的是,如果在以下选项卡中没有看到Project_Name_Appli，则需要在STM32 C&#x2F;C++ Application上右键，选择New Configration 然后正常按照正点原子的教程进行配置即可。<br><img src="/post/20260331100605/Run_Configration.png" alt="Run_Configration">  </p>
+<h4 id="2-5-工程烧录"><a href="#2-5-工程烧录" class="headerlink" title="2.5 工程烧录"></a>2.5 工程烧录</h4><p>&emsp;这里没有太多需要关注的内容，唯一需要注意的是<strong>开发板的BOOT模式</strong>，也就是上一期提到的BOOT，debug版本下必须在BOOT为开发者模式下才可运行，release版本下必须先在BOOT为开发者模式下烧录，然后在BOOT为flash存储模式下才可运行。</p>
+<h4 id="2-6-添加自制文件夹"><a href="#2-6-添加自制文件夹" class="headerlink" title="2.6 添加自制文件夹"></a>2.6 添加自制文件夹</h4><p>&emsp;由于后续开发需要添加非常多的驱动文件，因此这里提前说明如何添加自制文件夹&#x2F;文件。</p>
+<ol>
+<li><p>在工程根目录文件夹<code>Drivers</code>下新建一个文件夹<code>BSP</code></p>
+</li>
+<li><p>在IDE中右键点击工程目录<code>Drivers</code>，选择<code>New-&gt;Folder</code>，</p>
+</li>
+<li><p>在弹出的窗口中输入文件夹名称，<strong>不要</strong>立刻点击<code>Finish</code>，而是先点下面的Advanced &gt;&gt; (高级) 按钮。</p>
+</li>
+<li><p>展开高级选项后，你会看到下面多出了一块区域。<strong>勾选 Link to alternate location (Linked Folder)（链接到备用位置&#x2F;链接文件夹）</strong>。</p>
+</li>
+<li><p>这时下面的路径框亮起了。点击旁边的 Browse… (浏览) 按钮。</p>
+</li>
+<li><p>在弹出的窗口中，选择你刚刚在工程根目录<code>Drivers</code>文件夹下新建的文件夹<code>BSP</code>，然后点击 OK。</p>
+</li>
+<li><p>最后，点击窗口右下角的 Finish。<br>&emsp;这样，你就在工程目录<code>Drivers</code>下添加了一个名为<code>BSP</code>的文件夹，并且这个文件夹的链接位置是工程根目录<code>Drivers</code>下的<code>BSP</code>文件夹。以后，你在这个文件夹下添加的文件，都会被链接到工程目录<code>Drivers</code>下的<code>BSP</code>文件夹中。<br>此时的工程结构如下：</p>
+</li>
+</ol>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">📦 Project_Name (工程根目录)
+├── 📄 Project_Name.ioc               # CubeMX 图形化核心配置文件
+├── 📄 .mxproject                     # CubeMX 内部生成状态记录文件
+│
+├── 📁 Appli                          # 无变化 
+├── 📁 Drivers                        # 【纯源码区】官方底层驱动库
+│   ├── 📁 CMSIS                      # 无变化
+│   ├── 📁 BSP                        # 【自制区】自制驱动库
+│   └── 📁 STM32N6xx_HAL_Driver       # STM32 HAL/LL 库源码
+│   
+├── 📁 Secure_nsclib                  # 无变化
+│
+└── 📁 STM32CubeIDE                   # 无变化
+    ├── 📄 .project                   # 无变化
+    └── 📁 Appli                      # 无变化
+        ├── 📄 .cproject &amp; .project   # 无变化
+        ├── 📄 Project_Appli Debug.launch # 无变化
+        ├── 📁 Application            # 无变化
+        ├── 📁 Drivers                
+        │   # IDE 内部虚拟映射的驱动文件夹 (指向外层的 Drivers, BSP在其中)
+        ├── 📁 Debug                  # 无变化
+        ├── 📁 Release                # 无变化
+        └── 📄 STM32N647X0HXQ_*.ld    # 无变化<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>&emsp;另有,如果需要将某个文件夹单独列出方便调用，可以进行以下操作：</p>
+<ol>
+<li>点击左侧工程树所选工程的总目录Project_Name_Appli,右键选择<code>Properties</code>-&gt;<code>C/C++ General</code>-&gt;<code>Path and Symbols</code>-&gt; <code>Source Location</code>选项卡。<br><img src="/post/20260331100605/Source_Location.png" alt="添加自制文件夹">  </li>
+<li>点击右侧的 <code>Add Folder</code> (添加文件夹) 按钮，</li>
+<li>(举例)在弹出的目录树里，依次展开：你的工程 <code>Project_Name_Appli</code> -&gt; <code>Drivers</code> -&gt;<code>BSP</code>-&gt; 选中 <code>UART</code> 文件夹后-&gt;点击OK</li>
+<li>点击<code>Apply and Close</code>，你会看到原先在Drivers&#x2F;BSP 文件夹下 的UART已经被提升到了与Drivers同级的位置。<br><strong>2026-04-05 更新</strong><br>如果后续你需要通过cubemx重新生成代码，那么我不建议进行第四步第四步，因为它会导致重新生成的工程文件丢失最开始的<br><img src="/post/20260331100605/Source_Location_2.png" alt="实现效果"></li>
+</ol>
+<h4 id="2-7-添加自制文件-访问路径"><a href="#2-7-添加自制文件-访问路径" class="headerlink" title="2.7 添加自制文件 &amp; 访问路径"></a>2.7 添加自制文件 &amp; 访问路径</h4><p>&emsp;在工程根目录<code>Drivers</code>中的文件夹<code>BSP</code>添加相应代码文件，然后在IDE中右键点击工程右键flash,即可刷新进入到工程中。</p>
+<p>&emsp;接下来添加文件路径，由于BSP后续内容较多，因此索引路径只有一条&#x2F;${ProjName}&#x2F;Drivers&#x2F;BSP。操作如下：</p>
+<ol>
+<li>点击左侧工程树所选工程的总目录Project_Name_Appli,右键选择<code>Properties</code>-&gt;<code>C/C++ General</code>-&gt;<code>Path and Symbols</code>-&gt; <code>Includes</code>选项卡。<br><img src="/post/20260331100605/Path_and_Symbols.png" alt="添加自制文件 &amp; 访问路径">  </li>
+<li>点击右侧的 <code>Add...</code> (添加…) 按钮。</li>
+<li><strong>⚠️ 核心警告：绝对不要在 <code>Directory</code> 文本框里手动打字！</strong></li>
+<li>点击输入框下面的 <code>Workspace...</code> (工作空间…) 按钮。</li>
+<li>在弹出的目录树里，依次展开：你的工程 <code>Project_Name_Appli</code> -&gt; <code>Drivers</code> -&gt;  选中 <code>BSP</code> 文件夹。</li>
+<li>点击 <code>OK</code>。此时，文本框里会自动填入 <code>/$&#123;ProjName&#125;/Drivers/BSP</code>。</li>
+<li>仔细看输入框的下方，确保勾选了 <code>Is a workspace path</code>（这是一个工作空间路径）。 （通常用 <code>Workspace</code> 按钮选出来的，这个勾会自动打上，这就是纯手打无法触发的灵魂所在！）</li>
+<li>点击 <code>OK</code>。</li>
+</ol>
+<h3 id="3-添加代码"><a href="#3-添加代码" class="headerlink" title="3.添加代码"></a>3.添加代码</h3><p>&emsp;在<code>Drivers/BSP</code>文件夹下新建一个文件夹<code>UART</code>，然后在<code>UART</code>文件夹下新建一个文件<code>uart.c</code>，在<code>uart.c</code>文件中添加以下代码：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/**
+ ****************************************************************************************************
+ * @file        uart.c
+ * @version     V1.0
+ * @brief       串口驱动代码
+ ****************************************************************************************************
+ */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">"uart.h"</span></span>
+
+<span class="token comment">/**
+ * @brief   重定向C库的printf函数到串口
+ * @param   无
+ * @retval  无
+ */</span>
+<span class="token keyword">int</span> <span class="token function">__io_putchar</span><span class="token punctuation">(</span><span class="token keyword">int</span> ch<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token function">HAL_UART_Transmit</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>huart1<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token class-name">uint8_t</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>ch<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0xFFFF</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> ch<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+
+<span class="token comment">/**
+ * @brief   重定向C库的scanf函数到串口
+ * @param   无
+ * @retval  无
+ */</span>
+<span class="token keyword">int</span> <span class="token function">__io_getchar</span><span class="token punctuation">(</span><span class="token keyword">int</span> ch<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token function">HAL_UART_Receive</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>huart1<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token class-name">uint8_t</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>ch<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0xFFFF</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> ch<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>&emsp;在<code>Drivers/BSP</code>文件夹下新建一个文件夹<code>UART</code>，然后在<code>UART</code>文件夹下新建一个文件<code>uart.h</code>，在<code>uart.h</code>文件中添加以下代码：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/**
+ ****************************************************************************************************
+ * @file        uart.h
+ * @version     V1.0
+ * @brief       串口驱动代码
+ *
+ ****************************************************************************************************
+ */</span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">ifndef</span> <span class="token expression">__UART_H</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">__UART_H</span></span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">"main.h"</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">"usart.h"</span> <span class="token comment">//只有当你勾选了`Generate peripheral initialization as a pair of '.c/.h' files per peripheral`时才需要包含这个文件</span></span>
+
+
+
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>&emsp;主函数中代码如下：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token comment">/* Private includes ----------------------------------------------------------*/</span>
+<span class="token comment">/* USER CODE BEGIN Includes */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">"./UART/uart.h"</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">"stdio.h"</span></span>
+<span class="token comment">/* USER CODE END Includes */</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+···
+  <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#123;</span>
+    <span class="token comment">/* USER CODE END WHILE */</span>
+
+    <span class="token comment">/* USER CODE BEGIN 3 */</span>
+		 <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"hello world\r\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		 <span class="token function">HAL_GPIO_TogglePin</span><span class="token punctuation">(</span>LED0_GPIO_Port<span class="token punctuation">,</span> LED0_Pin<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		 <span class="token function">HAL_Delay</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token comment">/* USER CODE END 3 */</span>
+    ···
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>&emsp;编译并下载(Debug)，可以看到串口打印出<code>hello world</code>，LED0灯每秒闪烁一次。</p>
+<h3 id="4-关于在工程上复制和创新"><a href="#4-关于在工程上复制和创新" class="headerlink" title="4.关于在工程上复制和创新"></a>4.关于在工程上复制和创新</h3><p>&emsp;在工程上复制和创新，原本在keil5 上是可以直接复制文件夹改名字就可以了，但是STM32CUBEIDE上他会针对你的工程文件进行独立的签名，这种签名非常多，如果手动改的话将会非常繁琐，并且每个加入cubeide的工程之间还不能重名，否则无法添加进cubeide，<strong>因此我更建议</strong>如果要在原工程上做开发，请直接只复制一个cubemx文件，即xxx.ioc然后将xxx更名为你需要的名字比如zzz，然后打开zzz.ioc文件，在新的文件夹下重新生成工程，最后直接在cubeide上添加文件，这样就不会出现重名的问题了。</p>
+<h3 id="5-总结"><a href="#5-总结" class="headerlink" title="5.总结"></a>5.总结</h3><p>&emsp;通过以上步骤，我们成功在STM32CubeIDE上添加了自制驱动文件，并实现了串口打印功能。在后续的开发中，我们可以根据需要添加更多的自制驱动文件，以实现更多的功能。这篇文章是STM32N6 从0到1开发的巨大里程碑，后续文章将会继续介绍STM32N6的更多功能。<br>&emsp;如果你觉得这篇文章对你有帮助，请点赞、收藏、转发，你的支持是我最大的动力！下一期文章将会关于STM32N6上的RGB_LCD驱动，敬请期待！</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">littlehorsebrother</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://blog.556106.xyz/post/20260331100605.html">https://blog.556106.xyz/post/20260331100605.html</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">littlehorsebrother</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/STM32N6/">
+                                    <span class="chip bg-color">STM32N6</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/post/20260404204922.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="03_STM32N6开发实战2">
+                        
+                        <span class="card-title">03_STM32N6开发实战2</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2026-04-04
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" class="post-category">
+                                    学习记录
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/STM32N6/">
+                        <span class="chip bg-color">STM32N6</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/post/20260319163436.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="01_STM32N6开发板初探">
+                        
+                        <span class="card-title">01_STM32N6开发板初探</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2026-03-19
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" class="post-category">
+                                    学习记录
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/STM32N6/">
+                        <span class="chip bg-color">STM32N6</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4, h5'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2024-2026</span>
+            
+            <a href="/about" target="_blank">littlehorsebrother</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+                <span id="translate">|&nbsp;繁/简：</span><a id="translateLink" href="javascript:translatePage();">繁</a>
+            
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">46.7k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2024";
+                        var startMonth = "2";
+                        var startDate = "14";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/littlehorsebrother2021" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2403618853@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2403618853" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2403618853" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+        <script type="text/javascript" src="/js/tw_cn.js"></script>
+        <script type="text/javascript">
+          var defaultEncoding = 2; //网站编写字体是否繁体，1-繁体，2-简体
+          var translateDelay = 0; //延迟时间,若不在前, 要设定延迟翻译时间, 如100表示100ms,默认为0
+          var cookieDomain = "https://blog.556106.xyz"; //Cookie地址, 一定要设定, 通常为你的网址
+          var msgToTraditionalChinese = "繁"; //此处可以更改为你想要显示的文字
+          var msgToSimplifiedChinese = "简"; //同上，但两处均不建议更改
+          var translateButtonId = "translateLink"; //默认互换id
+          translateInitilization();
+        </script>
+    
+    
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
