@@ -257,7 +257,7 @@
         
         <li><div class="divider"></div></li>
         <li>
-            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+            <a href="https://github.com/littlehorsebrother2021" class="waves-effect waves-light" target="_blank">
                 <i class="fab fa-github-square fa-fw"></i>Fork Me
             </a>
         </li>
@@ -314,7 +314,7 @@
     }
 </style>
 
-<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+<a href="https://github.com/littlehorsebrother2021" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
    data-tooltip="Fork Me" data-position="left" data-delay="50">
     <svg viewBox="0 0 250 250" aria-hidden="true">
         <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
@@ -346,7 +346,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -453,18 +453,18 @@
 <h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="1-硬件准备"><a href="#1-硬件准备" class="headerlink" title="1. 硬件准备"></a>1. 硬件准备</h3><p>&emsp;STM32N6开发板，ST-LINK，电源线，数据线(用于串口输出提示)，正点原子通用RGB屏幕(博主的具体型号:LCD主控:0x4384 型号代码ATK-MD0430R-800480)。</p>
 <h3 id="2-软件准备"><a href="#2-软件准备" class="headerlink" title="2. 软件准备"></a>2. 软件准备</h3><p>&emsp;STM32CubeIDE，STM32CubeMX，RGB屏幕驱动库(正点原子官方)，串口驱动库。</p>
 <h3 id="3-环境搭建"><a href="#3-环境搭建" class="headerlink" title="3. 环境搭建"></a>3. 环境搭建</h3><h4 id="3-1-STM32Cubemx"><a href="#3-1-STM32Cubemx" class="headerlink" title="3.1 STM32Cubemx"></a>3.1 STM32Cubemx</h4><p>&emsp;打开上一期的STM32CubeMX工程，在实战1的基础上进行改动。</p>
-<h5 id="配置DMA2D-针对-2D-图形处理-设计的专用硬件加速器"><a href="#配置DMA2D-针对-2D-图形处理-设计的专用硬件加速器" class="headerlink" title="配置DMA2D (针对 2D 图形处理 设计的专用硬件加速器)"></a>配置DMA2D (针对 2D 图形处理 设计的专用硬件加速器)</h5><p>&emsp;MutiMedia -&gt; DMA2D,配置图如下：(具体内容根据你的屏幕参数决定)<br>    <img src="/post/20260404204922/DMA2D.png" alt="DMA2D配置"><br>&emsp;不开中断。</p>
+<h5 id="配置DMA2D-针对-2D-图形处理-设计的专用硬件加速器"><a href="#配置DMA2D-针对-2D-图形处理-设计的专用硬件加速器" class="headerlink" title="配置DMA2D (针对 2D 图形处理 设计的专用硬件加速器)"></a>配置DMA2D (针对 2D 图形处理 设计的专用硬件加速器)</h5><p>&emsp;MutiMedia -&gt; DMA2D,配置图如下：(具体内容根据你的屏幕参数决定)<br>    <img src="/post/20260404204922/DMA2D.png" alt="DMA2D配置" width="1165" height="726" style="height:auto" loading="lazy" decoding="async"><br>&emsp;不开中断。</p>
 <h5 id="配置LTDC-LCD-TFT-Display-Controller，液晶显示控制器"><a href="#配置LTDC-LCD-TFT-Display-Controller，液晶显示控制器" class="headerlink" title="配置LTDC  (LCD-TFT Display Controller，液晶显示控制器)"></a>配置LTDC  (LCD-TFT Display Controller，液晶显示控制器)</h5><p>MutiMedia -&gt; LTDC,配置图如下：(具体内容根据你的屏幕参数决定)<br><strong>这里需要注意两点</strong>:  </p>
 <ol>
-<li>在一开始你的界面大概率是灰色的无法勾选，不要慌，看下方Features选项，勾选上LTDC_L1 的Application选项卡，随后你就看到整个页面变得可编辑了。<br> <img src="/post/20260404204922/LTDC_Before.png" alt="LTDC_Before"><br> <img src="/post/20260404204922/LTDC_After.png" alt="LTDC_After">   </li>
-<li>注意，正点原子的屏幕引脚和它默认生成的引脚是不匹配的，请自行修改引脚，修改后如下(<strong>所有引脚都需要高速运行</strong>):<br> <img src="/post/20260404204922/LTDC_Pin1.png" alt="LTDC_Pin1"><br> <img src="/post/20260404204922/LTDC_Pin2.png" alt="LTDC_Pin2"></li>
+<li>在一开始你的界面大概率是灰色的无法勾选，不要慌，看下方Features选项，勾选上LTDC_L1 的Application选项卡，随后你就看到整个页面变得可编辑了。<br> <img src="/post/20260404204922/LTDC_Before.png" alt="LTDC_Before" width="1226" height="641" style="height:auto" loading="lazy" decoding="async"><br> <img src="/post/20260404204922/LTDC_After.png" alt="LTDC_After" width="1210" height="655" style="height:auto" loading="lazy" decoding="async">   </li>
+<li>注意，正点原子的屏幕引脚和它默认生成的引脚是不匹配的，请自行修改引脚，修改后如下(<strong>所有引脚都需要高速运行</strong>):<br> <img src="/post/20260404204922/LTDC_Pin1.png" alt="LTDC_Pin1" width="1155" height="578" style="height:auto" loading="lazy" decoding="async"><br> <img src="/post/20260404204922/LTDC_Pin2.png" alt="LTDC_Pin2" width="1167" height="243" style="height:auto" loading="lazy" decoding="async"></li>
 </ol>
-<p>&emsp;好接下来是剩下几个选项卡，有点多，但是也有必要配置一下，具体配置如下：<br>(Parameter Settings 选项卡)<br><img src="/post/20260404204922/LTDC_Config_Para1.png" alt="LTDC_Config_Para1"><br><img src="/post/20260404204922/LTDC_Config_Para2.png" alt="LTDC_Config_Para2"><br>(Layer Settings 选项卡)<br><img src="/post/20260404204922/LTDC_Config_Layer.png" alt="LTDC_Config_Layer"><br>(剩余选项卡保持默认即可)  </p>
-<h5 id="配置背光"><a href="#配置背光" class="headerlink" title="配置背光"></a>配置背光</h5><p>&emsp;这块RGBLCD背光引脚为PA1,配置成如下即可：<br><img src="/post/20260404204922/GPIO.png" alt="GPIO"></p>
-<h5 id="更新时钟树-maybe-not"><a href="#更新时钟树-maybe-not" class="headerlink" title="更新时钟树(maybe not ?)"></a>更新时钟树(maybe not ?)</h5><p>&emsp;时钟部分只有两个需要更改:SRAM和LTDC.(但是在代码部分感觉这部分配置寄了)<br><img src="/post/20260404204922/Clock1.png" alt="Clock1"><br><img src="/post/20260404204922/Clock2.png" alt="Clock2"><br><img src="/post/20260404204922/Clock3.png" alt="Clock3">  </p>
-<h5 id="配置RIF-新机制，重要"><a href="#配置RIF-新机制，重要" class="headerlink" title="配置RIF(新机制，重要)"></a>配置RIF(新机制，<strong>重要</strong>)</h5><p>&emsp;资源隔离框架（RIF）,用于隔离不同安全等级的代码和数据，防止低安全等级的代码访问高安全等级的代码和数据。这个机制会影响芯片与外设的通信，因此一定要打开权限，否则你的代码会无法与外设通信。<br>   <img src="/post/20260404204922/RIF.png" alt="RIF"></p>
-<h5 id="配置串口"><a href="#配置串口" class="headerlink" title="配置串口"></a>配置串口</h5><p>&emsp;这部分由于上期已经配置过，这里直接上图<br>   <img src="/post/20260404204922/USART1_GPIO.png" alt="USART_GPIO"><br>   <img src="/post/20260404204922/USART1_P.png" alt="USART_P"></p>
-<h5 id="配置生成代码"><a href="#配置生成代码" class="headerlink" title="配置生成代码"></a>配置生成代码</h5><p>   这里需要注意，我们这次<strong>不再勾选</strong><code>Generate peripheral initialization as a pair of &#39;.c/.h&#39; files per peripheral</code>,后续大部分代码不会在main中编写，外设增多会导致整个文件夹系统非常臃肿，所以这里我们选择只生成一个main.c文件，然后在其他文件中编写自己的代码在main中调用即可。<br>   <img src="/post/20260404204922/GenerateCode.png" alt="GenerateCode"></p>
+<p>&emsp;好接下来是剩下几个选项卡，有点多，但是也有必要配置一下，具体配置如下：<br>(Parameter Settings 选项卡)<br><img src="/post/20260404204922/LTDC_Config_Para1.png" alt="LTDC_Config_Para1" width="1166" height="619" style="height:auto" loading="lazy" decoding="async"><br><img src="/post/20260404204922/LTDC_Config_Para2.png" alt="LTDC_Config_Para2" width="1166" height="235" style="height:auto" loading="lazy" decoding="async"><br>(Layer Settings 选项卡)<br><img src="/post/20260404204922/LTDC_Config_Layer.png" alt="LTDC_Config_Layer" width="1153" height="732" style="height:auto" loading="lazy" decoding="async"><br>(剩余选项卡保持默认即可)  </p>
+<h5 id="配置背光"><a href="#配置背光" class="headerlink" title="配置背光"></a>配置背光</h5><p>&emsp;这块RGBLCD背光引脚为PA1,配置成如下即可：<br><img src="/post/20260404204922/GPIO.png" alt="GPIO" width="1177" height="764" style="height:auto" loading="lazy" decoding="async"></p>
+<h5 id="更新时钟树-maybe-not"><a href="#更新时钟树-maybe-not" class="headerlink" title="更新时钟树(maybe not ?)"></a>更新时钟树(maybe not ?)</h5><p>&emsp;时钟部分只有两个需要更改:SRAM和LTDC.(但是在代码部分感觉这部分配置寄了)<br><img src="/post/20260404204922/Clock1.png" alt="Clock1" width="561" height="63" style="height:auto" loading="lazy" decoding="async"><br><img src="/post/20260404204922/Clock2.png" alt="Clock2" width="474" height="197" style="height:auto" loading="lazy" decoding="async"><br><img src="/post/20260404204922/Clock3.png" alt="Clock3" width="458" height="207" style="height:auto" loading="lazy" decoding="async">  </p>
+<h5 id="配置RIF-新机制，重要"><a href="#配置RIF-新机制，重要" class="headerlink" title="配置RIF(新机制，重要)"></a>配置RIF(新机制，<strong>重要</strong>)</h5><p>&emsp;资源隔离框架（RIF）,用于隔离不同安全等级的代码和数据，防止低安全等级的代码访问高安全等级的代码和数据。这个机制会影响芯片与外设的通信，因此一定要打开权限，否则你的代码会无法与外设通信。<br>   <img src="/post/20260404204922/RIF.png" alt="RIF" width="1418" height="945" style="height:auto" loading="lazy" decoding="async"></p>
+<h5 id="配置串口"><a href="#配置串口" class="headerlink" title="配置串口"></a>配置串口</h5><p>&emsp;这部分由于上期已经配置过，这里直接上图<br>   <img src="/post/20260404204922/USART1_GPIO.png" alt="USART_GPIO" width="999" height="808" style="height:auto" loading="lazy" decoding="async"><br>   <img src="/post/20260404204922/USART1_P.png" alt="USART_P" width="1016" height="847" style="height:auto" loading="lazy" decoding="async"></p>
+<h5 id="配置生成代码"><a href="#配置生成代码" class="headerlink" title="配置生成代码"></a>配置生成代码</h5><p>   这里需要注意，我们这次<strong>不再勾选</strong><code>Generate peripheral initialization as a pair of &#39;.c/.h&#39; files per peripheral</code>,后续大部分代码不会在main中编写，外设增多会导致整个文件夹系统非常臃肿，所以这里我们选择只生成一个main.c文件，然后在其他文件中编写自己的代码在main中调用即可。<br>   <img src="/post/20260404204922/GenerateCode.png" alt="GenerateCode" width="1891" height="952" style="height:auto" loading="lazy" decoding="async"></p>
 <h4 id="3-2-STM32CubeIDE"><a href="#3-2-STM32CubeIDE" class="headerlink" title="3.2 STM32CubeIDE"></a>3.2 STM32CubeIDE</h4><p>&emsp;打开STM32CubeIDE，导入工程，这里不再赘述,用到的BSP板级支持包有：UART,HyperRam,RGBLCD,SYS,请将他们也一并引入工程这里不再赘述。<br>&emsp;接下来就是修改代码了。</p>
 <h5 id="修改链接脚本"><a href="#修改链接脚本" class="headerlink" title="修改链接脚本"></a>修改链接脚本</h5><p>&emsp;这一步非常坑，上一期中我们提到，“这部分内容由于正点原子已经有完整的教程，因此这里不再赘述，直接给跳转链接”，<strong>但是</strong>,事实是，正点原子的教程中并没有给出正确的<code>STM32N647X0HXQ_LRUN_RAMxspi1.ld</code>链接脚本，导致RGBLCD的部分代码(最典型的就是字符库)没有地方放，进而导致整个程序无法被烧录，一直报错:</p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c">Error in final launch sequence<span class="token operator">:</span>
@@ -697,10 +697,10 @@ after<span class="token operator">:</span>
 <p>这是我拿到的结果：</p>
 <ol>
 <li><p>屏蔽sys_clock_config_debug()：</p>
-<p><img src="/post/20260404204922/Sys_Clk1.png" alt="Sys_Clk"></p>
+<p><img src="/post/20260404204922/Sys_Clk1.png" alt="Sys_Clk" width="659" height="178" style="height:auto" loading="lazy" decoding="async"></p>
 </li>
 <li><p>去掉屏蔽sys_clock_config_debug()后:</p>
-<p><img src="/post/20260404204922/Sys_Clk2.png" alt="Sys_Clk_after"></p>
+<p><img src="/post/20260404204922/Sys_Clk2.png" alt="Sys_Clk_after" width="682" height="175" style="height:auto" loading="lazy" decoding="async"></p>
 </li>
 </ol>
 <p>&emsp;可以看到差距<strong>显著</strong>，所以我们必须要使用这些<code>ifdef DEBUG</code>之间的代码去填补我们写在FSBL中的内容，以此保证程序正常运行。</p>
@@ -831,7 +831,7 @@ uint16_t g_ltdc_lcd_framebuf[1280 * 800] __attribute__((section(&quot;.EXTRAM&qu
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="04_STM32N6开发实战3">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="04_STM32N6开发实战3" loading="lazy" decoding="async">
                         
                         <span class="card-title">04_STM32N6开发实战3</span>
                     </div>
@@ -880,7 +880,7 @@ uint16_t g_ltdc_lcd_framebuf[1280 * 800] __attribute__((section(&quot;.EXTRAM&qu
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="02_STM32N6开发实战1">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="02_STM32N6开发实战1" loading="lazy" decoding="async">
                         
                         <span class="card-title">02_STM32N6开发实战1</span>
                     </div>
@@ -929,9 +929,6 @@ uint16_t g_ltdc_lcd_framebuf[1280 * 800] __attribute__((section(&quot;.EXTRAM&qu
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
-
-  <!-- 是否加载使用自带的 prismjs. -->
-  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
 
 
 <!-- 代码语言 -->
@@ -1332,10 +1329,6 @@ $(function () {
     <!-- 鼠标星星特效 -->
     
 
-     
-        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
-        <script src="/libs/others/TencentCaptcha.js"></script>
-        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
     
 
     <!-- Baidu Analytics -->

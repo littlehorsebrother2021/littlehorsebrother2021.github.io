@@ -256,7 +256,7 @@
         
         <li><div class="divider"></div></li>
         <li>
-            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+            <a href="https://github.com/littlehorsebrother2021" class="waves-effect waves-light" target="_blank">
                 <i class="fab fa-github-square fa-fw"></i>Fork Me
             </a>
         </li>
@@ -313,7 +313,7 @@
     }
 </style>
 
-<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+<a href="https://github.com/littlehorsebrother2021" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
    data-tooltip="Fork Me" data-position="left" data-delay="50">
     <svg viewBox="0 0 250 250" aria-hidden="true">
         <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
@@ -345,7 +345,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -410,7 +410,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2026-03-18
+                    2026-10-17
                 </div>
                 
 
@@ -453,12 +453,12 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>&emsp;由于之后电赛需要经常用到这个库，而市面上的教程基本上都是基于原装DSP下载导入的，这里写一篇基于STM32CubeMX的添加指南，方便之后使用。<br>&emsp;重要：本博文主要用于DSP的直接配置，并没有运行示例，可以保证配置完成后可以使用</p>
-<h3 id="1-打开STM32CubeMX-配置工程"><a href="#1-打开STM32CubeMX-配置工程" class="headerlink" title="1. 打开STM32CubeMX 配置工程"></a>1. 打开STM32CubeMX 配置工程</h3><p>&emsp;进入配置主界面之后，点击Software packs,出现如下内容。<br><img src="/./STM32H743%20DSP%E6%B7%BB%E5%8A%A0%E6%8C%87%E5%8D%97/software_packs.png" alt="software packs"></p>
-<p>&emsp;我们要选择第一个select components，然后会出现如下页面。<br><img src="/components.png" alt="components"></p>
-<p>&emsp;点击红圈中内容，会出现一个搜索框，我们输入DSP，然后选择第一个DSP库。<br><img src="/DSP.png" alt="DSP"></p>
-<p>&emsp;点击OK,然后再到侧边栏，找到Middleware and Software Packs -&gt; X-CUBE-ALGOBUILD,这里我们勾选上DSP Library.<br><img src="/DSP_Library.png" alt="DSP_Library"></p>
+<h3 id="1-打开STM32CubeMX-配置工程"><a href="#1-打开STM32CubeMX-配置工程" class="headerlink" title="1. 打开STM32CubeMX 配置工程"></a>1. 打开STM32CubeMX 配置工程</h3><p>&emsp;进入配置主界面之后，点击Software packs,出现如下内容。<br><img src="/software_packs.png" alt="software packs" loading="lazy" decoding="async"></p>
+<p>&emsp;我们要选择第一个select components，然后会出现如下页面。<br><img src="/components.png" alt="components" loading="lazy" decoding="async"></p>
+<p>&emsp;点击红圈中内容，会出现一个搜索框，我们输入DSP，然后选择第一个DSP库。<br><img src="/DSP.png" alt="DSP" loading="lazy" decoding="async"></p>
+<p>&emsp;点击OK,然后再到侧边栏，找到Middleware and Software Packs -&gt; X-CUBE-ALGOBUILD,这里我们勾选上DSP Library.<br><img src="/DSP_Library.png" alt="DSP_Library" loading="lazy" decoding="async"></p>
 <p>&emsp;然后点击右上角的GENERATE CODE,生成代码,cubemx端的DSP配置内容就算结束了,其余可以配置串口方便查看结果。</p>
-<h3 id="2-修改宏定义"><a href="#2-修改宏定义" class="headerlink" title="2. 修改宏定义"></a>2. 修改宏定义</h3><p>&emsp;生成代码之后，打开工程，找到上方魔法棒，点击后点击C&#x2F;C++板块，如下图<br><img src="/C_C++.png" alt="C/C++"></p>
+<h3 id="2-修改宏定义"><a href="#2-修改宏定义" class="headerlink" title="2. 修改宏定义"></a>2. 修改宏定义</h3><p>&emsp;生成代码之后，打开工程，找到上方魔法棒，点击后点击C&#x2F;C++板块，如下图<br><img src="/C_C++.png" alt="C/C++" loading="lazy" decoding="async"></p>
 <p>&emsp;在Define中添加如下内容：(每个宏定义之间用英文逗号隔开)  </p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c">ARM_MATH_CM7<span class="token punctuation">,</span>__CC_ARM<span class="token punctuation">,</span>ARM_MATH_MATRIX_CHECK<span class="token punctuation">,</span>ARM_MATH_ROUNDING<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>(2026.3.18更新：由于AC6编译器替代AC5编译器是大势所趋，因此如果使用AC6编译器，需要删掉其中一个宏定义避免编译器报错，最终为如下宏定义：)</p>
@@ -470,7 +470,7 @@
 工程名文件夹<span class="token operator">/</span>Drivers<span class="token operator">/</span>CMSIS<span class="token operator">/</span>DSP<span class="token operator">/</span>Include<span class="token operator">/</span>arm_const_structs<span class="token punctuation">.</span>h
 工程名文件夹<span class="token operator">/</span>Drivers<span class="token operator">/</span>CMSIS<span class="token operator">/</span>DSP<span class="token operator">/</span>Include<span class="token operator">/</span>arm_math<span class="token punctuation">.</span>h<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>&emsp;将以上文件加入新增文件夹<br><img src="/drivers.png" alt="Drivers"></p>
+<p>&emsp;将以上文件加入新增文件夹<br><img src="/drivers.png" alt="Drivers" loading="lazy" decoding="async"></p>
 <h3 id="4-添加代码"><a href="#4-添加代码" class="headerlink" title="4. 添加代码"></a>4. 添加代码</h3><p>&emsp;在main函数中添加如下代码(例程参考了正点原子的例程)：</p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* USER CODE BEGIN Includes */</span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">"stdio.h"</span></span>
@@ -514,7 +514,7 @@ arm_cfft_radix4_instance_f32 scfft<span class="token punctuation">;</span><span 
     <span class="token function">HAL_Delay</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment">/* USER CODE END 3 */</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>打开串口，如果得到如下结果则可以证明移植成功<br><img src="/result.png" alt="result"></p>
+<p>打开串口，如果得到如下结果则可以证明移植成功<br><img src="/result.png" alt="result" loading="lazy" decoding="async"></p>
 
                 
             </div>
@@ -638,7 +638,7 @@ arm_cfft_radix4_instance_f32 scfft<span class="token punctuation">;</span><span 
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="STM32H743与ZYNQ核心进行SPI通信">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="STM32H743与ZYNQ核心进行SPI通信" loading="lazy" decoding="async">
                         
                         <span class="card-title">STM32H743与ZYNQ核心进行SPI通信</span>
                     </div>
@@ -691,7 +691,7 @@ arm_cfft_radix4_instance_f32 scfft<span class="token punctuation">;</span><span 
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="STM32H743 LVGL_GUIguider使用教程">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="STM32H743 LVGL_GUIguider使用教程" loading="lazy" decoding="async">
                         
                         <span class="card-title">STM32H743 LVGL_GUIguider使用教程</span>
                     </div>
@@ -744,9 +744,6 @@ arm_cfft_radix4_instance_f32 scfft<span class="token punctuation">;</span><span 
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
-
-  <!-- 是否加载使用自带的 prismjs. -->
-  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
 
 
 <!-- 代码语言 -->
@@ -1147,10 +1144,6 @@ $(function () {
     <!-- 鼠标星星特效 -->
     
 
-     
-        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
-        <script src="/libs/others/TencentCaptcha.js"></script>
-        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
     
 
     <!-- Baidu Analytics -->

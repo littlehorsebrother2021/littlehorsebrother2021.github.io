@@ -258,7 +258,7 @@
         
         <li><div class="divider"></div></li>
         <li>
-            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+            <a href="https://github.com/littlehorsebrother2021" class="waves-effect waves-light" target="_blank">
                 <i class="fab fa-github-square fa-fw"></i>Fork Me
             </a>
         </li>
@@ -315,7 +315,7 @@
     }
 </style>
 
-<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+<a href="https://github.com/littlehorsebrother2021" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
    data-tooltip="Fork Me" data-position="left" data-delay="50">
     <svg viewBox="0 0 250 250" aria-hidden="true">
         <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
@@ -463,7 +463,7 @@
 </ol>
 <h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="1-软件和硬件准备"><a href="#1-软件和硬件准备" class="headerlink" title="1.软件和硬件准备"></a>1.软件和硬件准备</h3><p>​	<strong>硬件</strong>:STM32N6开发板，ST-LINK，电源线，数据线(用于串口输出提示)，正点原子通用RGB屏幕(博主的具体型号:LCD主控:0x4384 型号代码ATK-MD0430R-800480，触摸主控型号:GT911，I2C通信)，IMX335摄像头模块。<br>​	<strong>软件</strong>:STM32CubeIDE，STM32CubeMX，RGB屏幕驱动库(正点原子官方,触摸没有用到)，串口驱动库，IMX335驱动库，中间件<a target="_blank" rel="noopener" href="https://github.com/STMicroelectronics/stm32-mw-isp">STM32_MW_ISP</a>(图像算法，正点原子例程中有，若需要自行移植请移步GITHUB)。</p>
 <h3 id="2-原理解析（IMX335在STM32上如何工作）"><a href="#2-原理解析（IMX335在STM32上如何工作）" class="headerlink" title="2.原理解析（IMX335在STM32上如何工作）"></a>2.原理解析（IMX335在STM32上如何工作）</h3><h4 id="2-1-接口协议解析"><a href="#2-1-接口协议解析" class="headerlink" title="2.1 接口协议解析"></a>2.1 接口协议解析</h4><p>&emsp;这里我专门做了一个图来理清新协议之间的关系，如下:</p>
-<p>​	<img src="/post/20260406173522/IMX335_guide.png" alt="IMX335通信原理"></p>
+<p>​	<img src="/post/20260406173522/IMX335_guide.png" alt="IMX335通信原理" width="633" height="336" style="height:auto" loading="lazy" decoding="async"></p>
 <p>可以看到，IMX335本身靠I2C与STM32通信，但是图像数据走的是速度更高的MIPI CSI协议，因此你可以在原理图中看到两种不同的协议引脚定义，<strong>并且</strong>，模块传过来的数据并不是最终我们在屏幕上看到的结果，而是摄影界常用的一个词”RAW”图像(<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Raw_image_format">原始图像格式</a>),我们还需要通过主控中的DCMIPP技术对图像数据进行转换和裁剪(原始的IMX335图像一帧数据大小为2592x1944),最后将这部分数据搬到RGB_LCD显示的内存上,才有了我们看到的实时图像。</p>
 <h4 id="2-2-中间层-STM32-MW-ISP"><a href="#2-2-中间层-STM32-MW-ISP" class="headerlink" title="2.2 中间层 STM32_MW_ISP"></a>2.2 中间层 STM32_MW_ISP</h4><p>&emsp;就像数码相机，手机镜头有专业模式一样，ST公司也为摄像头设计了一个类似的“专业模式”，通过把DCMIPP技术对图像数据进行转换和裁剪后的数据进行诸如白平衡，饱和度，色差等标准校准实现更优质的显示效果。但是这个专业模式需要我们自己将中间层加入工程中(cubemx中并没有包含，只能靠去GitHub下或者去拿正点原子现成的)，然后配合ST官方软件STM32 ISP IQTune去调节这些参数使得画面变得正常。</p>
 <p>&emsp;好消息是正点原子已经调出了一版正常的参数在例程之中，我们本期不需要费老大劲去调这个东西，以后如果有需要这个调配过程可能需要单开一期讲解。</p>
@@ -479,22 +479,22 @@
 <li>**进入主循环 (<code>while(1)</code>)**：CPU 此时已经不需要管图像搬运了(DMA自动接管)，它在循环里不断执行 <code>imx335_isp_background_process()</code>，利用帧中断传来的统计数据，默默地计算白平衡和曝光补偿，再通过 I2C 悄悄调整摄像头的寄存器，维持画面色彩的完美。</li>
 </ol>
 <h3 id="3-STM32CUBEMX"><a href="#3-STM32CUBEMX" class="headerlink" title="3. STM32CUBEMX"></a>3. STM32CUBEMX</h3><p>&emsp;这里基于的是上一期的ioc文件，也就是触摸驱动那期，当然使用RGBLCD那期也完全可行，触摸此次没有用到	</p>
-<h4 id="3-1-I2C"><a href="#3-1-I2C" class="headerlink" title="3.1 I2C"></a>3.1 I2C</h4><p>&emsp; 这里需要开启I2C2进行配置，<strong>Parameter Settings部分</strong>和剩余部分<strong>保持默认</strong>，<strong>引脚部分</strong>需要进行更改：<br>    <img src="/post/20260406173522/I2C.png" alt="I2C_GPIO"></p>
+<h4 id="3-1-I2C"><a href="#3-1-I2C" class="headerlink" title="3.1 I2C"></a>3.1 I2C</h4><p>&emsp; 这里需要开启I2C2进行配置，<strong>Parameter Settings部分</strong>和剩余部分<strong>保持默认</strong>，<strong>引脚部分</strong>需要进行更改：<br>    <img src="/post/20260406173522/I2C.png" alt="I2C_GPIO" width="899" height="486" style="height:auto" loading="lazy" decoding="async"></p>
 <h4 id="3-2-CSI"><a href="#3-2-CSI" class="headerlink" title="3.2 CSI"></a>3.2 CSI</h4><p>&emsp;CSI部分也是只需要开启即可，不需要改变参数。</p>
-<p>​	<img src="/post/20260406173522/CSI.png" alt="CSI"></p>
+<p>​	<img src="/post/20260406173522/CSI.png" alt="CSI" width="912" height="681" style="height:auto" loading="lazy" decoding="async"></p>
 <h4 id="3-3-DCMIPP"><a href="#3-3-DCMIPP" class="headerlink" title="3.3 DCMIPP"></a>3.3 DCMIPP</h4><p>&emsp;DCMIPP部分需要注意，我们开启Camera Serial Interface模式，<strong>PIPE1</strong>管线，下方的具体参数配置保持默认，随后转到NVIC Settings中，这里我们开启图示的两个中断(<strong>这部分内容在正点原子例程的cubemx文件中没有开启，但是你可以在他的代码中找到他后续写的关于开启中断的代码，这里直接开了防止遗漏</strong>)，保证后续ISP算法在数据经DCMIPP处理完毕后运行。</p>
-<p><img src="/post/20260406173522/DCMIPP_Normal.png" alt="DCMIPP"></p>
-<p><img src="/post/20260406173522/DCMIPP_NVIC.png" alt="DCMIPP_NVIC"></p>
+<p><img src="/post/20260406173522/DCMIPP_Normal.png" alt="DCMIPP" width="906" height="802" style="height:auto" loading="lazy" decoding="async"></p>
+<p><img src="/post/20260406173522/DCMIPP_NVIC.png" alt="DCMIPP_NVIC" width="894" height="590" style="height:auto" loading="lazy" decoding="async"></p>
 <h4 id="3-4-GPIO"><a href="#3-4-GPIO" class="headerlink" title="3.4 GPIO"></a>3.4 GPIO</h4><p>&emsp; 这部分需要定义两个引脚：PG4和PG6，用于供电和重置的引脚，如果没有定义你的摄像头很可能就没开机，卡在初始化失败。</p>
-<p><img src="/post/20260406173522/GPIO.png" alt="GPIO"></p>
+<p><img src="/post/20260406173522/GPIO.png" alt="GPIO" width="902" height="582" style="height:auto" loading="lazy" decoding="async"></p>
 <h4 id="3-5-时钟树"><a href="#3-5-时钟树" class="headerlink" title="3.5 时钟树"></a>3.5 时钟树</h4><p>&emsp;这里针对的是DCMIPP，他需要300MHz的时钟，我们通过IC17进行供应，IC18我们也先配置，在后续正点原子代码中IC18可能有用。</p>
 <p>然后I2C2使用I2C4同款PEK时钟64MHz.</p>
-<p>​			<img src="/post/20260406173522/Clock_tree1.png" alt="Clock_tree1">  </p>
-<p>​			<img src="/post/20260406173522/Clock_tree2.png" alt="Clock_tree2">  </p>
-<p>​			<img src="/post/20260406173522/Clock_tree3.png" alt="Clock_tree3"> </p>
+<p>​			<img src="/post/20260406173522/Clock_tree1.png" alt="Clock_tree1" width="505" height="92" style="height:auto" loading="lazy" decoding="async">  </p>
+<p>​			<img src="/post/20260406173522/Clock_tree2.png" alt="Clock_tree2" width="334" height="176" style="height:auto" loading="lazy" decoding="async">  </p>
+<p>​			<img src="/post/20260406173522/Clock_tree3.png" alt="Clock_tree3" width="322" height="243" style="height:auto" loading="lazy" decoding="async"> </p>
 <p>​	</p>
 <h4 id="3-6-安全保护RIF"><a href="#3-6-安全保护RIF" class="headerlink" title="3.6 安全保护RIF"></a>3.6 安全保护RIF</h4><p>&emsp;这里需要将DCMIPP的权限打开，跟RGBLCD一样，保证核心和外设的正常访问。</p>
-<p><img src="/post/20260406173522/RIF.png" alt="RIF"></p>
+<p><img src="/post/20260406173522/RIF.png" alt="RIF" width="1180" height="886" style="height:auto" loading="lazy" decoding="async"></p>
 <p>&emsp;综上，所有的新增外设配置完毕，按照前几期的格式生成工程代码，下面进入ide编程阶段。</p>
 <h3 id="4-cubeIDE部分"><a href="#4-cubeIDE部分" class="headerlink" title="4.cubeIDE部分"></a>4.cubeIDE部分</h3><h4 id="4-1-基础操作"><a href="#4-1-基础操作" class="headerlink" title="4.1 基础操作"></a>4.1 基础操作</h4><p>&emsp;这部分不再赘述，前三期很多都围绕这个展开，对照请直接去开发实战3中比对。</p>
 <h4 id="4-2-引入驱动"><a href="#4-2-引入驱动" class="headerlink" title="4.2 引入驱动"></a>4.2 引入驱动</h4><p>&emsp;这里除了上两期用到的RGBLCD和Touch相关文件外，新的正点原子驱动文件如下：</p>
@@ -507,9 +507,9 @@
 
 <p>&emsp;以上三个文件夹📂都可以在正点的例程包里同样的位置找到内容。</p>
 <p>&emsp;<strong>需要提一嘴的是</strong>，如果你之前的cubemx没配完整，那么我建议你将新增的文件夹Middlewares找个别的位置（非工程目录）存一下，因为每次cubemx重新生成代码都会被删，或者你在cubemx中随便找个小的中间件文件加上，让这个文件夹得以保留。</p>
-<p>​	最终文件目录结构如下：<br>​	<img src="/post/20260406173522/file_tree.png" alt="file_tree"></p>
+<p>​	最终文件目录结构如下：<br>​	<img src="/post/20260406173522/file_tree.png" alt="file_tree" width="519" height="780" style="height:auto" loading="lazy" decoding="async"></p>
 <h4 id="4-3-屏蔽代码"><a href="#4-3-屏蔽代码" class="headerlink" title="4.3 屏蔽代码"></a>4.3 屏蔽代码</h4><p>​	由于部分算法被正点原子优化和修改过，并且本例程不参与ISP的调优(“专业模式调节参数”)，因此ISP算法中的部分代码不能参与编译，具体如下：</p>
-<p><img src="/post/20260406173522/shield_files.png" alt="屏蔽(图中灰色)"></p>
+<p><img src="/post/20260406173522/shield_files.png" alt="屏蔽(图中灰色)" width="349" height="304" style="height:auto" loading="lazy" decoding="async"></p>
 <p>&emsp;屏蔽的具体方法:</p>
 <ol>
 <li><p>在 CubeIDE 的左侧 Project Explorer 项目管理树中，找到那个目录：<code>Middlewares/STM32_MW_ISP/isp/USB_Device</code>。</p>
@@ -635,7 +635,7 @@ XSPI_HandleTypeDef hxspi1<span class="token punctuation">;</span>
 <span class="token operator">/</span>$<span class="token punctuation">&#123;</span>ProjName<span class="token punctuation">&#125;</span><span class="token operator">/</span>Middlewares<span class="token operator">/</span>STM32_MW_ISP<span class="token operator">/</span>evision<span class="token operator">/</span>Inc
 <span class="token operator">/</span>$<span class="token punctuation">&#123;</span>ProjName<span class="token punctuation">&#125;</span><span class="token operator">/</span>Middlewares<span class="token operator">/</span>STM32_MW_ISP<span class="token operator">/</span>isp<span class="token operator">/</span>Inc
 <span class="token operator">/</span>$<span class="token punctuation">&#123;</span>ProjName<span class="token punctuation">&#125;</span><span class="token operator">/</span>Application<span class="token operator">/</span>User<span class="token operator">/</span>STM32_MW_ISP<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="/post/20260406173522/Includes.png" alt="Includes"></p>
+<p><img src="/post/20260406173522/Includes.png" alt="Includes" width="1283" height="800" style="height:auto" loading="lazy" decoding="async"></p>
 <h4 id="4-6-添加库文件"><a href="#4-6-添加库文件" class="headerlink" title="4.6 添加库文件"></a>4.6 添加库文件</h4><p>&emsp;STM32_MW_ISP和DSP库一样，都需要使用封装好的lib库，因此我们需要添加，具体路径如下：</p>
 <ol>
 <li>在 CubeIDE 左侧资源管理器右键点击你的工程名，选择 Properties (属性)。</li>
@@ -657,7 +657,7 @@ XSPI_HandleTypeDef hxspi1<span class="token punctuation">;</span>
 <li><p>I2C 通信失败（卡死在 ReadID，仅显示 “IMX335 ERROR!”）<br> 问题：代码成功烧录，但卡死在摄像头初始化阶段的 IMX335_ReadID。<br> 解决：摄像头处于“断电&#x2F;死机”状态。在 CUBEMX中补充对 PG6 (PWDN) 和 PG4 (RST) 引脚的推挽输出初始化。</p>
 </li>
 </ol>
-<h3 id="5-最终结果"><a href="#5-最终结果" class="headerlink" title="5. 最终结果"></a>5. 最终结果</h3><p>&emsp;运行后应该可以在屏幕上看到完整的摄像样貌，颜色正常，由于摄像头素质拍出来的可能比较糊但是能辨认物品。<br><img src="/post/20260406173522/output.jpg" alt="output"></p>
+<h3 id="5-最终结果"><a href="#5-最终结果" class="headerlink" title="5. 最终结果"></a>5. 最终结果</h3><p>&emsp;运行后应该可以在屏幕上看到完整的摄像样貌，颜色正常，由于摄像头素质拍出来的可能比较糊但是能辨认物品。<br><img src="/post/20260406173522/output.jpg" alt="output" width="1920" height="2557" style="height:auto" loading="lazy" decoding="async"></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>​	通过以上操作，我们成功实现了IMX335的图像采集和图像显示，离未来的图像识别更近了一步，在下一期，我们将挑战最麻烦的，同时也是最具吸引力的项目：STM32N6 cubeAI，搞清楚如何在STM32上部署视觉AI。</p>
 <p>​	如果你觉得这篇文章对你有帮助，请点赞、收藏、转发本网址，你的支持是我最大的动力！下一期文章将会关于STM32N6上的AI部署，敬请期待！</p>
 
@@ -780,7 +780,7 @@ XSPI_HandleTypeDef hxspi1<span class="token punctuation">;</span>
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="05_STM32N6开发实战4">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="05_STM32N6开发实战4" loading="lazy" decoding="async">
                         
                         <span class="card-title">05_STM32N6开发实战4</span>
                     </div>
@@ -830,7 +830,7 @@ XSPI_HandleTypeDef hxspi1<span class="token punctuation">;</span>
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="04_STM32N6开发实战3">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="04_STM32N6开发实战3" loading="lazy" decoding="async">
                         
                         <span class="card-title">04_STM32N6开发实战3</span>
                     </div>
@@ -879,9 +879,6 @@ XSPI_HandleTypeDef hxspi1<span class="token punctuation">;</span>
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
-
-  <!-- 是否加载使用自带的 prismjs. -->
-  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
 
 
 <!-- 代码语言 -->
@@ -1282,10 +1279,6 @@ $(function () {
     <!-- 鼠标星星特效 -->
     
 
-     
-        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
-        <script src="/libs/others/TencentCaptcha.js"></script>
-        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
     
 
     <!-- Baidu Analytics -->

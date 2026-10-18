@@ -256,7 +256,7 @@
         
         <li><div class="divider"></div></li>
         <li>
-            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+            <a href="https://github.com/littlehorsebrother2021" class="waves-effect waves-light" target="_blank">
                 <i class="fab fa-github-square fa-fw"></i>Fork Me
             </a>
         </li>
@@ -313,7 +313,7 @@
     }
 </style>
 
-<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+<a href="https://github.com/littlehorsebrother2021" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
    data-tooltip="Fork Me" data-position="left" data-delay="50">
     <svg viewBox="0 0 250 250" aria-hidden="true">
         <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
@@ -345,7 +345,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -449,19 +449,19 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>&emsp;由于这两年AI开发如火如荼，嵌入式部分也不甘落后，推出了大量关于NPU的开发板，最近在研究STM32N6。STM32N6是ST公司推出的一款专门用于边缘计算的系列微控制器，具有强大的AI计算能力，适用于各种AI应用场景。再加上打比赛的需要，所以最近在研究。手头上使用的是正点原子家的STM32N647开发板。之后所有的教程都会依据于此开发板进行。</p>
-<h2 id="硬件介绍-STM32N647X0"><a href="#硬件介绍-STM32N647X0" class="headerlink" title="硬件介绍(STM32N647X0)"></a>硬件介绍(STM32N647X0)</h2><p>&emsp;先来介绍一下这块芯片。STM32N647X0基于高性能Arm® Cortex®-M55(STM32H7内核是Arm®Cortex®-M7),工作频率高达800 MHz。<br>&emsp;<strong>其与其他F1,F4,H7最大的不同在于它取消了内部flash的设计</strong><br><img src="/post/20260319163436/RAM_M55.png" alt="存储器_M55"><br>&emsp;作为对比，STM32H743IIT6的存储器设计如下：<br><img src="/post/20260319163436/RAM_H7.png" alt="存储器_H7"><br>&emsp;可以看到，H7显眼的在存储器第一行就已经标明了内部flash的存储大小为2MB，而N6则没有内部flash。<br>&emsp;<strong>这就代表着，N6的内部存储器只有RAM和少量用于启动的ROM，没有flash （存放具体代码的硬件），所以N6的程序需要通过外部存储器来存储。</strong>,也就是相当于<strong>一台手机只有内存，没有那些大128G的内部存储，你只有用外部内存卡才能存进你的那些系统，应用等文件</strong>。<br>&emsp;这就导致了两者的开发模式和风格迥异。  </p>
-<p>&emsp;其次，这块芯片多了一个设备：NPU，专门用于神经运算(矩阵运算)的处理单元,这块的内容放到后面去探索。<br><img src="/post/20260319163436/NPU_N6.png" alt="NPU">  </p>
+<h2 id="硬件介绍-STM32N647X0"><a href="#硬件介绍-STM32N647X0" class="headerlink" title="硬件介绍(STM32N647X0)"></a>硬件介绍(STM32N647X0)</h2><p>&emsp;先来介绍一下这块芯片。STM32N647X0基于高性能Arm® Cortex®-M55(STM32H7内核是Arm®Cortex®-M7),工作频率高达800 MHz。<br>&emsp;<strong>其与其他F1,F4,H7最大的不同在于它取消了内部flash的设计</strong><br><img src="/post/20260319163436/RAM_M55.png" alt="存储器_M55" width="689" height="416" style="height:auto" loading="lazy" decoding="async"><br>&emsp;作为对比，STM32H743IIT6的存储器设计如下：<br><img src="/post/20260319163436/RAM_H7.png" alt="存储器_H7" width="659" height="377" style="height:auto" loading="lazy" decoding="async"><br>&emsp;可以看到，H7显眼的在存储器第一行就已经标明了内部flash的存储大小为2MB，而N6则没有内部flash。<br>&emsp;<strong>这就代表着，N6的内部存储器只有RAM和少量用于启动的ROM，没有flash （存放具体代码的硬件），所以N6的程序需要通过外部存储器来存储。</strong>,也就是相当于<strong>一台手机只有内存，没有那些大128G的内部存储，你只有用外部内存卡才能存进你的那些系统，应用等文件</strong>。<br>&emsp;这就导致了两者的开发模式和风格迥异。  </p>
+<p>&emsp;其次，这块芯片多了一个设备：NPU，专门用于神经运算(矩阵运算)的处理单元,这块的内容放到后面去探索。<br><img src="/post/20260319163436/NPU_N6.png" alt="NPU" width="647" height="260" style="height:auto" loading="lazy" decoding="async">  </p>
 <p>&emsp;说回到开发板，这块开发板在外部存储器上使用了MX25UM25645G这块芯片，具有256MB存储，使用XSPI2接口与STM32N647通信，XSPI可以简单看做是SPI的速度增强版协议。</p>
 <p>&emsp;其余的外设相比于H7系列没有太大的改观，不做细讲。我需要提一嘴的是<strong>N6的电源系统比H7复杂的多</strong>，这块板子具有非常多电源设计，如果在他的核心板上进行二次开发需要搞清楚这些供电关系。  </p>
-<h2 id="软件介绍-STM32CubeIDE-STM32CUBEMX"><a href="#软件介绍-STM32CubeIDE-STM32CUBEMX" class="headerlink" title="软件介绍(STM32CubeIDE,STM32CUBEMX)"></a>软件介绍(STM32CubeIDE,STM32CUBEMX)</h2><p>&emsp;接下来介绍软件部分。<br>&emsp;正点原子提供的例程全部在STM32CubeIDE上，没有在keil上了，这两天初步感觉下来可能确实在STM32CubeIDE上开发更加方便。后续讲原因。<br>&emsp;改观最大的是cubemx，因为整个界面发生了巨大改变。<br>这是STM32N6的开发界面：<br><img src="/post/20260319163436/cubemx_n6.png" alt="cubemx_n6"><br>而这是原来STM32F1,F4,H7的开发界面：<br><img src="/post/20260319163436/cubemx_h7.png" alt="cubemx_h7"><br>&emsp;可以看到，N6左侧的导航栏多出了一个表格,产生这个表格的原因就是N6的内部存储器没有了。</p>
+<h2 id="软件介绍-STM32CubeIDE-STM32CUBEMX"><a href="#软件介绍-STM32CubeIDE-STM32CUBEMX" class="headerlink" title="软件介绍(STM32CubeIDE,STM32CUBEMX)"></a>软件介绍(STM32CubeIDE,STM32CUBEMX)</h2><p>&emsp;接下来介绍软件部分。<br>&emsp;正点原子提供的例程全部在STM32CubeIDE上，没有在keil上了，这两天初步感觉下来可能确实在STM32CubeIDE上开发更加方便。后续讲原因。<br>&emsp;改观最大的是cubemx，因为整个界面发生了巨大改变。<br>这是STM32N6的开发界面：<br><img src="/post/20260319163436/cubemx_n6.png" alt="cubemx_n6" width="1919" height="926" style="height:auto" loading="lazy" decoding="async"><br>而这是原来STM32F1,F4,H7的开发界面：<br><img src="/post/20260319163436/cubemx_h7.png" alt="cubemx_h7" width="1905" height="923" style="height:auto" loading="lazy" decoding="async"><br>&emsp;可以看到，N6左侧的导航栏多出了一个表格,产生这个表格的原因就是N6的内部存储器没有了。</p>
 <p>&emsp;那么，这个表格代表的是什么意思呢？<br>&emsp;表格左侧是正常的外设选项，这一点不需要过多赘述，下面重点介绍一下表格上方的三个项目的具体定义：</p>
 <h3 id="1-FSBL-First-Stage-Boot-Loader"><a href="#1-FSBL-First-Stage-Boot-Loader" class="headerlink" title="1.FSBL(First Stage Boot Loader)"></a>1.FSBL(First Stage Boot Loader)</h3><p>&emsp;第一阶段引导加载程序 (<a target="_blank" rel="noopener" href="https://community.st.com/t5/stm32-mcus/stm32n6-fsbl-explained/ta-p/764307">FSBL</a>) 是 STM32N6 微控制器启动过程中的关键组件。它负责初始化系统、配置硬件，并将应用程序代码从外部存储器加载到内部或外部存储器中执行。<br>&emsp;这是什么意思呢？简单来说，由于N6没有内部flash，在人为不写任何东西的情况下是没有办法将程序放到内存里跑起来的，需要有“人”去把我们写的代码指令搬到内存中去跑，这个“人”就是FSBL。 </p>
 <p>&emsp;在这个过程中最大的问题就在于，我们要搞清楚我们要将哪些外设的初始化配置写在FSBL中，而不是写在后面的两项中。</p>
 <h3 id="2-Application"><a href="#2-Application" class="headerlink" title="2.Application"></a>2.Application</h3><p>&emsp;应用程序是用户编写的代码，用于实现特定的功能或任务。<br>&emsp;简单来说，就是我们的代码，那些在F1,F4,H7写的外设代码不出意外的话都在这一分区下进行编写。</p>
-<h3 id="3-ExtMemLoader-External-Memory-Loader"><a href="#3-ExtMemLoader-External-Memory-Loader" class="headerlink" title="3.ExtMemLoader(External Memory Loader)"></a>3.ExtMemLoader(External Memory Loader)</h3><p>&emsp;ExtMemLoader（外部存储器下载算法&#x2F;加载器），本质上是一段运行在 MCU 内部 SRAM 中的“微型驱动程序”。它的唯一使命，就是教会烧录工具（如 Keil、STM32CubeProgrammer）如何把你的代码写入到开发板外挂的存储器。由于没有内部 flash，而外部的存储器种类又非常多样(SPI FLASH,SD 卡等等)<br><img src="/post/20260319163436/EX_ROM.png" alt="EX_ROM"><br>所以就需要这个加载器先行一步在内存中加载这些存储器的驱动来帮助烧录工具完成在外部存储中烧录代码的工作。</p>
+<h3 id="3-ExtMemLoader-External-Memory-Loader"><a href="#3-ExtMemLoader-External-Memory-Loader" class="headerlink" title="3.ExtMemLoader(External Memory Loader)"></a>3.ExtMemLoader(External Memory Loader)</h3><p>&emsp;ExtMemLoader（外部存储器下载算法&#x2F;加载器），本质上是一段运行在 MCU 内部 SRAM 中的“微型驱动程序”。它的唯一使命，就是教会烧录工具（如 Keil、STM32CubeProgrammer）如何把你的代码写入到开发板外挂的存储器。由于没有内部 flash，而外部的存储器种类又非常多样(SPI FLASH,SD 卡等等)<br><img src="/post/20260319163436/EX_ROM.png" alt="EX_ROM" width="1230" height="405" style="height:auto" loading="lazy" decoding="async"><br>所以就需要这个加载器先行一步在内存中加载这些存储器的驱动来帮助烧录工具完成在外部存储中烧录代码的工作。</p>
 <p>&emsp;总结一下,N6的一个工程包含的内容实际上相当于H7的两个工程，FSBL和Application在一个工程，而ExtMemLoader在另一个工程。但是他们必须同时被烧录进N6才能脱机运行。<br>&emsp;比较好的是，正点原子的这块板子的ExtMemLoader固件已经被厂家写好了，在初期开发可以直接拿过来用。<br>&emsp;<strong>值得注意的是</strong>，ExtMemLoader并不会被存储进外部Flash中，他只会在你烧录过程中在芯片的RAM中运行，掉电后丢失。所以最终你的外部flash中只存放了两个东西：FSBL和Application。  </p>
 <p>&emsp;那么真正需要我们去配置和编写的，就是FSBL和Application了。这一块放在下一期内容讲。接下来讲一讲烧录。</p>
-<h2 id="烧录"><a href="#烧录" class="headerlink" title="烧录"></a>烧录</h2><p>&emsp;烧录这块，正点原子家的开发板提供了两种烧录方式，一种是使用cubeide内置的烧录程序，另一种是使用ST官方的烧录工具STM32Programmer。博主的建议是使用cubeide内置的程序，因为后续的调试大概率也需要用。<br>&emsp;与H7不同的是，这一次的boot不再是用硬件可以定死的全0或全1了，他需要经常去变动，直观的对比如下：<br>&emsp;H7的boot：<br><img src="/post/20260319163436/boot_h7.png" alt="boot_h7"><br>&emsp;N6的boot：<br><img src="/post/20260319163436/boot_n6.png" alt="boot_n6"><br>&emsp;可以看到，N6的boot选项和H7有明显不同，他变成了三个新模式：开发者模式，flash存储模式和串口模式。开发者模式就是使用N6内置的SRAM去存储和读取程序，但是<strong>程序是掉电丢失的</strong>，flash存储模式就是使用外部存储器去读取程序，串口模式就是使用外部的串口去读取程序。  </p>
+<h2 id="烧录"><a href="#烧录" class="headerlink" title="烧录"></a>烧录</h2><p>&emsp;烧录这块，正点原子家的开发板提供了两种烧录方式，一种是使用cubeide内置的烧录程序，另一种是使用ST官方的烧录工具STM32Programmer。博主的建议是使用cubeide内置的程序，因为后续的调试大概率也需要用。<br>&emsp;与H7不同的是，这一次的boot不再是用硬件可以定死的全0或全1了，他需要经常去变动，直观的对比如下：<br>&emsp;H7的boot：<br><img src="/post/20260319163436/boot_h7.png" alt="boot_h7" width="936" height="365" style="height:auto" loading="lazy" decoding="async"><br>&emsp;N6的boot：<br><img src="/post/20260319163436/boot_n6.png" alt="boot_n6" width="709" height="238" style="height:auto" loading="lazy" decoding="async"><br>&emsp;可以看到，N6的boot选项和H7有明显不同，他变成了三个新模式：开发者模式，flash存储模式和串口模式。开发者模式就是使用N6内置的SRAM去存储和读取程序，但是<strong>程序是掉电丢失的</strong>，flash存储模式就是使用外部存储器去读取程序，串口模式就是使用外部的串口去读取程序。  </p>
 <p>&emsp;而这种模式让烧录也发生了改变，正常情况下H7烧录程序只需要将boot设置为全0按下keil的烧录按键即可，而N6烧录程序需要将boot首先设置为开发者模式，让程序烧录到外部flash中，然后再将boot设置为flash存储模式，这样你烧录到外部flash中的程序才能正常运行。  </p>
 <p>&emsp;<strong>注意</strong>cubeide要求的烧录器固件非常新，如果版本较低比如J37版本，他会一直提示你升级J47版本，否则烧不进去，升级也较为简单，找这篇<a target="_blank" rel="noopener" href="https://docs.keysking.com/docs/stm32/FAQ/STLinkUpdate">文章</a>，按着里面说的做就行</p>
 <p>&emsp;然后是关于烧录的具体步骤，这一块直接移步到正点原子的<a target="_blank" rel="noopener" href="https://wiki.alientek.com/docs/Boards/STM32/DNN647/start-guide/start-development/step-by-step/">开发流程 Step-by-Step</a>的Step2.4。</p>
@@ -586,7 +586,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="02_STM32N6开发实战1">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="02_STM32N6开发实战1" loading="lazy" decoding="async">
                         
                         <span class="card-title">02_STM32N6开发实战1</span>
                     </div>
@@ -635,7 +635,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="学校的部分规章制度备忘录">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="学校的部分规章制度备忘录" loading="lazy" decoding="async">
                         
                         <span class="card-title">学校的部分规章制度备忘录</span>
                     </div>
@@ -684,9 +684,6 @@
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
-
-  <!-- 是否加载使用自带的 prismjs. -->
-  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
 
 
 <!-- 代码语言 -->
@@ -1087,10 +1084,6 @@ $(function () {
     <!-- 鼠标星星特效 -->
     
 
-     
-        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
-        <script src="/libs/others/TencentCaptcha.js"></script>
-        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
     
 
     <!-- Baidu Analytics -->

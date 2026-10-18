@@ -257,7 +257,7 @@
         
         <li><div class="divider"></div></li>
         <li>
-            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+            <a href="https://github.com/littlehorsebrother2021" class="waves-effect waves-light" target="_blank">
                 <i class="fab fa-github-square fa-fw"></i>Fork Me
             </a>
         </li>
@@ -314,7 +314,7 @@
     }
 </style>
 
-<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+<a href="https://github.com/littlehorsebrother2021" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
    data-tooltip="Fork Me" data-position="left" data-delay="50">
     <svg viewBox="0 0 250 250" aria-hidden="true">
         <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
@@ -346,7 +346,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -455,7 +455,7 @@
             <div id="articleContent">
                 <h2 id="本文用于记录STM32H743RGB-LCD的配置过程-基于cubemx"><a href="#本文用于记录STM32H743RGB-LCD的配置过程-基于cubemx" class="headerlink" title="本文用于记录STM32H743RGB_LCD的配置过程,基于cubemx"></a>本文用于记录STM32H743RGB_LCD的配置过程,基于cubemx</h2><ol>
 <li>准备工作<br> 1.1. 准备好STM32H743开发板，RGBLCD屏幕，博主的屏幕为兼容正点原子排线的7寸屏<br> 1.2. 准备好STM32CubeMX软件<br> 1.3. 准备好Keil5软件<br> 1.4. 准备好正点原子显示和触摸相关例程，官方链接：正点原子  </li>
-<li>配置步骤<br> 2.1. 打开STM32CubeMX软件，选择STM32H743芯片<br> 2.2. 配置时钟树，使能HSE和PLL<br> 时钟树如下：<br> <img src="/post/20250307211036/clock.png" alt="时钟树"><br> 注意：STM32H743IIT6有两个芯片版本，其中一个芯片版本只能达到400MHz，另外一个可以达到480MHz，博主使用的是480MHz版本，所以时钟树配置为480MHz<br> 2.3. 配置mpu<br> <img src="/post/20250307211036/mpu.png" alt="MPU"><br> 2.4. 配置GPIO<br> <img src="/post/20250307211036/gpio.png" alt="GPIO"><br> 2.5. 配置定时器<br> 选择TIM1为定时器，配置如下：<br> <img src="/post/20250307211036/tim.png" alt="定时器"><br> 2.6. 配置FMC<br> 这里使用的是W9825G6KH 这颗SDRAM，配置如下：<br> <img src="/post/20250307211036/sdram1.png" alt="SDRAM1"><br> <img src="/post/20250307211036/sdram2.png" alt="SDRAM2"><br> 这里需要注意，这里博主似乎没有配置对，但是能够根据正点官方初始化达到目的.<br> <strong>(2025.7.24更新，，原始图像存在错误，SDRAM1图片中Data下方的Byte Enable 未被使能，导致两个GPIO未被使能，进而导致数据流紊乱绿屏，并且请将后面的SDRAM2图片中的GPIO Setting中的所有引脚全部改为上拉输出，保证正常运行)</strong><br> 2.7. 配置UART<br> <img src="/post/20250307211036/usart.png" alt="USART"><br> 这里需要注意，STM32H7不同于F1,F4，USART的引脚有多组替换方案，注意默认方案是否跟你所接的串口引脚匹配。<br> 2.8. 配置DMA2D<br> <img src="/post/20250307211036/dma2d.png" alt="DMA2D"><br> 2.9. 配置LTDC<br> <img src="/post/20250307211036/ltdc1.png" alt="LTDC1"><br> <img src="/post/20250307211036/ltdc2.png" alt="LTDC2"><br> 注意，cubemx自己分配的默认LTDC引脚与正点原子例程不匹配，需要手动修改引脚，修改如下：<br> <img src="/post/20250307211036/ltdc3.png" alt="LTDC3"><br> <img src="/post/20250307211036/ltdc4.png" alt="LTDC4"><br> 2.10. 配置堆栈<br> 由于后期需要UI库，建议先把堆栈调大，这里配置为0x2000<br> 至此所有配置完成，点击生成代码<br> 2.11. 修改代码<br> <img src="/post/20250307211036/folder.png" alt="转移文件"><br> 请将如上代码移入工程中。<br> 请自行修改相关宏定义配置错误，这里不再赘述。<br> 进入fmc.c文件，将SDRAM的初始化代码注释掉，这里使用正点原子代码初始化SDRAM，否则会发生绿屏现象。<br> <strong>(2025.7.24更新，如果在上方已经将Byte Enable 使能，则这里需要将正点原子代码中的初始化SERAM的代码注释掉，否则会出现函数重复定义，两者函数在当前配置下等价)</strong><br> <img src="/post/20250307211036/comment.png" alt="注释代码"><br> 迁移正点例程中的测试代码，主函数修改代码如下:(user code begin2 end2 之间)<br> <img src="/post/20250307211036/main.png" alt="main"><br> 2.12. 编译下载<br> 此时应该得到与正点原子例程相同的效果，显示正点原子LOGO，并且能够通过串口打印信息。</li>
+<li>配置步骤<br> 2.1. 打开STM32CubeMX软件，选择STM32H743芯片<br> 2.2. 配置时钟树，使能HSE和PLL<br> 时钟树如下：<br> <img src="/post/20250307211036/clock.png" alt="时钟树" width="1158" height="628" style="height:auto" loading="lazy" decoding="async"><br> 注意：STM32H743IIT6有两个芯片版本，其中一个芯片版本只能达到400MHz，另外一个可以达到480MHz，博主使用的是480MHz版本，所以时钟树配置为480MHz<br> 2.3. 配置mpu<br> <img src="/post/20250307211036/mpu.png" alt="MPU" width="630" height="477" style="height:auto" loading="lazy" decoding="async"><br> 2.4. 配置GPIO<br> <img src="/post/20250307211036/gpio.png" alt="GPIO" width="624" height="216" style="height:auto" loading="lazy" decoding="async"><br> 2.5. 配置定时器<br> 选择TIM1为定时器，配置如下：<br> <img src="/post/20250307211036/tim.png" alt="定时器" width="622" height="289" style="height:auto" loading="lazy" decoding="async"><br> 2.6. 配置FMC<br> 这里使用的是W9825G6KH 这颗SDRAM，配置如下：<br> <img src="/post/20250307211036/sdram1.png" alt="SDRAM1" width="637" height="215" style="height:auto" loading="lazy" decoding="async"><br> <img src="/post/20250307211036/sdram2.png" alt="SDRAM2" width="624" height="475" style="height:auto" loading="lazy" decoding="async"><br> 这里需要注意，这里博主似乎没有配置对，但是能够根据正点官方初始化达到目的.<br> <strong>(2025.7.24更新，，原始图像存在错误，SDRAM1图片中Data下方的Byte Enable 未被使能，导致两个GPIO未被使能，进而导致数据流紊乱绿屏，并且请将后面的SDRAM2图片中的GPIO Setting中的所有引脚全部改为上拉输出，保证正常运行)</strong><br> 2.7. 配置UART<br> <img src="/post/20250307211036/usart.png" alt="USART" width="584" height="766" style="height:auto" loading="lazy" decoding="async"><br> 这里需要注意，STM32H7不同于F1,F4，USART的引脚有多组替换方案，注意默认方案是否跟你所接的串口引脚匹配。<br> 2.8. 配置DMA2D<br> <img src="/post/20250307211036/dma2d.png" alt="DMA2D" width="621" height="643" style="height:auto" loading="lazy" decoding="async"><br> 2.9. 配置LTDC<br> <img src="/post/20250307211036/ltdc1.png" alt="LTDC1" width="635" height="817" style="height:auto" loading="lazy" decoding="async"><br> <img src="/post/20250307211036/ltdc2.png" alt="LTDC2" width="611" height="665" style="height:auto" loading="lazy" decoding="async"><br> 注意，cubemx自己分配的默认LTDC引脚与正点原子例程不匹配，需要手动修改引脚，修改如下：<br> <img src="/post/20250307211036/ltdc3.png" alt="LTDC3" width="916" height="496" style="height:auto" loading="lazy" decoding="async"><br> <img src="/post/20250307211036/ltdc4.png" alt="LTDC4" width="926" height="468" style="height:auto" loading="lazy" decoding="async"><br> 2.10. 配置堆栈<br> 由于后期需要UI库，建议先把堆栈调大，这里配置为0x2000<br> 至此所有配置完成，点击生成代码<br> 2.11. 修改代码<br> <img src="/post/20250307211036/folder.png" alt="转移文件" width="742" height="363" style="height:auto" loading="lazy" decoding="async"><br> 请将如上代码移入工程中。<br> 请自行修改相关宏定义配置错误，这里不再赘述。<br> 进入fmc.c文件，将SDRAM的初始化代码注释掉，这里使用正点原子代码初始化SDRAM，否则会发生绿屏现象。<br> <strong>(2025.7.24更新，如果在上方已经将Byte Enable 使能，则这里需要将正点原子代码中的初始化SERAM的代码注释掉，否则会出现函数重复定义，两者函数在当前配置下等价)</strong><br> <img src="/post/20250307211036/comment.png" alt="注释代码" width="681" height="190" style="height:auto" loading="lazy" decoding="async"><br> 迁移正点例程中的测试代码，主函数修改代码如下:(user code begin2 end2 之间)<br> <img src="/post/20250307211036/main.png" alt="main" width="580" height="182" style="height:auto" loading="lazy" decoding="async"><br> 2.12. 编译下载<br> 此时应该得到与正点原子例程相同的效果，显示正点原子LOGO，并且能够通过串口打印信息。</li>
 </ol>
 
                 
@@ -580,7 +580,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="计划表">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="计划表" loading="lazy" decoding="async">
                         
                         <span class="card-title">计划表</span>
                     </div>
@@ -629,7 +629,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="新学期，新展望">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="新学期，新展望" loading="lazy" decoding="async">
                         
                         <span class="card-title">新学期，新展望</span>
                     </div>
@@ -678,9 +678,6 @@
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
-
-  <!-- 是否加载使用自带的 prismjs. -->
-  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
 
 
 <!-- 代码语言 -->
@@ -1081,10 +1078,6 @@ $(function () {
     <!-- 鼠标星星特效 -->
     
 
-     
-        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
-        <script src="/libs/others/TencentCaptcha.js"></script>
-        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
     
 
     <!-- Baidu Analytics -->

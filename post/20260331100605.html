@@ -258,7 +258,7 @@ rm0486-stm32">
         
         <li><div class="divider"></div></li>
         <li>
-            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+            <a href="https://github.com/littlehorsebrother2021" class="waves-effect waves-light" target="_blank">
                 <i class="fab fa-github-square fa-fw"></i>Fork Me
             </a>
         </li>
@@ -315,7 +315,7 @@ rm0486-stm32">
     }
 </style>
 
-<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+<a href="https://github.com/littlehorsebrother2021" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
    data-tooltip="Fork Me" data-position="left" data-delay="50">
     <svg viewBox="0 0 250 250" aria-hidden="true">
         <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
@@ -455,15 +455,15 @@ rm0486-stm32">
 <li><a target="_blank" rel="noopener" href="https://www.st.com/resource/en/reference_manual/rm0486-stm32n647657xx-armbased-32bit-mcus-stmicroelectronics.pdf">rm0486-stm32n647657xx-armbased-32bit-mcus-stmicroelectronics.pdf</a></li>
 <li><a target="_blank" rel="noopener" href="https://wiki.alientek.com/docs/Boards/STM32/DNN647/start-guide/start-development/step-by-step/#step-13-mcu-%E5%BC%95%E8%84%9A%E5%92%8C%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE">STM32N6开发实战指南</a></li>
 </ol>
-<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="1-Cubemx配置"><a href="#1-Cubemx配置" class="headerlink" title="1.Cubemx配置"></a>1.Cubemx配置</h3><p>&emsp;新建工程部分直接跳过，唯一需要注意的是在新建工程之后会弹出如下内容：<br><img src="/post/20260331100605/TrustZone.png" alt="安全域TrustZone"><br>&emsp;由于安全域是针对工程源代码加密的，因此我们选择不启用安全区，点击“Secrue domain only”按钮随后生成即可，接下来进入外设配置部分。  </p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="1-Cubemx配置"><a href="#1-Cubemx配置" class="headerlink" title="1.Cubemx配置"></a>1.Cubemx配置</h3><p>&emsp;新建工程部分直接跳过，唯一需要注意的是在新建工程之后会弹出如下内容：<br><img src="/post/20260331100605/TrustZone.png" alt="安全域TrustZone" width="280" height="167" style="height:auto" loading="lazy" decoding="async"><br>&emsp;由于安全域是针对工程源代码加密的，因此我们选择不启用安全区，点击“Secrue domain only”按钮随后生成即可，接下来进入外设配置部分。  </p>
 <!-- &emsp;**需要注意的是**,由于是基础工程阶段，因此当前工程中所有的外设都配置在“Application”部分 -->
-<h4 id="1-1-配置RCC-时钟"><a href="#1-1-配置RCC-时钟" class="headerlink" title="1.1 配置RCC 时钟"></a>1.1 配置RCC 时钟</h4><p>&emsp;在RCC选项卡中，我们选择外部高速晶振，这里和普通F1,F4,H7芯片配置不同的是，我们还要注意芯片的供电方式，N6的核心电压有两种不同方式供电，手册中的说明如下：<br><img src="/post/20260331100605/Systemsupply_SMPS.png" alt="供电方式1_SMPS"><br><img src="/post/20260331100605/Systemsupply_NonSMPS.png" alt="供电方式2_NonSMPS"><br>SMPS:SMPS step-down converter（开关电源降压转换器）,是STM32N6芯片<strong>自带</strong>的一个开关电源降压转换器，这个设施的启用与否取决于硬件设施设计时是否对外部供电存在处理，能否让核心在没有转换器的情况下正常工作。我所使用的开发板并没有，因此这里需要将其变成“PWR_SMPS_SUPPLY”，完整的配置图如下：<br><img src="/post/20260331100605/RCC.png" alt="RCC配置">  </p>
-<h4 id="1-2-配置SYS-Cortex-M55"><a href="#1-2-配置SYS-Cortex-M55" class="headerlink" title="1.2 配置SYS,Cortex_M55"></a>1.2 配置SYS,Cortex_M55</h4><p>&emsp;这部分不过多赘述，直接上图：<br><img src="/post/20260331100605/SYS.png" alt="SYS配置"><br><img src="/post/20260331100605/Cortex_M55.png" alt="Cortex_M55配置"></p>
-<h4 id="1-3-配置LED-Button-GPIO"><a href="#1-3-配置LED-Button-GPIO" class="headerlink" title="1.3 配置LED,Button(GPIO)"></a>1.3 配置LED,Button(GPIO)</h4><p>&emsp;在GPIO选项卡中，根据开发板原理图，我们选择PC10,PE10(LED)，配置为输出模式即可，然后PC6,PC13,PD1,PG11（Button）配置成EXTI模式，根据原理图配置上&#x2F;下拉电阻以及触发边沿，完整配置图如下：<br><img src="/post/20260331100605/GPIO.png" alt="GPIO配置"><br>&emsp;需要说明，如果配置了按键为EXTI模式，要在NVIC1_S_Application选项卡中配置相应的中断优先级，否则按键无法正常使用。<br><img src="/post/20260331100605/NVIC.png" alt="NVIC配置">  </p>
-<h4 id="1-4-配置UART"><a href="#1-4-配置UART" class="headerlink" title="1.4 配置UART"></a>1.4 配置UART</h4><p>&emsp;由于在上期中已经说明，基础部分开发不涉及FSBL(正点原子已经帮我们写好)，因此勾选USART1的”Application”即可，然后选择异步通信”Asynchronous”，配置(默认即可)波特率为115200，数据位为8，停止位为1，无校验位，<strong>需要注意，默认引脚与原理图上不符，需要更改</strong>，正确的引脚是PE5为UASRT1_TX,PE6为UASRT1_RX,完整配置图如下：<br><img src="/post/20260331100605/USART1_P.png" alt="USART配置"><br><img src="/post/20260331100605/USART1_GPIO.png" alt="USART引脚"></p>
-<h4 id="1-5-配置XSPIM-XSPI1"><a href="#1-5-配置XSPIM-XSPI1" class="headerlink" title="1.5 配置XSPIM,XSPI1"></a>1.5 配置XSPIM,XSPI1</h4><p>&emsp;由于开发板中使用了XSPI1链接外部flash，因此需要配置XSPI1，这部分配置内容取决于外部flash的链接方式和flash参数，配置图如下：<br><img src="/post/20260331100605/XSPIM.png" alt="XSPIM配置"><br><img src="/post/20260331100605/XSPI1_page1.png" alt="XSPI1配置"><br><img src="/post/20260331100605/XSPI1_page2.png" alt="XSPI1配置"></p>
-<h4 id="1-6-配置时钟树"><a href="#1-6-配置时钟树" class="headerlink" title="1.6 配置时钟树"></a>1.6 配置时钟树</h4><p>&emsp;这里是整个配置部分最头疼的地方，原本H7的时钟树对于我来说就已经比较复杂了，N6的时钟树更是复杂,LOL。下面我用visio画了一个简单的时钟树简图(只画最基础的部分)，方便大家理解：<br><img src="/post/20260331100605/Clock.png" alt="时钟树"><br>&emsp;由于本期只涉及UART和LED，因此我们只需要配置UART和系统时钟即可，配置图如下：<br><img src="/post/20260331100605/ClockTree_page1.png" alt="时钟树配置1"><br><img src="/post/20260331100605/ClockTree_page2.png" alt="时钟树配置2"><br><img src="/post/20260331100605/ClockTree_page3.png" alt="时钟树配置3"><br><img src="/post/20260331100605/ClockTree_page4.png" alt="时钟树配置4">    </p>
-<h4 id="1-7-配置工程生成选项"><a href="#1-7-配置工程生成选项" class="headerlink" title="1.7 配置工程生成选项"></a>1.7 配置工程生成选项</h4><p>&emsp;配置完成之后，我们点击“Project”选项卡，配置工程生成选项，这里我们IDE选择“STM32Cubeide”，取消勾选”Generate Under Root”,然后<strong>取消</strong>勾选FSBL工程结构，<br><img src="/post/20260331100605/Project.png" alt="工程生成选项"><br>对于代码生成设置，由于建立的工程需要与他人共享，因此这里不选最后的“Add necessary library files as reference in the toolchain project configuration file”，然后为了区分每个外设的配置，将外设相关的代码生成到独立.c&#x2F;.h文件下，最终结果如下：<br><img src="/post/20260331100605/CodeGenerator.png" alt="代码生成设置"><br>设置完毕后，生成代码。转到Cubeide中进行编写</p>
+<h4 id="1-1-配置RCC-时钟"><a href="#1-1-配置RCC-时钟" class="headerlink" title="1.1 配置RCC 时钟"></a>1.1 配置RCC 时钟</h4><p>&emsp;在RCC选项卡中，我们选择外部高速晶振，这里和普通F1,F4,H7芯片配置不同的是，我们还要注意芯片的供电方式，N6的核心电压有两种不同方式供电，手册中的说明如下：<br><img src="/post/20260331100605/Systemsupply_SMPS.png" alt="供电方式1_SMPS" width="901" height="371" style="height:auto" loading="lazy" decoding="async"><br><img src="/post/20260331100605/Systemsupply_NonSMPS.png" alt="供电方式2_NonSMPS" width="864" height="696" style="height:auto" loading="lazy" decoding="async"><br>SMPS:SMPS step-down converter（开关电源降压转换器）,是STM32N6芯片<strong>自带</strong>的一个开关电源降压转换器，这个设施的启用与否取决于硬件设施设计时是否对外部供电存在处理，能否让核心在没有转换器的情况下正常工作。我所使用的开发板并没有，因此这里需要将其变成“PWR_SMPS_SUPPLY”，完整的配置图如下：<br><img src="/post/20260331100605/RCC.png" alt="RCC配置" width="864" height="838" style="height:auto" loading="lazy" decoding="async">  </p>
+<h4 id="1-2-配置SYS-Cortex-M55"><a href="#1-2-配置SYS-Cortex-M55" class="headerlink" title="1.2 配置SYS,Cortex_M55"></a>1.2 配置SYS,Cortex_M55</h4><p>&emsp;这部分不过多赘述，直接上图：<br><img src="/post/20260331100605/SYS.png" alt="SYS配置" width="926" height="805" style="height:auto" loading="lazy" decoding="async"><br><img src="/post/20260331100605/Cortex_M55.png" alt="Cortex_M55配置" width="932" height="840" style="height:auto" loading="lazy" decoding="async"></p>
+<h4 id="1-3-配置LED-Button-GPIO"><a href="#1-3-配置LED-Button-GPIO" class="headerlink" title="1.3 配置LED,Button(GPIO)"></a>1.3 配置LED,Button(GPIO)</h4><p>&emsp;在GPIO选项卡中，根据开发板原理图，我们选择PC10,PE10(LED)，配置为输出模式即可，然后PC6,PC13,PD1,PG11（Button）配置成EXTI模式，根据原理图配置上&#x2F;下拉电阻以及触发边沿，完整配置图如下：<br><img src="/post/20260331100605/GPIO.png" alt="GPIO配置" width="1186" height="827" style="height:auto" loading="lazy" decoding="async"><br>&emsp;需要说明，如果配置了按键为EXTI模式，要在NVIC1_S_Application选项卡中配置相应的中断优先级，否则按键无法正常使用。<br><img src="/post/20260331100605/NVIC.png" alt="NVIC配置" width="1133" height="801" style="height:auto" loading="lazy" decoding="async">  </p>
+<h4 id="1-4-配置UART"><a href="#1-4-配置UART" class="headerlink" title="1.4 配置UART"></a>1.4 配置UART</h4><p>&emsp;由于在上期中已经说明，基础部分开发不涉及FSBL(正点原子已经帮我们写好)，因此勾选USART1的”Application”即可，然后选择异步通信”Asynchronous”，配置(默认即可)波特率为115200，数据位为8，停止位为1，无校验位，<strong>需要注意，默认引脚与原理图上不符，需要更改</strong>，正确的引脚是PE5为UASRT1_TX,PE6为UASRT1_RX,完整配置图如下：<br><img src="/post/20260331100605/USART1_P.png" alt="USART配置" width="1016" height="847" style="height:auto" loading="lazy" decoding="async"><br><img src="/post/20260331100605/USART1_GPIO.png" alt="USART引脚" width="999" height="808" style="height:auto" loading="lazy" decoding="async"></p>
+<h4 id="1-5-配置XSPIM-XSPI1"><a href="#1-5-配置XSPIM-XSPI1" class="headerlink" title="1.5 配置XSPIM,XSPI1"></a>1.5 配置XSPIM,XSPI1</h4><p>&emsp;由于开发板中使用了XSPI1链接外部flash，因此需要配置XSPI1，这部分配置内容取决于外部flash的链接方式和flash参数，配置图如下：<br><img src="/post/20260331100605/XSPIM.png" alt="XSPIM配置" width="1035" height="833" style="height:auto" loading="lazy" decoding="async"><br><img src="/post/20260331100605/XSPI1_page1.png" alt="XSPI1配置" width="1014" height="350" style="height:auto" loading="lazy" decoding="async"><br><img src="/post/20260331100605/XSPI1_page2.png" alt="XSPI1配置" width="1008" height="757" style="height:auto" loading="lazy" decoding="async"></p>
+<h4 id="1-6-配置时钟树"><a href="#1-6-配置时钟树" class="headerlink" title="1.6 配置时钟树"></a>1.6 配置时钟树</h4><p>&emsp;这里是整个配置部分最头疼的地方，原本H7的时钟树对于我来说就已经比较复杂了，N6的时钟树更是复杂,LOL。下面我用visio画了一个简单的时钟树简图(只画最基础的部分)，方便大家理解：<br><img src="/post/20260331100605/Clock.png" alt="时钟树" width="1014" height="402" style="height:auto" loading="lazy" decoding="async"><br>&emsp;由于本期只涉及UART和LED，因此我们只需要配置UART和系统时钟即可，配置图如下：<br><img src="/post/20260331100605/ClockTree_page1.png" alt="时钟树配置1" width="810" height="776" style="height:auto" loading="lazy" decoding="async"><br><img src="/post/20260331100605/ClockTree_page2.png" alt="时钟树配置2" width="495" height="653" style="height:auto" loading="lazy" decoding="async"><br><img src="/post/20260331100605/ClockTree_page3.png" alt="时钟树配置3" width="1091" height="618" style="height:auto" loading="lazy" decoding="async"><br><img src="/post/20260331100605/ClockTree_page4.png" alt="时钟树配置4" width="913" height="232" style="height:auto" loading="lazy" decoding="async">    </p>
+<h4 id="1-7-配置工程生成选项"><a href="#1-7-配置工程生成选项" class="headerlink" title="1.7 配置工程生成选项"></a>1.7 配置工程生成选项</h4><p>&emsp;配置完成之后，我们点击“Project”选项卡，配置工程生成选项，这里我们IDE选择“STM32Cubeide”，取消勾选”Generate Under Root”,然后<strong>取消</strong>勾选FSBL工程结构，<br><img src="/post/20260331100605/Project.png" alt="工程生成选项" width="1911" height="1035" style="height:auto" loading="lazy" decoding="async"><br>对于代码生成设置，由于建立的工程需要与他人共享，因此这里不选最后的“Add necessary library files as reference in the toolchain project configuration file”，然后为了区分每个外设的配置，将外设相关的代码生成到独立.c&#x2F;.h文件下，最终结果如下：<br><img src="/post/20260331100605/CodeGenerator.png" alt="代码生成设置" width="1853" height="920" style="height:auto" loading="lazy" decoding="async"><br>设置完毕后，生成代码。转到Cubeide中进行编写</p>
 <p>这里需要注意的是，由于N6的一个工程可能会包含FSBL和Application两部分，因此生成的工程目录中和正常的F1,F4,H7目录不一样，这里给出具体解释：    </p>
 <h4 id="STM32N6-工程真实目录结构说明-基于-STM32CubeIDE"><a href="#STM32N6-工程真实目录结构说明-基于-STM32CubeIDE" class="headerlink" title="STM32N6 工程真实目录结构说明 (基于 STM32CubeIDE)"></a>STM32N6 工程真实目录结构说明 (基于 STM32CubeIDE)</h4><p>本项目基于 STM32N6 系列微处理器开发。STM32CubeMX 在生成 STM32CubeIDE 工程时，采用了”<strong>源码与 IDE 工作区严格分离</strong>“的设计逻辑。</p>
 <p>以下是本工程真实生成的物理目录层级及其核心功能详解：</p>
@@ -493,11 +493,11 @@ rm0486-stm32">
         ├── 📁 Release                # 编译输出目录 (包含生成的 .elf, .bin, .map 等文件)
         └── 📄 STM32N647X0HXQ_*.ld    # 【关键】所有的链接脚本文件都在这里！<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="2-IDE配置"><a href="#2-IDE配置" class="headerlink" title="2.IDE配置"></a>2.IDE配置</h3><p>&emsp;由于博主原先一直在Keil 5.36环境下开发，不适应cubeide，因此下方内容将大部分涉及cubeide的使用，如果只需要了解代码编写，可以跳过直接去看<strong>2.1</strong>部分。</p>
-<h4 id="2-1-导入工程到cubeide"><a href="#2-1-导入工程到cubeide" class="headerlink" title="2.1 导入工程到cubeide"></a>2.1 导入工程到cubeide</h4><p>&emsp;点击左上角file-&gt;import，选择General-&gt;Existing Project into workspace-&gt;next，选择刚刚生成的工程目录，会看到已经有相关的工程显示，勾选{Projectname}和{Projectname_Appli}，然后点击finish即可。具体如下图：<br><img src="/post/20260331100605/Import.png" alt="导入工程">  </p>
+<h4 id="2-1-导入工程到cubeide"><a href="#2-1-导入工程到cubeide" class="headerlink" title="2.1 导入工程到cubeide"></a>2.1 导入工程到cubeide</h4><p>&emsp;点击左上角file-&gt;import，选择General-&gt;Existing Project into workspace-&gt;next，选择刚刚生成的工程目录，会看到已经有相关的工程显示，勾选{Projectname}和{Projectname_Appli}，然后点击finish即可。具体如下图：<br><img src="/post/20260331100605/Import.png" alt="导入工程" width="597" height="853" style="height:auto" loading="lazy" decoding="async">  </p>
 <p>&emsp;导入工程后，可以看到其非常庞大的文件库，这里的文件库和上方解释的整体物理目录树基本一一对应，这里不再赘述。</p>
 <h4 id="2-2-更改和设置链接脚本"><a href="#2-2-更改和设置链接脚本" class="headerlink" title="2.2 更改和设置链接脚本"></a>2.2 更改和设置链接脚本</h4><p>&emsp;这部分内容由于正点原子已经有完整的教程，因此这里不再赘述，直接给跳转链接：<br><a target="_blank" rel="noopener" href="https://wiki.alientek.com/docs/Boards/STM32/DNN647/start-guide/start-development/step-by-step/#step-2-%E4%BD%BF%E7%94%A8-stm32cubeide-%E5%BC%80%E5%8F%91">正点原子教程</a><br><strong>2026-04-05 更新</strong><br>这部分的<code>STM32N647X0HXQ_LRUN_RAMxspi1.ld</code>修改完成之后，请去03_STM32N6开发实战2.md中补全剩余修改，正点原子的内容不全。</p>
 <h4 id="2-3-工程编译"><a href="#2-3-工程编译" class="headerlink" title="2.3 工程编译"></a>2.3 工程编译</h4><p>&emsp;选中需要配置的工程后，依次点击工具栏中的 “Project” -&gt; “Build Configurations” -&gt; “Set Active” 可以设置当前工程激活的是 ‘Debug’ 配置还是 ‘Release’ 配置,设置好后点击小锤子 🔨进行编译</p>
-<h4 id="2-4-工程运行与调试"><a href="#2-4-工程运行与调试" class="headerlink" title="2.4 工程运行与调试"></a>2.4 工程运行与调试</h4><p>&emsp;这部分内容由于正点原子已经有完整的教程，因此这里不再赘述，直接给跳转链接：<br><a target="_blank" rel="noopener" href="https://wiki.alientek.com/docs/Boards/STM32/DNN647/start-guide/start-development/step-by-step/#step-2-%E4%BD%BF%E7%94%A8-stm32cubeide-%E5%BC%80%E5%8F%91">正点原子教程</a><br>&emsp;值得注意的是,如果在以下选项卡中没有看到Project_Name_Appli，则需要在STM32 C&#x2F;C++ Application上右键，选择New Configration 然后正常按照正点原子的教程进行配置即可。<br><img src="/post/20260331100605/Run_Configration.png" alt="Run_Configration">  </p>
+<h4 id="2-4-工程运行与调试"><a href="#2-4-工程运行与调试" class="headerlink" title="2.4 工程运行与调试"></a>2.4 工程运行与调试</h4><p>&emsp;这部分内容由于正点原子已经有完整的教程，因此这里不再赘述，直接给跳转链接：<br><a target="_blank" rel="noopener" href="https://wiki.alientek.com/docs/Boards/STM32/DNN647/start-guide/start-development/step-by-step/#step-2-%E4%BD%BF%E7%94%A8-stm32cubeide-%E5%BC%80%E5%8F%91">正点原子教程</a><br>&emsp;值得注意的是,如果在以下选项卡中没有看到Project_Name_Appli，则需要在STM32 C&#x2F;C++ Application上右键，选择New Configration 然后正常按照正点原子的教程进行配置即可。<br><img src="/post/20260331100605/Run_Configration.png" alt="Run_Configration" width="1325" height="694" style="height:auto" loading="lazy" decoding="async">  </p>
 <h4 id="2-5-工程烧录"><a href="#2-5-工程烧录" class="headerlink" title="2.5 工程烧录"></a>2.5 工程烧录</h4><p>&emsp;这里没有太多需要关注的内容，唯一需要注意的是<strong>开发板的BOOT模式</strong>，也就是上一期提到的BOOT，debug版本下必须在BOOT为开发者模式下才可运行，release版本下必须先在BOOT为开发者模式下烧录，然后在BOOT为flash存储模式下才可运行。</p>
 <h4 id="2-6-添加自制文件夹"><a href="#2-6-添加自制文件夹" class="headerlink" title="2.6 添加自制文件夹"></a>2.6 添加自制文件夹</h4><p>&emsp;由于后续开发需要添加非常多的驱动文件，因此这里提前说明如何添加自制文件夹&#x2F;文件。</p>
 <ol>
@@ -542,15 +542,15 @@ rm0486-stm32">
 
 <p>&emsp;另有,如果需要将某个文件夹单独列出方便调用，可以进行以下操作：</p>
 <ol>
-<li>点击左侧工程树所选工程的总目录Project_Name_Appli,右键选择<code>Properties</code>-&gt;<code>C/C++ General</code>-&gt;<code>Path and Symbols</code>-&gt; <code>Source Location</code>选项卡。<br><img src="/post/20260331100605/Source_Location.png" alt="添加自制文件夹">  </li>
+<li>点击左侧工程树所选工程的总目录Project_Name_Appli,右键选择<code>Properties</code>-&gt;<code>C/C++ General</code>-&gt;<code>Path and Symbols</code>-&gt; <code>Source Location</code>选项卡。<br><img src="/post/20260331100605/Source_Location.png" alt="添加自制文件夹" width="1109" height="716" style="height:auto" loading="lazy" decoding="async">  </li>
 <li>点击右侧的 <code>Add Folder</code> (添加文件夹) 按钮，</li>
 <li>(举例)在弹出的目录树里，依次展开：你的工程 <code>Project_Name_Appli</code> -&gt; <code>Drivers</code> -&gt;<code>BSP</code>-&gt; 选中 <code>UART</code> 文件夹后-&gt;点击OK</li>
-<li>点击<code>Apply and Close</code>，你会看到原先在Drivers&#x2F;BSP 文件夹下 的UART已经被提升到了与Drivers同级的位置。<br><strong>2026-04-05 更新</strong><br>如果后续你需要通过cubemx重新生成代码，那么我不建议进行第四步第四步，因为它会导致重新生成的工程文件丢失最开始的<br><img src="/post/20260331100605/Source_Location_2.png" alt="实现效果"></li>
+<li>点击<code>Apply and Close</code>，你会看到原先在Drivers&#x2F;BSP 文件夹下 的UART已经被提升到了与Drivers同级的位置。<br><strong>2026-04-05 更新</strong><br>如果后续你需要通过cubemx重新生成代码，那么我不建议进行第四步第四步，因为它会导致重新生成的工程文件丢失最开始的<br><img src="/post/20260331100605/Source_Location_2.png" alt="实现效果" width="441" height="822" style="height:auto" loading="lazy" decoding="async"></li>
 </ol>
 <h4 id="2-7-添加自制文件-访问路径"><a href="#2-7-添加自制文件-访问路径" class="headerlink" title="2.7 添加自制文件 &amp; 访问路径"></a>2.7 添加自制文件 &amp; 访问路径</h4><p>&emsp;在工程根目录<code>Drivers</code>中的文件夹<code>BSP</code>添加相应代码文件，然后在IDE中右键点击工程右键flash,即可刷新进入到工程中。</p>
 <p>&emsp;接下来添加文件路径，由于BSP后续内容较多，因此索引路径只有一条&#x2F;${ProjName}&#x2F;Drivers&#x2F;BSP。操作如下：</p>
 <ol>
-<li>点击左侧工程树所选工程的总目录Project_Name_Appli,右键选择<code>Properties</code>-&gt;<code>C/C++ General</code>-&gt;<code>Path and Symbols</code>-&gt; <code>Includes</code>选项卡。<br><img src="/post/20260331100605/Path_and_Symbols.png" alt="添加自制文件 &amp; 访问路径">  </li>
+<li>点击左侧工程树所选工程的总目录Project_Name_Appli,右键选择<code>Properties</code>-&gt;<code>C/C++ General</code>-&gt;<code>Path and Symbols</code>-&gt; <code>Includes</code>选项卡。<br><img src="/post/20260331100605/Path_and_Symbols.png" alt="添加自制文件 &amp; 访问路径" width="1109" height="716" style="height:auto" loading="lazy" decoding="async">  </li>
 <li>点击右侧的 <code>Add...</code> (添加…) 按钮。</li>
 <li><strong>⚠️ 核心警告：绝对不要在 <code>Directory</code> 文本框里手动打字！</strong></li>
 <li>点击输入框下面的 <code>Workspace...</code> (工作空间…) 按钮。</li>
@@ -762,7 +762,7 @@ rm0486-stm32">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="03_STM32N6开发实战2">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="03_STM32N6开发实战2" loading="lazy" decoding="async">
                         
                         <span class="card-title">03_STM32N6开发实战2</span>
                     </div>
@@ -811,7 +811,7 @@ rm0486-stm32">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="01_STM32N6开发板初探">
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="01_STM32N6开发板初探" loading="lazy" decoding="async">
                         
                         <span class="card-title">01_STM32N6开发板初探</span>
                     </div>
@@ -860,9 +860,6 @@ rm0486-stm32">
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
-
-  <!-- 是否加载使用自带的 prismjs. -->
-  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
 
 
 <!-- 代码语言 -->
@@ -1263,10 +1260,6 @@ $(function () {
     <!-- 鼠标星星特效 -->
     
 
-     
-        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
-        <script src="/libs/others/TencentCaptcha.js"></script>
-        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
     
 
     <!-- Baidu Analytics -->
